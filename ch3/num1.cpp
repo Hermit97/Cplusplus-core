@@ -17,7 +17,8 @@ int main(){
         sum = sum + kilo;
     }
 
-    std::cout << "You entered " << miles << " miles " << "which is converted to " << sum << " kilos\n";
+    std::cout << "You entered " << miles << " miles "
+              << "which is converted to " << sum << " kilos\n";
 
 
 
