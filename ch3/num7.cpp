@@ -25,10 +25,9 @@ int main() {
     oneDollar = oneDollar * 100;
 
     //Get the total amount of coins the user entered\n"
-    total = nickels + dimes + quarters + halfDollars + oneDollar;
+    total = pennies + nickels + dimes + quarters + halfDollars + oneDollar;
 
     //Print the total amout of coins
-
-
+    std::cout << "The values of all your coins is " << total << " cents\n";
 
 }
