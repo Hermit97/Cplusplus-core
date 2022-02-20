@@ -5,12 +5,10 @@
 #include <cmath>
 
 int main(){
-    int num = 1;
-    char letter = 'a';
-    int newLetter {'a' + num};
+    int num = 0;
 
-    while(letter <= 'z'){
-       // std::cout <<
+    while(num <= 25){
+      std::cout << char('a' + num) << "\t" <<  int('a' + num) << "\n";
+      ++num;
     }
-
 }
