@@ -5,7 +5,7 @@
 #include <cmath>
 
 int main(){
-    int num = 0;
+    int num = 1;
 
     while(num <= 25){
       std::cout << char('a' + num) << "\t" <<  int('a' + num) << "\n";
