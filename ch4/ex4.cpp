@@ -16,6 +16,5 @@ void sqr(int n){
 
 int main(){
     sqr(4);
-
-
+    return 0;
 }
