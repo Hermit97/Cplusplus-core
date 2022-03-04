@@ -33,17 +33,19 @@ int main(){
     std::cin >> num;
 
     while(count <= num){
-        for(int i = 0; i < disliked.size(); ++i){
+
             //get a word to test against the vector
             std::cout << "Enter a word to test\n";
             std::cin >> test;
 
-            if(disliked[i] == test){
-                std::cout << "bleep\n";
-            }else{
+            auto it = std::find(disliked.begin(), disliked.end(), test);
+
+            if(it == disliked.end()){
                 std::cout << "Does not match any values int he array\n";
+            }else{
+                std::cout << "bleep\n";
             }
-        }
+
         ++count;
     }
 
