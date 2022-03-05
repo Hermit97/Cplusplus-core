@@ -7,8 +7,6 @@
 using namespace std;
 
 int main(){
-    //std::string num1 {0};
-    //std::string num2 {0};
 
     int num1, num2;
 
