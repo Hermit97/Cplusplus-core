@@ -1,0 +1,7 @@
+Number 6: Program should not restart everytime the loop ends.
+
+user input = 5 --> smallest number is 5
+
+user input = 10 --> biggest number so far is 10
+
+user input = 7 --> for a number smaller than the biggiest but bigger than the smallest, it should be assigned to a variable. Maybe current?
