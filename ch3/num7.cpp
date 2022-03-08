@@ -17,6 +17,11 @@ int main() {
     std::cout << "Enter the amout of pennies, nickels, dimes, quarters, halfDollar, oneDollar\n";
     std::cin >> pennies >> nickels >> dimes >> quarters >> halfDollars >> oneDollar;
 
+    if(dimes < 2)
+        std::cout << dimes << " dime \n";
+    else
+        std::cout << dimes << " dimes \n";
+
     //get the actual value for each coin
     nickels = nickels * 5;
     dimes = dimes * 10;
