@@ -5,8 +5,13 @@
 #include <cmath>
 #include <cstdlib>
 #include <limits>
-/*Reject values without units or with “illegal” representations of units, such
-as y, yard, meter, km, and gallons.*/
+/* Keep track of the sum of values entered (as well as the smallest and the
+largest) and the number of values entered. When the loop ends, print the
+smallest, the largest, the number of values, and the sum of values. Note
+that to keep the sum, you have to decide on a unit to use for that sum; use
+meters.
+*/
+
 int main(){
     double num1;
     double small = 0;
@@ -22,15 +27,9 @@ int main(){
     std::cout << "Enter a number\n";
     while(std::cin >> num1 >> addUnit){
 
-      /*for (int i = 0; i < units.size(); i++) {
-          if()
-      }*/
         //Check for invalid inputs
         while(notValid == true){
-            for(int i = 0; i < units.size(); i++){
-
-
-            if (addUnit != units[i] || addUnit == "yards" || addUnit == "y" || addUnit == "meters" || addUnit == "km" || addUnit == "gallons"){
+            if (addUnit == " " || addUnit == "yards" || addUnit == "y" || addUnit == "meters" || addUnit == "km" || addUnit == "gallons"){
                 std::cout << "Illegal units input\n";
 
                 //Ask for input again
@@ -47,14 +46,10 @@ int main(){
                 if(addUnit == "|")
                     exit(0);
 
-                if(addUnit == units[i])
-                    break;
-
             }else{
                 notValid = false;
             }
         }
-    }
         //Convert cm to meters
         if(addUnit == units[0]){
             convert = num1 / 100;
