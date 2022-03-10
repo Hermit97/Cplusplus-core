@@ -14,15 +14,40 @@ int main(){
     std::string addUnit;
     bool isTrue = true;
     bool firstNum = true;
+    bool notValid = true;
+    int exitProgram {'|'};
     std::vector<std::string> units = {"cm", "in", "m", "ft"};
 
     std::cout << "Enter a number\n";
     while(std::cin >> num1 >> addUnit){
 
+        //Check for invalid inputs
+        while(notValid == true){
+            std::cin.clear(); // Test this!!!
+            if (addUnit == " " || addUnit == "yards" || addUnit == "y" || addUnit == "meters" || addUnit == "km" || addUnit == "gallons"){
+                std::cout << "Illegal units input\n";
+
+                //Ask for input again
+                std::cout << "Enter input again\n";
+                std::cin >> num1;
+                std:: cin >> addUnit;
+
+
+                //Exit program with |
+                //Wont work.....
+                //if(num1 == exitProgram || addUnit == "|")
+                //if(num1 == '|' || addUnit == "|")
+                if(addUnit == "|")
+                    exit(0);
+            }else{
+                notValid = false;
+            }
+        }
         //Convert cm to meters
         if(addUnit == units[0]){
             convert = num1 / 100;
             std::cout << num1 << units[0]  << " converted to "<< convert << "m\n";
+
             //Convert in to cm
         }else if(addUnit == units[1]){
             convert = num1 * 2.54;
@@ -51,6 +76,8 @@ int main(){
             }else{
                 std::cout << "The number you entered is neither bigger than the biggest number or smaller than the biggest.\n";
             }
+        //Reset not valid for the next iteration
+        notValid = true;
     }
     return 0;
 }
