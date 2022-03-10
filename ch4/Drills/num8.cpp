@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
+#include <limits>
 /*Reject values without units or with “illegal” representations of units, such
 as y, yard, meter, km, and gallons.*/
 int main(){
@@ -23,22 +24,23 @@ int main(){
 
         //Check for invalid inputs
         while(notValid == true){
-            std::cin.clear(); // Test this!!!
             if (addUnit == " " || addUnit == "yards" || addUnit == "y" || addUnit == "meters" || addUnit == "km" || addUnit == "gallons"){
                 std::cout << "Illegal units input\n";
 
                 //Ask for input again
                 std::cout << "Enter input again\n";
+
                 std::cin >> num1;
+                std::cin.clear(); // Test this!!!
+
+                if(num1 == exitProgram){
+                    exit(0);
+                }
+
                 std:: cin >> addUnit;
-
-
-                //Exit program with |
-                //Wont work.....
-                //if(num1 == exitProgram || addUnit == "|")
-                //if(num1 == '|' || addUnit == "|")
                 if(addUnit == "|")
                     exit(0);
+
             }else{
                 notValid = false;
             }
