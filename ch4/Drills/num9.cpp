@@ -28,28 +28,26 @@ int main(){
     while(std::cin >> num1 >> addUnit){
 
         //Check for invalid inputs
-        while(notValid == true){
-            if (addUnit == " " || addUnit == "yards" || addUnit == "y" || addUnit == "meters" || addUnit == "km" || addUnit == "gallons"){
-                std::cout << "Illegal units input\n";
+        if(notValid == true){
+            std::cout << "Illegal units input\n";
 
-                //Ask for input again
-                std::cout << "Enter input again\n";
+            //Ask for input again
+            std::cout << "Enter input again\n";
 
-                std::cin >> num1;
-                std::cin.clear(); // Test this!!!
+            std::cin >> num1;
+            std::cin.clear(); // Test this!!!
 
-                if(num1 == exitProgram){
-                    exit(0);
-                }
-
-                std:: cin >> addUnit;
-                if(addUnit == "|")
-                    exit(0);
-
-            }else{
-                notValid = false;
+            if(num1 == exitProgram){
+                exit(0);
             }
-        }
+
+            std:: cin >> addUnit;
+            if(addUnit == "|")
+                exit(0);
+
+    }else
+        notValid = false;
+
         //Convert cm to meters
         if(addUnit == units[0]){
             convert = num1 / 100;

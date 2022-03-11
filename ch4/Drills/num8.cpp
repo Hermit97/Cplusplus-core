@@ -8,10 +8,10 @@
 /*Reject values without units or with “illegal” representations of units, such
 as y, yard, meter, km, and gallons.*/
 int main(){
+    int convert = 0;
     double num1;
     double small = 0;
     double big = 0;
-    double convert = 0;
     std::string addUnit;
     bool isTrue = true;
     bool firstNum = true;
@@ -22,15 +22,13 @@ int main(){
     std::cout << "Enter a number\n";
     while(std::cin >> num1 >> addUnit){
 
-      /*for (int i = 0; i < units.size(); i++) {
-          if()
-      }*/
         //Check for invalid inputs
-        while(notValid == true){
-            for(int i = 0; i < units.size(); i++){
+        //while(notValid == true){
+        if(notValid == true){
 
+            //if (addUnit != units[0] || addUnit != units[1] || addUnit != units[2] || addUnit != units[3] || addUnit == "yards" || addUnit == "y" || addUnit == "meters" || addUnit == "km" || addUnit == "gallons"){
+            //if ( addUnit == "yards" || addUnit == "y" || addUnit == "meters" || addUnit == "km" || addUnit == "gallons"){
 
-            if (addUnit != units[i] || addUnit == "yards" || addUnit == "y" || addUnit == "meters" || addUnit == "km" || addUnit == "gallons"){
                 std::cout << "Illegal units input\n";
 
                 //Ask for input again
@@ -47,14 +45,9 @@ int main(){
                 if(addUnit == "|")
                     exit(0);
 
-                if(addUnit == units[i])
-                    break;
-
-            }else{
-                notValid = false;
-            }
-        }
-    }
+            }else 
+            notValid = false;
+            
         //Convert cm to meters
         if(addUnit == units[0]){
             convert = num1 / 100;
@@ -90,6 +83,7 @@ int main(){
             }
         //Reset not valid for the next iteration
         notValid = true;
-    }
+}
+
     return 0;
 }
