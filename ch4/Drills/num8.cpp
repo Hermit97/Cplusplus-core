@@ -23,17 +23,13 @@ int main(){
     while(std::cin >> num1 >> addUnit){
 
         //Check for invalid inputs
-        //while(notValid == true){
         while(notValid == true){
 
             if (addUnit != units[0] && addUnit != units[1] && addUnit != units[2] && addUnit != units[3]) {
-            //if ( addUnit == "yards" || addUnit == "y" || addUnit == "meters" || addUnit == "km" || addUnit == "gallons"){
 
                 std::cout << "Illegal units input\n";
-
                 //Ask for input again
                 std::cout << "Enter input again\n";
-
                 std::cin >> num1;
                 std::cin.clear(); // Test this!!!
 
