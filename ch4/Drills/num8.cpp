@@ -24,9 +24,9 @@ int main(){
 
         //Check for invalid inputs
         //while(notValid == true){
-        if(notValid == true){
+        while(notValid == true){
 
-            //if (addUnit != units[0] || addUnit != units[1] || addUnit != units[2] || addUnit != units[3] || addUnit == "yards" || addUnit == "y" || addUnit == "meters" || addUnit == "km" || addUnit == "gallons"){
+            if (addUnit != units[0] && addUnit != units[1] && addUnit != units[2] && addUnit != units[3]) {
             //if ( addUnit == "yards" || addUnit == "y" || addUnit == "meters" || addUnit == "km" || addUnit == "gallons"){
 
                 std::cout << "Illegal units input\n";
@@ -46,7 +46,8 @@ int main(){
                     exit(0);
 
             }else 
-            notValid = false;
+                notValid = false;
+        }
             
         //Convert cm to meters
         if(addUnit == units[0]){
@@ -84,6 +85,5 @@ int main(){
         //Reset not valid for the next iteration
         notValid = true;
 }
-
     return 0;
 }
