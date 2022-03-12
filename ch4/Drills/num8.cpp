@@ -26,7 +26,6 @@ int main(){
         while(notValid == true){
 
             if (addUnit != units[0] && addUnit != units[1] && addUnit != units[2] && addUnit != units[3]) {
-
                 std::cout << "Illegal units input\n";
                 //Ask for input again
                 std::cout << "Enter input again\n";
