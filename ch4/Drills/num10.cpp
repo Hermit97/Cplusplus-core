@@ -5,10 +5,9 @@
 #include <cmath>
 #include <cstdlib>
 #include <limits>
-/*Reject values without units or with “illegal” representations of units, such
-as y, yard, meter, km, and gallons.*/
+
 int main(){
-    int convert = 0;
+    double convert = 0;
     double num1;
     double small = 0;
     double big = 0;
@@ -20,6 +19,7 @@ int main(){
     int sum = 0;
     int numEntered = 0;
     std::vector<std::string> units = {"cm", "in", "m", "ft"};
+    std::vector<double> mUnits;
 
     std::cout << "Enter a number\n";
     while(std::cin >> num1 >> addUnit){
@@ -36,7 +36,6 @@ int main(){
 
                 if(num1 == exitProgram){
                     exit(0);
-
                 }
 
                 std:: cin >> addUnit;
@@ -51,6 +50,7 @@ int main(){
         if(addUnit == units[0]){
             convert = num1 / 100;
             std::cout << num1 << units[0]  << " converted to "<< convert << "m\n";
+            mUnits.push_back(convert);
 
             //Convert in to cm
         }else if(addUnit == units[1]){
@@ -88,9 +88,6 @@ int main(){
         if(addUnit ==  "m"){
             sum = num1 + sum;
 
-           /*Keep all the values entered (converted into meters) in a vector. At the
-             end, write out those values.
-           */
         }
 
         //Reset not valid for the next iteration
@@ -110,6 +107,14 @@ int main(){
 
     std::cout << "The smallest value is: " << small << "\n"
               << "The biggiest value is " << big << "\n";
+
+    //Print out the new vector
+    std::cout << "M vector values: ";
+    for(int i = 0; i < mUnits.size(); i++){
+        std::cout << mUnits[i] << " ";
+    }
+
+    std::cout << std::endl;
 
     return 0;
 }
