@@ -26,7 +26,6 @@ int main(){
 
         //Check for invalid inputs
         while(notValid == true){
-
             if (addUnit != units[0] && addUnit != units[1] && addUnit != units[2] && addUnit != units[3]) {
 
                 std::cout << "Illegal units input\n";
@@ -37,6 +36,7 @@ int main(){
 
                 if(num1 == exitProgram){
                     exit(0);
+
                 }
 
                 std:: cin >> addUnit;
@@ -85,20 +85,22 @@ int main(){
         numEntered++;
 
         //Sum of the inputs only for meters
-        if(addUnit ==  "m")
+        if(addUnit ==  "m"){
             sum = num1 + sum;
+
+           /*Keep all the values entered (converted into meters) in a vector. At the
+             end, write out those values.
+           */
+        }
 
         //Reset not valid for the next iteration
         notValid = true;
 }
 
-    //Number 9
-    /*Keep track of the sum of values entered (as well as the smallest and the
-      largest) and the number of values entered. When the loop ends, print the
-      smallest, the largest, the number of values, and the sum of values. Note
-      that to keep the sum, you have to decide on a unit to use for that sum; use
-      meters.
-    */
+//Number 10
+/*Keep all the values entered (converted into meters) in a vector. At the
+  end, write out those values.
+*/
 
     //Print the tracked number of inputs
     std::cout << "Number of inputs entered " << numEntered << "\n";
