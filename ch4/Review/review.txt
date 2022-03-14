@@ -1,0 +1,29 @@
+What is computation?
+Computation is when the computer takes some input which is data (lots of code) and produces some output.
+
+What do we mean by inputs and outputs to a computation? Give some examples.
+Input coming from a keyboard, mouse or a touch screen. From apps, or other files as well.
+
+What are the three requirements a programmer should keep in mind when expressing computations?
+Correctly, simply, efficiency.
+
+What does an expression do?
+An expression computes value from a number of operands. The simplest expression is simply a literal value, such as 10, 'a', 3.14, or "Norah".
+
+What is the difference between a statement and an expression, as described
+in this chapter?
+A statement is used to produce several values. Another way of putting it is when you want do do something many times. A expression is a kind of statement that computes a value from a set of operands using operators. Essentially a expression is followed by a semicolon.
+
+What is an lvalue? List the operators that require an lvalue. Why do
+these operators, and not the others, require an lvalue?
+lvalue is the locator of the object in memory. some of the operators are the mathmatical ones like additon and multiplying. Other ones dont work because they are not have a memory locatoin because thya arte literal constants.
+
+What is a constant expression?
+Constant expression is an expression that has constants whose values do not change and are executed at the
+compilation time.
+
+What is a literal?
+Literals are data used for representing fixed values. They can be used directly in the code. For example
+1, 2.5, 'c', "hello" etc.
+
+What is a symbolic constant and why do we use them?

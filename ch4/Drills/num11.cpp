@@ -12,7 +12,6 @@ int main(){
     double small = 0;
     double big = 0;
     std::string addUnit;
-    bool isTrue = true;
     bool firstNum = true;
     bool notValid = true;
     int exitProgram {'|'};
