@@ -27,3 +27,34 @@ Literals are data used for representing fixed values. They can be used directly 
 1, 2.5, 'c', "hello" etc.
 
 What is a symbolic constant and why do we use them?
+Symbolic constants can't be changed once they have been initilized. They are useful for keeping the code readable.
+
+What is a magic constant? Give examples.
+Magic constant are literals non obvious. They are for constants that are not as obvious.
+Such as initlizing the value of a object to a object and adding it to a int literal. This would make it non obvious because a literal is involved instead of another int object.
+
+What are some operators that we can use for integers and floating-point values?
+You can use whole numbers such as 1, 2, 3, or 4
+
+What operators can be used on integers but not on floating-point numbers?
+Module can be used on int but not on floating ones.
+
+What are some operators that can be used for strings?
+You can use not equal operators, logical or, compound assignment, and function call.
+
+When would a programmer prefer a switch-statement to an if-statement?
+When their are multiple constants involved, switch-statements would make for a better choice.
+
+What are some common problems with switch-statements?
+Some common problems with switch-statements are forgetting to terminate a case with a break.
+
+What is the function of each part of the header line in a for-loop, and in what sequence are they executed?
+First you have the loop variable. Then the test followed by the incrementor/decrementor. They are executed in this order.
+
+When should the for-loop be used and when should the while-loop be used?
+For loops are a lot more structured resulting in more readable code. While loop on the other hand is the opposite and should be used when a strctured for loop doesn't make sense.
+
+How do you print the numeric value of a char?
+By using the char function and pass the letter in the parameter.
+
+Describe what the line char foo(int x) means in a function definition.
