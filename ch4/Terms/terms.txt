@@ -1,0 +1,31 @@
+Abstraction - Hides the implementation details. For example instead of looking into the details of how to implement the sort algorithm, you can just call the sort algorithm since its hidden.
+
+Begin() - Gets the first element.
+
+Computation - Taking input and producing some sort of output.
+
+Conditional Statement - Statement is executed depending on if a conditoin is true. Their can be multiple consiotins where if one is false the next one is tested.
+
+Declaration - A program statement is a program staterment specifying how a piece of code can be used. Another way of thinking of it is that a declaration gives a name to an object.
+
+Definition - A statement that introduces a new name into a program and sets aside meory for a variable is called a definiton.
+
+Divide and Conquer - Dividing a large problem into several smaller problems. This allows the you to break down the problem and solve them in smaller sets making it easier to solve these problems as a whole.
+
+Else - Part of the if statement, gives an alternative if the prior condition is not true.
+
+End() - Gets the last element.
+
+Expression - A set of operands. In other words its the most basic building block of a program. It computes a value from a number of operands. The simplest expression is simply a literal value, such as 10, 'a', 3.14, or "Norah". Names of variables are also expressions.
+
+Literal - Any non changing value. Can be a string literal, int literal. or char literal. in int x = 3, the 3 is the literal while int is the type and x is the object name.
+
+Iteration - A repeated task. In our case when you iterate over a array, it means taking each element. Or for a for loop the iterator is in charge of repeating the loop a certain number of times depending on what the initilizatoin is set on. If the initilizatoin is set to 5 and the condinton set to 5 <= 10 and a incrementor is present, then the for loop will repeat 5 times until the condition is made true.
+
+For-statement - Similar to a while statement but instead of having the management of the conrrel vartiable at in the bottom, in the for loop all of that is taken care of at the top hence the beginning.
+
+Range-for-loop - Executes a for loop over a range. Basically iterates through the whole loop.
+
+Function - A named sequence of statements. It can return a value.
+
+If-statement - A simple form os selection. It can select between multiple alternatives.
