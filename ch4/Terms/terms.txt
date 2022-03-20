@@ -16,7 +16,7 @@ Else - Part of the if statement, gives an alternative if the prior condition is 
 
 End() - Gets the last element.
 
-Expression - A set of operands. In other words its the most basic building block of a program. It computes a value from a number of operands. The simplest expression is simply a literal value, such as 10, 'a', 3.14, or "Norah". Names of variables are also expressions.
+Expression - A set of operands. In other words its the most basic building block of a program. It computes a value from a number of operands. The simplest expression is simply a literal value, such as 10, 'a', 3.14, or "Norah". Names of variables are also expressions. In simple terms, a expressoin is any section of the code that evaluates a value.
 
 Literal - Any non changing value. Can be a string literal, int literal. or char literal. in int x = 3, the 3 is the literal while int is the type and x is the object name.
 
@@ -36,4 +36,26 @@ Iteration - A repeated task. In our case when you iterate over a array, it means
 
 Loop - Repeating something like a statement.
 
-Lvalue -
+Lvalue - Something that appears on the left hand side of an assignment.
+
+Member function - Are functions are are apart of a class. They can be called using the dot notation.
+
+Output - After inputing some data and and implemengint some sort of set of instructions on it, the data is then outputed.
+
+push_back() - A member functoin that pushes a literal to the back of a vector.
+
+Repetition - Something that is repeated.
+
+Rvalue - Right side of an assignment.
+
+Selection - Selecting between alternatives. This is done using if statements and switch-statements.
+
+size() - Gets the size of the vector. Allowing you to do things to the elements.
+
+sort() - Sorts the vector by smallest to biggiest.
+
+Statement - Actions in the function body that are going to be performed. Another way of explaining statements is, they are complete lines of code that perfrom some action.
+
+Vector - A sequence of elements that you can access by an index. Vectors are are not size fixed unlike arrays.
+
+While-statement - An exmaple of iteration. Unlike the for loop, the while loop can be altered in the body.
