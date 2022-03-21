@@ -1,0 +1,3 @@
+Number one - The example median problem only gives the correct median if odd number of data is inputted. If an even number of data set is inputted then the result is incorrect.
+
+Even number of data set - First set a condition for only odd number of data.
