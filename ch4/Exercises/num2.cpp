@@ -41,21 +41,17 @@ int main(){
     }*/
 
     //Try finding the smallest and largest without the sort function.
-    for(int i = 0; i < distances.size(); i++){
-        small = distances[i];
+        small = distances[0];
+        big = distances[0];
+        //100, 65, 88
+    for(int i = 1; i < distances.size(); i++){
+        if(distances[i] < small)
+            small = distances[i];
 
-        for(int j = i + 1; j < distances.size(); j++){
-            big = distances[j];
 
-            if(small < big){
-                small = distances[i];
-                big = distances[j];
-            }else{
-                small = distances[j];
-                big = distances[i];
-            }
-            //std::cout << "Small value is " << small << " big value is " << big << "\n";
-        }
+        if(distances[i] > big)
+            big = distances[i];
     }
-            std::cout << "Small value is " << small << " big value is " << big << "\n";
+
+    std::cout << "Small value is " << small << " big value is " << big << "\n";
 }
