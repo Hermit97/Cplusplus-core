@@ -1,2 +1,2 @@
-num1: num1.cpp
-	clang++ -Wall -g num1.cpp -o num1
+num2: num2.cpp
+	clang++ -Wall -g num2.cpp -o num2
