@@ -45,6 +45,7 @@ int main(){
         big = distances[0];
         //100, 65, 88
     for(int i = 1; i < distances.size(); i++){
+        if(small > distances[i])
         if(distances[i] < small)
             small = distances[i];
 
