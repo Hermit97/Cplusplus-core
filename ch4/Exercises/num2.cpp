@@ -32,23 +32,14 @@ int main(){
     //Print the sum
     std::cout << sum << std::endl;
 
-    //Find the smallest and biggiest distances.
-    //std::sort(distances.begin(), distances.end());
-
-    //Print out the sorted vector
-    /*for(int i = 0; i < distances.size(); i++){
-
-    }*/
 
     //Try finding the smallest and largest without the sort function.
         small = distances[0];
         big = distances[0];
         //100, 65, 88
     for(int i = 1; i < distances.size(); i++){
-        if(small > distances[i])
         if(distances[i] < small)
             small = distances[i];
-
 
         if(distances[i] > big)
             big = distances[i];

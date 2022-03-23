@@ -15,6 +15,7 @@ mean distance between two neighboring cities.
 
 int main(){
     std::vector<double> dists;
+    double mean;
 
     std::cout << "Enter the distances\n";
     for(double dist; std::cin >> dist;)
@@ -36,5 +37,31 @@ int main(){
     }
 
     std::cout << "Sum = " << sum << "\n";
+
+    double small = dists[0];
+    double big = dists[0];
+
+    for(int i = 0; i < dists.size(); i++){
+        if(small > dists[i])
+            small = dists[i];
+        else if(big < dists[i])
+            big = dists[i];
+    }
+
+    std::cout << "Small: " << small << " Big: " << big << std::endl;
+
+    //Find the mean
+    int count = 1;
+    for(int i = 1; i < dists.size(); i++){
+        count = dists.size();
+    }
+    std::cout << count << "\n";
+
+    mean = sum / count;
+    std::cout << "Mean is " << mean << "\n";
+
+
+
+
 
 }
