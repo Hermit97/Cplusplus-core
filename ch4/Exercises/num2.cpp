@@ -60,8 +60,4 @@ int main(){
     mean = sum / count;
     std::cout << "Mean is " << mean << "\n";
 
-
-
-
-
 }
