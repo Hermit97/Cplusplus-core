@@ -1,2 +1,14 @@
-Number one - The example median problem only gives the correct median if odd number of data is inputted. If an even number of data set is inputted then the result is incorrect.
-Even number of data set - First set a condition for only odd number of data.
+Excersise 4 - Number guessing game
+
+
+Step 1 - User is asked to input a number between 1 and 100.
+     - The computer asks the user 7 questions. Enter Yes or No for each questions.
+
+Step 2 - Questions
+     Question 1 - Is the number bigger than 50?
+     If yes
+        Then small number is equal to 51 and biggest number is 100.
+    else (Meaning no)
+
+
+Get rid of the small and big inside of the if statements for question

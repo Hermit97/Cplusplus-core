@@ -15,14 +15,27 @@ no more than seven questions. Hint: Use the < and <= operators and the
 if-else construct.
 */
 
+char checkInput(){
+    char usrAnswer;
+
+    std::cin >> usrAnswer;
+    while(usrAnswer != 'y' && usrAnswer != 'Y' && usrAnswer != 'n' && usrAnswer != 'N'){
+        std::cout << "Wrong input, try again.\n";
+        //std::cin.clear();
+        //std::cin.ignore(256, '\n');
+        std::cin >> usrAnswer;
+    }
+    return usrAnswer;
+}
+
 int main(){
     int small = 1;
     int big = 100;
     int usrNum;
-    char usrAnswer;
     int maxQuestions = 7;
     int count = 1;
-    //int count = 0;
+
+//????    int range = big - small;
 
     std::cout << "Enter a number: \n";
     std::cin >> usrNum;
@@ -34,23 +47,28 @@ int main(){
         std::cin.ignore(256,'\n');
         std::cout << "Enter another number: \n";
         std::cin >> usrNum;
-
     }
+
     //Ask up to 7 questions
     while(count <= maxQuestions){
 
-        //Question 1
+        //Question 1 for [51, 100]
         std::cout << "Is the number you are thinking of above 50?\n";
-        std::cin >> usrAnswer;
+        if(checkInput() ==  'Y'){
+            small = 51;
+            big = 100;
 
-        while(usrAnswer != 'y' && usrAnswer != 'Y' && usrAnswer != 'n' && usrAnswer != 'N'){
-            std::cout << "Wrong input, try again.\n";
-            //std::cin.clear();
-            //std::cin.ignore(256, '\n');
-            std::cin >> usrAnswer;
+
+
         }
 
-        //count++;
+
+
+        //Question 2
+        std::cout << "Is the number smaller than ";
+
+
+
         ++count;
     }
 
