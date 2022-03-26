@@ -1,14 +1,27 @@
 Excersise 4 - Number guessing game
 
 
-Step 1 - User is asked to input a number between 1 and 100.
-     - The computer asks the user 7 questions. Enter Yes or No for each questions.
-
-Step 2 - Questions
-     Question 1 - Is the number bigger than 50?
-     If yes
-        Then small number is equal to 51 and biggest number is 100.
-    else (Meaning no)
+Write a program to play a numbers guessing game. The user thinks of a number between 1 and 100 and your program asks questions to figure out what the number is (e.g., “Is the number you are thinking of less than
+50?”). Your program should be able to identify the number after asking
+no more than seven questions. Hint: Use the < and <= operators and the
+if-else construct.
 
 
-Get rid of the small and big inside of the if statements for question
+1. variables
+
+//Lower bound is the smallest possible number
+int lowerBound = 1;
+
+//Upper bound is the largest possible number
+int upperBound = 100;
+
+int midPoint = (upperBound + lowerBound) / 2; //This will give 50 as the mid point
+
+
+2. While loop condition
+A while loop that runs until both upperBound and lowerBound are equal meaning the answer has been found
+OR
+While loop that runs for only 7 questoins. If the answer is found before its finidhed the loop breaks out and prints the result.
+
+3. While loop body
+int midPoint = (upperBound + lowerBound) / 2; //This will give 50 as the mid point. This is also in the body because every time the loop increments the guess will perform this operation. (NOW try this on a paper using procedure code.)

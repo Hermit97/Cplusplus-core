@@ -7,15 +7,13 @@
 #include <limits>
 
 /*
-Write a program to play a numbers guessing game. The user thinks of a
-number between 1 and 100 and your program asks questions to figure
-out what the number is (e.g., “Is the number you are thinking of less than
+Write a program to play a numbers guessing game. The user thinks of a number between 1 and 100 and your program asks questions to figure out what the number is (e.g., “Is the number you are thinking of less than
 50?”). Your program should be able to identify the number after asking
 no more than seven questions. Hint: Use the < and <= operators and the
 if-else construct.
 */
 
-char checkInput(){
+char answer(){
     char usrAnswer;
 
     std::cin >> usrAnswer;
@@ -28,17 +26,10 @@ char checkInput(){
     return usrAnswer;
 }
 
-int main(){
-    int small = 1;
-    int big = 100;
-    int usrNum;
-    int maxQuestions = 7;
-    int count = 1;
-
-//????    int range = big - small;
-
+int userNum(){
+    int usrNumber;
     std::cout << "Enter a number: \n";
-    std::cin >> usrNum;
+    std::cin >> usrNumber;
 
     //Check for invalid input
     while(std::cin.fail()){
@@ -46,34 +37,12 @@ int main(){
         std::cin.clear();
         std::cin.ignore(256,'\n');
         std::cout << "Enter another number: \n";
-        std::cin >> usrNum;
+        std::cin >> usrNumber;
     }
 
-    //Ask up to 7 questions
-    while(count <= maxQuestions){
+    return usrNumber;
+}
 
-        //Question 1 for [51, 100]
-        std::cout << "Is the number you are thinking of above 50?\n";
-        if(checkInput() ==  'Y'){
-            small = 51;
-            big = 100;
-
-
-
-        }
-
-
-
-        //Question 2
-        std::cout << "Is the number smaller than ";
-
-
-
-        ++count;
-    }
-
-
-
-
+int main(){
 
 }
