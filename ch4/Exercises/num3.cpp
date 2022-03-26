@@ -7,7 +7,9 @@
 #include <limits>
 
 /*
-Write a program to play a numbers guessing game. The user thinks of a number between 1 and 100 and your program asks questions to figure out what the number is (e.g., “Is the number you are thinking of less than
+Write a program to play a numbers guessing game. The user thinks of a number between
+1 and 100 and your program asks questions to figure out what the number is
+(e.g., “Is the number you are thinking of less than
 50?”). Your program should be able to identify the number after asking
 no more than seven questions. Hint: Use the < and <= operators and the
 if-else construct.
@@ -44,5 +46,26 @@ int userNum(){
 }
 
 int main(){
+    int lowerBound = 1;
+    int upperBound = 100;
+    int midPoint;
+    int questions = 0;
+    int maxQuestions = 7;
 
+    //Enter a number
+    userNum();
+    while(questions != maxQuestions){
+
+        midPoint = (upperBound + lowerBound) / 2;
+
+        std::cout <<"Is the number your thinking of less than " << midPoint << "\n";
+        if(answer() == 'Y' || answer() == 'y')
+            upperBound = midPoint - 1;
+        else {
+            lowerBound = midPoint;
+        }
+        ++questions;
+    }
+
+    std::cout << "The number your were thinking of is " << lowerBound << " it took " << questions << " questions";
 }
