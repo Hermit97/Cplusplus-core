@@ -14,11 +14,10 @@ their digit form;
 
 e.g., the input seven gives the output 7.*/
 
-
-int main() {
-    int input = 0;
-    bool cont = true;
-    std::vector<std::string> numValues = {
+int main(){
+int input;
+int i;
+std::vector<std::string> numValues = {
         "zero",
         "one",
         "two",
@@ -31,73 +30,22 @@ int main() {
         "nine",
 };
 
-    std::cout << "Enter a integer input and the corresponding number will be outputting as a worded string\n";
-    std::cin >> input;
+//ConvertIntToString
+std::cout << "Enter an integer to get its string value\n";
+std::cin >> input;
 
-    while(std::cin.fail()){
-        std::cout << "WRONG, enter a integer\n";
-        std::cin.clear();
-        std::cin.ignore(256, '\n');
-        std::cin >> input;
-    }
+if(input >= 0 && input <= 9){
+    std::cout << numValues[input] << "\n";
+}else{
+    std::cout << "Out of bounds\n";
+}
 
-    while(cont){
-        if(input >= 0 && input <= 9){
-            std::cout << numValues[input];
-            cont = false;
-//Now convert the num back to the spelled digit using the same input loop.
+//ConvertStringToInt
 
-        }
-    }
+for(i = 0; i < numValues.size(); i++){
+    std::cout << numValues[input] <<  " is " << i << "\n";
+}
 
-    /*while(cont){
-        if(input == 0){
-            std::cout << numValues[0] << "\n";
-            std::cout << "Converted back is " << input;
-            cont = false;
-        }else if(input == 1){
-            std::cout << numValues[1] << "\n";
-            std::cout << "Converted back is " << input;
-            cont = false;
-        }else if(input == 2){
-            std::cout << numValues[2] << "\n";
-            std::cout << "Converted back is " << input;
-            cont = false;
-        }else if(input == 3){
-            std::cout << numValues[3] << "\n";
-            std::cout << "Converted back is " << input;
-            cont = false;
-        }else if(input == 4){
-            std::cout << numValues[4] << "\n";
-            std::cout << "Converted back is " << input;
-            cont = false;
-        }else if(input == 5){
-            std::cout << numValues[5] << "\n";
-            std::cout << "Converted back is " << input;
-            cont = false;
-        }else if(input == 6){
-            std::cout << numValues[6] << "\n";
-            std::cout << "Converted back is " << input;
-            cont = false;
-        }else if(input == 7){
-            std::cout << numValues[7] << "\n";
-            std::cout << "Converted back is " << input;
-            cont = false;
-        }else if(input == 8){
-            std::cout << numValues[8] << "\n";
-            std::cout << "Converted back is " << input;
-            cont = false;
-        }else if(input == 9){
-            std::cout << numValues[9] << "\n";
-            std::cout << "Converted back is " << input;
-            cont = false;
-        }
-    }
 
-    std::cout << "\n\n";
-    for(int i = 0; i < numValues.size(); i++){
-        std::cout << i  <<  " " << numValues[i] << "\n";
-    }
-    std::cout << "Converted back is " << input;
-    */
+
 }
