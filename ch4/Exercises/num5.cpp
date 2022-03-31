@@ -16,6 +16,7 @@ e.g., the input seven gives the output 7.*/
 
 int main(){
     int input;
+    std::string numberName;
     int i;
     std::vector<std::string> numValues = {
             "zero",
@@ -41,5 +42,14 @@ int main(){
     }
 
     //ConvertStringToInt
-    std::cout << input << " as a string is " << numValues[input] << "\n";
+    std::cin.clear();
+    std::cout << "Enter a number to get it back in words\n";
+    std::cin >> numberName;
+
+    for(int i = 0; i <= numValues.size(); i++){
+        if(numberName == numValues[i]){
+            std::cout << numberName << " is " << i << "\n";
+        }
+    }
+
 }
