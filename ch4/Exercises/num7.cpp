@@ -23,5 +23,5 @@ of the loop so that you can see what’s going on.*/
 
 
 int main(){
-
+    std::vector<int> squares;
 }
