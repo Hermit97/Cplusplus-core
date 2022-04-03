@@ -1,27 +1,18 @@
-Excersise 4 - Number guessing game
+Excercise 7
 
+one grain of rice for first square
+2 grain of rice for the second4 for third
+and so on....
+up to 64 squares
 
-Write a program to play a numbers guessing game. The user thinks of a number between 1 and 100 and your program asks questions to figure out what the number is (e.g., “Is the number you are thinking of less than
-50?”). Your program should be able to identify the number after asking
-no more than seven questions. Hint: Use the < and <= operators and the
-if-else construct.
+Calculate how many squares are required to give the inventor at least 1000 grains of rice.
+And 1,000,000 grains
+And 1,000,000,000 grains
 
+Use a loop.
 
-1. variables
+Use a int to keep track of which square you are at.
 
-//Lower bound is the smallest possible number
-int lowerBound = 1;
+Use a int to keep the unmber of grains on all the previous squares.
 
-//Upper bound is the largest possible number
-int upperBound = 100;
-
-int midPoint = (upperBound + lowerBound) / 2; //This will give 50 as the mid point
-
-
-2. While loop condition
-A while loop that runs until both upperBound and lowerBound are equal meaning the answer has been found
-OR
-While loop that runs for only 7 questoins. If the answer is found before its finidhed the loop breaks out and prints the result.
-
-3. While loop body
-int midPoint = (upperBound + lowerBound) / 2; //This will give 50 as the mid point. This is also in the body because every time the loop increments the guess will perform this operation. (NOW try this on a paper using procedure code.)
+Write out the values of all your variables for each iteration of the loop so that you can see whats going on.
