@@ -23,5 +23,17 @@ of the loop so that you can see what’s going on.*/
 
 
 int main(){
-    std::vector<int> squares;
+    int squares;
+    int count = 1;
+    int i = 1;
+
+    std::cin >> squares;
+
+
+    while(i <= squares){
+        std::cout << "Squares = " << count << " Grains of rice = " << i << "\n";
+        count++;
+        i = i * 2;
+    }
+
 }
