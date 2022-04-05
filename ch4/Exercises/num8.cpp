@@ -18,14 +18,20 @@ you can calculate the approximate number of grains (using a double )?*/
 
 int main() {
 
-    int squares;
-    int riceGrain = 1;
+    //int squares;
+    //int riceGrain = 1;
+
+    double squares;
+    double riceGrain = 1;
 
     std::cin >> squares;
 
     for(int i = 1; i <= squares; i++){
-        std::cout << "Square = " << squares << " Rice grain = " << riceGrain << "\n";
+        std::cout << "Square = " << i << " Rice grain = " << riceGrain << "\n";
         riceGrain = riceGrain * 2;
     }
+
+    //Biggest int value is 31 squares
+    //Biggest double value is 1024 squares
 
 }
