@@ -35,7 +35,6 @@ int number() {
       if(s == numValues[i])
         num1 = i;
     }
-    //std::cout << num1 << "\n";
   }
   return num1;
 }

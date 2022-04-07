@@ -1,18 +1,37 @@
-Excercise 7
+Excercise 10
 
-one grain of rice for first square
-2 grain of rice for the second4 for third
-and so on....
-up to 64 squares
+Find prime numbers between 1 and 100.
 
-Calculate how many squares are required to give the inventor at least 1000 grains of rice.
-And 1,000,000 grains
-And 1,000,000,000 grains
+Make a function to check if a number is prime.
 
-Use a loop.
+Find prime numbers by dividing by a prime number smaller than itself.
 
-Use a int to keep track of which square you are at.
 
-Use a int to keep the unmber of grains on all the previous squares.
+2 is the first prime number
 
-Write out the values of all your variables for each iteration of the loop so that you can see whats going on.
+start loop at 2
+
+To check if a number is prime:
+
+Divide the number by 2.
+If the result is a whole number then its not prime.
+
+Find prime numbers by dividing by a prime number smaller than itself.
+
+So 2 is a prime number check if 3 is by dividing it by a smaller prime number which is 2.
+
+Enter a number bigger than 2, if its less than 2 its not a prime and try again, if it is 2 then
+its a prime enter more.
+
+Make vector called primes in main function.
+push 100 numbers into a vector called numbers from 1 to 100.
+sort them by order smallest to largest.
+print to see if they are sorted.
+
+check each number in the vector called numbers for prime numbers.
+Push all the prime numbers into another vector called primes.
+Make for loop to print out all of the prime numbers.
+Check to make sure the primes are right by comparing to a prime chart off google etc.
+
+
+Check if the next number is divisible by 2? Since 2 is a prime number;
