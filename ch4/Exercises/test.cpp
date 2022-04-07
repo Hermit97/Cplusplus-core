@@ -10,6 +10,10 @@
 
 int main(){
 
+    std::vector<int> h;
+    for(int i; std::cin >> i;){
+        h.push_back(i);
+    }
 
 
 }

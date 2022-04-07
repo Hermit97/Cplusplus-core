@@ -33,7 +33,6 @@ int main(){
         randomValues.push_back(npcValues);
         if(npcValues == '|')
             break;
-        break;
     }
 
     //User enters value to test against computer vector
