@@ -19,28 +19,27 @@ primes you found. You might check your result by comparing your vector
 of prime numbers with primes . Consider 2 the first prime.*/
 
 std::vector<int> primes;
-std::vector<int> numbers;
 
-void isPrime(){
-    int primeNums = 3;
-
-    for(int i = 2; i <= 100; i++){
-        numbers.push_back(i);
-    }
-
+bool isPrime(int primeNums){
     //If numbers vector elements are prime, push them into primes vector.
-    for(int i = 2; i < primeNums; i++){
+    for(int i = 2; i <= primeNums / 2; i++){
       if (primeNums % i == 0) {
-          std::cout << "Not a prime number\n";
-      }else {
-          std::cout << "IS prime\n";
+        return false;
       }
     }
-
+      return true;
 }
 
 int main(){
-    isPrime();
+  int num = 100;
 
+  for(int i = 2; i < num; i++){
+    if(isPrime(i)){
+      primes.push_back(i);
+    }
+  }
+    for(int i = 0; i < primes.size(); i++){
+      std::cout << primes[i] << "\n";
 
+    }
 }
