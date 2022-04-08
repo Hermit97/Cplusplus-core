@@ -22,32 +22,21 @@ std::vector<int> primes;
 std::vector<int> numbers;
 
 void isPrime(){
-    int primeNums;
+    int primeNums = 3;
 
     for(int i = 2; i <= 100; i++){
         numbers.push_back(i);
     }
 
-
     //If numbers vector elements are prime, push them into primes vector.
-    for(int i = 0; i < numbers.size(); i++){
-        primeNums = numbers[i + 1] / numbers[i];
-
-        if(primeNums != 0){
-            //primes.push_back(primeNums);
-            std::cout << i << "\n";
-        }else{
-            std::cout << "Not a prime\n";
-        }
+    for(int i = 2; i < primeNums; i++){
+      if (primeNums % i == 0) {
+          std::cout << "Not a prime number\n";
+      }else {
+          std::cout << "IS prime\n";
+      }
     }
 
-    /*for(int i = 0; i < numbers.size(); i++){
-        std::cout << numbers[i] << "\n";
-    }*/
-
-    for(int i = 0; i < primes.size(); i++){
-        std::cout << primes[i] << "\n";
-    }
 }
 
 int main(){
