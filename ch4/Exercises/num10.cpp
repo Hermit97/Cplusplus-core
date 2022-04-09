@@ -20,26 +20,25 @@ of prime numbers with primes . Consider 2 the first prime.*/
 
 std::vector<int> primes;
 
-bool isPrime(int primeNums){
-    //If numbers vector elements are prime, push them into primes vector.
-    for(int i = 2; i <= primeNums / 2; i++){
-      if (primeNums % i == 0) {
-        return false;
-      }
+bool isNumberPrime(int checkNum){
+  for(int i = 2; i <= checkNum / 2; i++){
+    if(checkNum % i == 0){
+      return false;
+      break;
     }
-      return true;
+  }
+
+  return true;
 }
 
 int main(){
+
   int num = 100;
-
-  for(int i = 2; i < num; i++){
-    if(isPrime(i)){
+  for(int i = 2; i <= num; i++){
+    if(isNumberPrime(i))
       primes.push_back(i);
-    }
   }
-    for(int i = 0; i < primes.size(); i++){
-      std::cout << primes[i] << "\n";
 
-    }
+  for(int j = 0; j < primes.size(); j++)
+    std::cout << primes[j] << "\n";
 }

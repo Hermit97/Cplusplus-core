@@ -7,8 +7,6 @@
 #include <cstdlib>
 #include <limits>
 
-
-
 std::vector<int> primes;
 
 int main(){
