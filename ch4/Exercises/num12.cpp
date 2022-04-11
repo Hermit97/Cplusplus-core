@@ -20,12 +20,12 @@ int main(){
 
     std::vector<int> isPrime;
     for(int i = 2; i <= n; i++){
-        if(primes[i] == true){
+        //if(primes[i] == true){
             //Gets multiple of i, sets it to false for marking then gets the next multiple and stores it in j.
             for(int j = i * i; j <= n; j = j +i){
                 primes[j] = false;
             }
-        }
+        //}
     }
     for(int i = 0; i <= n; i++){
         if(primes[i] == true)
