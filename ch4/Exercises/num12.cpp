@@ -14,20 +14,19 @@ you don’t know that method, get on the web and look it up. Write your
 program using this method.*/
 
 int main(){
-  int n = 50;
-  std::vector<bool> primes (n, 1);
+    int num = 50;
+    bool isPrime = true;
+    //std::cin >> num;
+    int A[100] = {0};
 
-  for(int i = 2; i < n; i++){
-    if(primes[i] == true){
-      for(int j = i * 2; j < n; j += i){
-        primes[j] = false;
-      }
+    for(int i = 2; i * i <= num; i++){
+        for(int j = i * i; j <= num; j+=i){
+            A[j - 1] = 1;
+        }
     }
 
-  for(int p = 2; p <= n; p++){
-    if(primes[p])
-      std::cout << p << "\n";
-  }
-  }
-
+    for(int p = 2; p < num; p++){
+        if(A[p - 1] == 0)
+            std::cout << p << "\n";
+    }
 }
