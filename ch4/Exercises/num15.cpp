@@ -16,6 +16,7 @@ a set of positive integers.*/
 int main() {
   int max, min, temp;
   std::vector<int> num;
+  std::vector<int > modeNums;
 
   // Enter and print series of numbers
   for (int nums; std::cin >> nums;) {
@@ -57,5 +58,25 @@ int main() {
     if (num[i] > max)
       max = num[i];
   }
+
   std::cout << "Max is " << max << "\n";
+
+  //Find the mode
+  int mode;
+  for(int i = 0; i < num.size(); i++){
+    if(num[i]== num[i + 1]){
+        mode = num[i];
+        modeNums.push_back(mode);
+    }
+  }
+
+  std::cout << "Mode: ";
+  std::string whitespace = "";
+  for(int i = 0; i < modeNums.size(); i++){
+      std::cout << whitespace <<  modeNums[i];
+      whitespace = ",";
+  }
+
+  std::cout << "\n";
+
 }
