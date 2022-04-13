@@ -23,11 +23,11 @@ int main() {
 
   // Enter and print series of numbers
   for (int nums; std::cin >> nums;) {
-      while(nums < 0){
+    if(nums < 0){
           std::cin.clear();
           std::cout << "Try again";
           std::cin >> nums;
-      }
+      }else
           num.push_back(nums);
   }
 
