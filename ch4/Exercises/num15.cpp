@@ -17,11 +17,20 @@ int main() {
   int max, min, temp;
   std::vector<int> num;
   std::vector<int > modeNums;
+  int num1;
+  bool isNegative = true;
+
 
   // Enter and print series of numbers
   for (int nums; std::cin >> nums;) {
-    num.push_back(nums);
+      if(nums < 0){
+          std::cin.clear();
+          std::cout << "Try again";
+          std::cin >> nums;
+      }else
+          num.push_back(nums);
   }
+
 
   std::cout << "Unsorted:\n";
   for (int i = 0; i < num.size(); i++)
@@ -78,5 +87,4 @@ int main() {
   }
 
   std::cout << "\n";
-
 }
