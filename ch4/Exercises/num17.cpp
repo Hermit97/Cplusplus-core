@@ -12,17 +12,16 @@
   the form ax^2 + bx + c = 0 */
 
 int main(){
-  int a, b, c, x;
+  double a, b, c;
   int quad; 
-  int radic;
-  int squared = x * x;
 
   std::cout << "Enter values for a, b, c, x\n";
-  std::cin >> a >> b >> c;
-  //quad = (-b + sqrt((b*b)-4*(a*c)))/(2 * a);
+  std::cin >> b >> a >> c;
+  double addQuad = (-(b) + sqrt((b*b)-4*a*c))/(2 * a);
+  double subQuad = (-(b) - sqrt((b*b)-4*a*c))/(2 * a);
+  //quad = (-(3) - sqrt((3*3)-4*1*-4))/(2 * 1);
 
-  int sq = sqrt(16-576);
-  std::cout << sq << "\n";
 
-  //std::cout << "The result to the quadratic formula is: " << quad << "\n";
+  std::cout << "The result to the addition quadratic formula is: " << addQuad << "\n";
+  std::cout << "The result to the subs addition quadratic formula is: " << subQuad << "\n";
 }
