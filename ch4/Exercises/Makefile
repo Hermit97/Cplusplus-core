@@ -1,4 +1,4 @@
-all: num1 num2 num3 num4 num5 num6 num7 num8 num9 num10 num11 num12 num13 num14 num15 num16 test2 test
+all: num1 num2 num3 num4 num5 num6 num7 num8 num9 num10 num11 num12 num13 num14 num15 num16 num17 test2 test
 
 num1: num1.cpp
 	clang++ -o num1 num1.cpp
