@@ -48,6 +48,9 @@ num15: num15.cpp
 num16: num16.cpp
 	clang++ -o num16 num16.cpp
 
+num17: num17.cpp
+	clang++ -o num17 num17.cpp
+
 test: test.cpp
 	clang++ -o test test.cpp
 
