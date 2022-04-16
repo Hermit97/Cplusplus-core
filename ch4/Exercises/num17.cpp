@@ -19,7 +19,6 @@ int main(){
   std::cin >> b >> a >> c;
   double addQuad = (-(b) + sqrt((b*b)-4*a*c))/(2 * a);
   double subQuad = (-(b) - sqrt((b*b)-4*a*c))/(2 * a);
-  //quad = (-(3) - sqrt((3*3)-4*1*-4))/(2 * 1);
 
 
   std::cout << "The result to the addition quadratic formula is: " << addQuad << "\n";
