@@ -30,6 +30,16 @@ int main(){
 
         std::cin >> name;
         std::cin >> score;
+
+
+        //Check for same entries for names vector
+        for(int i = 0; i < names.size() && i < scores.size(); i++){
+            if(name == names[i] && score == scores[i]){
+              std::cout << "This already exists. Try again.\n";
+
+            }
+        }
+
         if(name == "NoName" && score == 0){
             isTrue = false;;
             break;
@@ -39,14 +49,16 @@ int main(){
         scores.push_back(score);
     }
 
+    std::cout << "Result:\n";
     for(int  i = 0; i < names.size() && i < scores.size(); i++){
         std::cout << names[i];
         std::cout << " " << scores[j] << "\n";
     }
 
     //Check for same entries for names vector
-    for(int i = 0; i < names.size(); i++){
+    /*for(int i = 0; i < names.size(); i++){
         if(names[i] == names[i + 1]){
         }
     }
+    */
 }
