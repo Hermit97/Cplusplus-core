@@ -60,8 +60,17 @@ int main(){
 /*Modify the program from exercise 19 so that when you enter a name, the
   program will output the corresponding score or name not found .*/
 
-    std::cout << "NUMBER19\n\n\n\n";
+    std::cout << "\n\n";
 
     std::cout << "Enter a name to get the correspoinding score\n";
     std::cin >> enterName;
+
+    //Maybe use a inner loop to check each of the names.
+    for(int i = 0; i < names.size() && i < scores.size(); i++){
+      if(enterName == names[i]){
+	std::cout << scores[i] << "\n";
+      }else{
+	std::cout << "Score or name not found\n";
+      }
+    }
 }
