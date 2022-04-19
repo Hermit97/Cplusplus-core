@@ -47,7 +47,7 @@ int main(){
     std::cout << "Result:\n";
     for(int  i = 0; i < names.size() && i < scores.size(); i++){
         std::cout << names[i];
-        std::cout << " " << scores[j] << "\n";
+        std::cout << " " << scores[i] << "\n";
     }
 
     //Check for same entries for names vector
@@ -66,11 +66,13 @@ int main(){
     std::cin >> enterName;
 
     //Maybe use a inner loop to check each of the names.
-    for(int i = 0; i < names.size() && i < scores.size(); i++){
+    for(int i = 0; i < names.size(); i++){
       if(enterName == names[i]){
-	std::cout << scores[i] << "\n";
+        std::cout << scores[i] << "\n";
+        break;
       }else{
-	std::cout << "Score or name not found\n";
+          std::cout << "Name not found";
+          break;
       }
     }
 }
