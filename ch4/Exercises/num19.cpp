@@ -69,10 +69,8 @@ int main(){
     for(int i = 0; i < names.size(); i++){
       if(enterName == names[i]){
         std::cout << scores[i] << "\n";
-        break;
       }else{
-          std::cout << "Name not found";
-          break;
+          std::cout << "Name not found\n";
       }
     }
 }
