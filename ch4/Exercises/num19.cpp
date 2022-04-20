@@ -17,6 +17,7 @@ int main(){
     std::vector<int> scores;
     std::string enterName;
     bool isTrue = true;
+    bool nameFound;
     int i, j;
 
     while(isTrue){
@@ -50,13 +51,6 @@ int main(){
         std::cout << " " << scores[i] << "\n";
     }
 
-    //Check for same entries for names vector
-    /*for(int i = 0; i < names.size(); i++){
-        if(names[i] == names[i + 1]){
-        }
-    }
-    */
-
 /*Modify the program from exercise 19 so that when you enter a name, the
   program will output the corresponding score or name not found .*/
 
@@ -69,8 +63,14 @@ int main(){
     for(int i = 0; i < names.size(); i++){
       if(enterName == names[i]){
         std::cout << scores[i] << "\n";
+        nameFound = true;
+        break;
       }else{
-          std::cout << "Name not found\n";
+          nameFound = false;
       }
     }
+
+    if(nameFound == false)
+            std::cout << "Name not found\n";
+
 }
