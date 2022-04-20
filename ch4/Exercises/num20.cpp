@@ -16,8 +16,13 @@ int main(){
     std::vector<std::string> names;
     std::vector<int> scores;
     std::string enterName;
+    int checkNum;
     bool isTrue = true;
+    bool nameFound;
     int i, j;
+    
+            
+    
 
     while(isTrue){
         std::string name;
@@ -54,15 +59,31 @@ int main(){
     std::cin >> enterName;
 
     //Maybe use a inner loop to check each of the names.
-    for(int i = 0; i < names.size(); i++){
-      if(enterName == names[i]){
-        std::cout << scores[i] << "\n";
-      }else{
-          std::cout << "Name not found\n";
-      }
+    nameFound = false;
+    while(nameFound == false){
+	for(int i = 0; i < names.size(); i++){
+	    if(enterName == names[i]){
+		std::cout << scores[i] << "\n";
+		nameFound = true;
+		break;
+	    }else{
+		//std::cout << "Name not found\n";
+		nameFound = false;
+	    }
+	}
     }
+
+    if(nameFound == false)
+	std::cout << "Name not found\n";
 
 /*Modify the program from exercise 19 so that when you enter an integer,
 the program will output all the names with that score or score not found .*/
-std::cout << "Enter an integer: \n";
+    std::cout << "Enter an integer: \n";
+    std::cin >> checkNum;
+
+    for(int i = 0; i < scores.size(); i++){
+	if(checkNum == scores[i]){
+	    std::cout << names[i] << "\n";
+	}
+    }
 }

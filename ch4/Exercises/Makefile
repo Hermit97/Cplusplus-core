@@ -1,4 +1,4 @@
-all: num1 num2 num3 num4 num5 num6 num7 num8 num9 num10 num11 num12 num13 num14 num15 num16 num17 num18 num19 test2 test
+all: num1 num2 num3 num4 num5 num6 num7 num8 num9 num10 num11 num12 num13 num14 num15 num16 num17 num18 num19 num20 test2 test
 
 num1: num1.cpp
 	clang++ -o num1 num1.cpp
@@ -56,6 +56,9 @@ num18: num18.cpp
 
 num19: num19.cpp
 	clang++ -o num19 num19.cpp
+
+num20: num20.cpp
+	clang++ -o num20 num20.cpp
 
 test: test.cpp
 	clang++ -o test test.cpp
