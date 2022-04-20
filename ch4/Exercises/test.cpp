@@ -14,13 +14,25 @@ you don’t know that method, get on the web and look it up. Write your
 program using this method.*/
 
 int main(){
-  int a = 10;
-  int b = 20;
-  int temp;
+  int num;
+  bool foundNum;
+  std::vector<int> nums {1, 2, 3, 4};
+  std::cin >> num;
 
-  temp = a;
-  a = b;
-  b = temp;
 
-  std::cout << "a:" << a << "\n" << "b:" << b << "\n";
+
+  for(int i = 0; i < nums.size(); i++){
+    if(num != nums[i]){
+      foundNum = false;
+    }else if(num == nums[i]){
+      std::cout << num << " = " << nums[i] << "\n";
+      foundNum = true;
+      break;
+    }
+  }
+
+  if(foundNum == false)
+    std::cout << "Number not found\n";
+
+  
 }

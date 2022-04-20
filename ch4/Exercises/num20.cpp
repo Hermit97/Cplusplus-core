@@ -19,10 +19,8 @@ int main(){
     int checkNum;
     bool isTrue = true;
     bool nameFound;
+    bool scoreFound;
     int i, j;
-    
-            
-    
 
     while(isTrue){
         std::string name;
@@ -59,19 +57,15 @@ int main(){
     std::cin >> enterName;
 
     //Maybe use a inner loop to check each of the names.
-    nameFound = false;
-    while(nameFound == false){
 	for(int i = 0; i < names.size(); i++){
-	    if(enterName == names[i]){
-		std::cout << scores[i] << "\n";
-		nameFound = true;
-		break;
-	    }else{
-		//std::cout << "Name not found\n";
-		nameFound = false;
+	    if(enterName != names[i]){
+            nameFound = false;
+	    }else if(enterName == names[i]){
+            std::cout << scores[i] << "\n";
+            nameFound = true;
+            break;
 	    }
 	}
-    }
 
     if(nameFound == false)
 	std::cout << "Name not found\n";
@@ -82,8 +76,16 @@ the program will output all the names with that score or score not found .*/
     std::cin >> checkNum;
 
     for(int i = 0; i < scores.size(); i++){
-	if(checkNum == scores[i]){
-	    std::cout << names[i] << "\n";
-	}
+        if(checkNum != scores[i]){
+            scoreFound = false;
+        }else if(checkNum == scores[i]){
+            std::cout << names[i] << "\n";
+            scoreFound = true;
+            break;
+        }
+    }
+
+    if(scoreFound == false){
+        std::cout << "Score not found.\n";
     }
 }
