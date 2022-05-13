@@ -45,36 +45,71 @@ int main() {
     if (a > s)
       std::cout << "num9 Success!\n ";
 
-    //num10
+    // num10
     std::string x = "fool";
     if (x == "fool")
-	std::cout << "num10 Success!\n";
+      std::cout << "num10 Success!\n";
 
-    //num11
+    // num11
     std::string o = "ape";
-    if (o != "fool" )
-	std::cout << " num11 Success!\n " ;
+    if (o != "fool")
+      std::cout << " num11 Success!\n ";
 
-    //num12
+    // num12
     std::string q = "ape";
     if (s != "fool")
-	std::cout << "num 12 Success!\n " ;
+      std::cout << "num 12 Success!\n ";
 
-    //num13
+    // num13
     std::vector<char> n(5);
-    for (int i=0; i <= n.size(); ++i)
-	std::cout << "num13 Success!\n";
+    for (int i = 0; i <= n.size(); ++i)
+      std::cout << "num13 Success!\n";
 
-    //num14
+    // num14
     std::vector<char> z(5);
     for (int i = 0; i <= z.size(); ++i)
-	std::cout << "num14 Success!\n";
+      std::cout << "num14 Success!\n";
 
-    //num15
+    // num15
     std::string g = "Success!\n";
-    for (int i=0; i<6; ++i)
-	std::cout << g[i - 5];
+    for (int i = 0; i < g.size(); ++i)
+      std::cout << g[i];
 
+    //num16
+    if (true)
+      std::cout << "num16 Success!\n ";
+    else
+      std::cout << " Fail!\n " ;
+
+    //num17
+    int l = 2000;
+    int sev = l;
+    if (sev == 2000)
+      std::cout << "num17 Success!\n";
+
+    //num18
+    std::string sa = "num18 Success!\n";
+    for(int i=0; i < sa.size(); ++i)
+      std::cout << sa[i];
+
+    //num19
+    std::vector<int> vv(5);
+    for (int i=0; i<=v.size(); ++i)
+      std::cout << "Success!\n" ;
+
+    //num20
+    int i = 0;
+    int j = 9;
+    while (i<=10)
+      ++i;
+    if(j<i)
+      std::cout << "Num 20 Success!\n";
+
+    //num21
+    int xx = 2;
+    double dd = 5 / (xx – 2);
+    if (dd == 2 * xx + 0.5)
+      std::cout << " Success!\n " ;
     return 0;
   } catch (std::exception &e) {
     std::cerr << "error: " << e.what() << '\n';
