@@ -102,14 +102,54 @@ int main() {
     int j = 9;
     while (i<=10)
       ++i;
-    if(j<i)
+    if(j < i)
       std::cout << "Num 20 Success!\n";
 
     //num21
     int xx = 2;
-    double dd = 5 / (xx – 2);
-    if (dd == 2 * xx + 0.5)
+    double dd = 18 / (xx + 2) + 0.5;
+    double cc = 2 * xx + 0.5;
+
+    std::cout << "dd is " << dd << "\n";
+    std::cout << "cc is " << cc << "\n";
+
+    if (dd == cc)
       std::cout << " Success!\n " ;
+
+    //num22
+    std::string ss = "num22 Success!\n";
+    for (int i = 0; i <= ss.size(); ++i)
+      std::cout << ss[i];
+
+    //num23
+    int iii=0;
+    int jj = 0;
+
+    while(iii < 10)
+      ++iii;
+    if (jj < iii)
+      std::cout << "num23 Success!\n " ;
+
+    //num24
+    int who = 4;
+    double d = 48 / (who + 2) + 0.5;
+    double ew = 2 * who + 0.5;
+    std::cout << "who is " << d << "\n";
+    std::cout << "ew is " << ew << "\n";
+    if (d == ew)
+      std::cout << "num24 Success!\n " ;
+
+    //num25
+    std::string word;
+    std::string re = "Success!";
+    std::cin >> word;
+
+    if (word == re) {
+      std::cout << "num25 Success!\n " ;
+
+    }
+
+
     return 0;
   } catch (std::exception &e) {
     std::cerr << "error: " << e.what() << '\n';
