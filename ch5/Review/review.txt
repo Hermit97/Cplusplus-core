@@ -1,0 +1,74 @@
+CH5 review
+
+Name four major types of errors and briefly define each one.
+-Run time errors = Errors found by checks in a running program.
+-Compile time errors = errors found by the compiler.
+-Logic errors = Errors found by the programmer looking for the causes of the erroneous results.
+-Link time errors = Errors found by the linker when its trying to combine object files into an executable program.
+
+What kinds of errors can we ignore in student programs?
+-Can ignore link time errors.
+
+What guarantees should every completed project offer?
+-That it has minimum bugs and it does what its suppose to do.
+
+List three approaches we can take to eliminate errors in programs and
+produce acceptable software.
+-Use estimations.
+-Use a debugger.
+-Plan your program out before writing actual code.
+
+Why do we hate debugging?
+-Its a repetitive tedious task.
+
+What is a syntax error? Give five examples.
+-Syntax error break the rules of the programming languages grammar.
+-Some examples of this would be,
+int x = 32 //Missing a semi Colon
+double int = 33 //Using a reserved key word
+int dog;
+do = "Bullseye"; // do is not defined.
+
+What is a type error? Give five examples.
+-Type errors are mismatch between the types you declared.
+-Arena mispelled as aren.
+-Arugments for area should be one but you enter 2 arguments.
+-Using the wrong type for exmaple, giveing a int type object a boolean value.
+-Using undeclared function.
+
+What is a linker error? Give three examples.
+-The linker error is when a file is not declared atleast once. This is ofeten avoided by using header files.
+-Functions that are not defined.
+-Sometimes wrong names.
+-Wrong types.
+
+What is a logic error? Give three examples.
+-Logic errors are when your code doesnt do what its suppose to.
+-Instead of adding it substracts.
+-Takes input but doesn't do anything with it.
+-Takes decimals when it should only take whole numbers.
+
+List four potential sources of program errors discussed in the text.
+-Type error
+-Linker error
+-Logic Error
+-Run time error
+
+How do you know if a result is plausible? What techniques do you have to answer such questions?
+-One way is by using estimations and asking your self questoins regarding the result being logically sound.
+
+Compare and contrast having the caller of a function handle a run-time error vs. the called function’s handling the run-time error.
+-
+
+Why is using exceptions a better idea than returning an “error value”?
+How do you test if an input operation succeeded?
+Describe the process of how exceptions are thrown and caught.
+Why, with a vector called v , is v[v.size()] a range error? What would be
+the result of calling this?
+Define pre-condition and post-condition; give an example (that is not the area()
+function from this chapter), preferably a computation that requires a loop.
+When would you not test a pre-condition?
+When would you not test a post-condition?
+What are the steps in debugging a program?
+Why does commenting help when debugging?
+How does testing differ from debugging?
