@@ -58,7 +58,7 @@ How do you know if a result is plausible? What techniques do you have to answer 
 -One way is by using estimations and asking your self questoins regarding the result being logically sound.
 
 Compare and contrast having the caller of a function handle a run-time error vs. the called function’s handling the run-time error.
--
+-The caller function has an easier time handling run time errors. Having the caller function handle run time errors can also lead to brittle code beacause if the functions details are changed in any way, it can leader to errors for the caller function. Having the called fucntion handle it is easier and unlike the caller functoin, you wont have to write test everytime the function is used. Another reason is that you only have to look at one place when modifying the code.
 
 Why is using exceptions a better idea than returning an “error value”?
 How do you test if an input operation succeeded?
