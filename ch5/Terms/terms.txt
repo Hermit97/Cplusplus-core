@@ -1,8 +1,8 @@
-argument error -
-assertion
-catch
-compile-time error
-container
+argument error - Arguments that are wrong for example the wront type.
+assertion - Statement that asserts an invariant.
+catch - Keyword what catches an exception and handles the exception.
+compile-time error - Errors that the compiler catches when you compile the program.
+container -
 debugging
 error
 exception
