@@ -61,10 +61,18 @@ Compare and contrast having the caller of a function handle a run-time error vs.
 -The caller function has an easier time handling run time errors. Having the caller function handle run time errors can also lead to brittle code beacause if the functions details are changed in any way, it can leader to errors for the caller function. Having the called fucntion handle it is easier and unlike the caller functoin, you wont have to write test everytime the function is used. Another reason is that you only have to look at one place when modifying the code.
 
 Why is using exceptions a better idea than returning an “error value”?
+-Error values require tests for both called and caller functions. This can lead to prolematic situations like forgetting to implement the actual testing everytime.
+
 How do you test if an input operation succeeded?
+-You can test std::cin, if it suceeds then the input operation was succesful. Otherwise it failed.
+
 Describe the process of how exceptions are thrown and caught.
+-The process begins when a function finds an error it can't handle forcing it to not retrurn normally. Instead it throws an exception indicating what went wrong. Any direct or indirect caller can catch the exception. In practical terms a try-block is used to implement this. It lists the kinds of exceptions it wants to handle in the catch parts of the try-block. If no caller catches an exception, the program terminates.
+
 Why, with a vector called v , is v[v.size()] a range error? What would be
 the result of calling this?
+-You would get a out of range error when compiling. The reason for this is that when testing till when you want the for loop to continue, you test it as i <= v.size(). Vectors start at the index 0. If the total number of elements in v is 10 then this will increment till it reaches the index 11 because going to increment till i is equal to v. To avoid this you would instead test it as i < v.size(). This will allow it to keep incrementing in range. Again the reason being vectors index start at 0 instead of 1. making sure it doesn't test for it being equal allows it to increment only till 10 which would be the index 9 since it begins at 0.
+
 Define pre-condition and post-condition; give an example (that is not the area()
 function from this chapter), preferably a computation that requires a loop.
 When would you not test a pre-condition?
