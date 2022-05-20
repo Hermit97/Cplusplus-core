@@ -73,10 +73,20 @@ Why, with a vector called v , is v[v.size()] a range error? What would be
 the result of calling this?
 -You would get a out of range error when compiling. The reason for this is that when testing till when you want the for loop to continue, you test it as i <= v.size(). Vectors start at the index 0. If the total number of elements in v is 10 then this will increment till it reaches the index 11 because going to increment till i is equal to v. To avoid this you would instead test it as i < v.size(). This will allow it to keep incrementing in range. Again the reason being vectors index start at 0 instead of 1. making sure it doesn't test for it being equal allows it to increment only till 10 which would be the index 9 since it begins at 0.
 
-Define pre-condition and post-condition; give an example (that is not the area()
-function from this chapter), preferably a computation that requires a loop.
+Define pre-condition and post-condition; give an example (that is not the area() function from this chapter), preferably a computation that requires a loop.
+-Pre-condition means it has to be true for the function to perform its action correctly. Post-conditoin is the expected reuslt or actions that should occur. An example for pre-condition would be having an function that takes two integer arguments a and b. The purpose of the functoin is to take a as the starting number and print all the following numbers till b. One way of implementing post-condition is by commenting the functon requires two integer values. A should be smaller than b since it's the initial number. An example for the post-condition for this would be that the result shoudl be a set of integer numbers ranging from a to b.
+
 When would you not test a pre-condition?
+-If it slows down the code, nobody would give bad arguments, and if its too complicated to check.
+
 When would you not test a post-condition?
+-If its too complicatdd to check.
+
 What are the steps in debugging a program?
+-Compile the progra, link the program, get the program to perform what ever instructiouns its suppose to do.
+
 Why does commenting help when debugging?
+-Allows you to stay organized and easily figure out what a function might do or who wrote it or the design ideas behind it.
+
 How does testing differ from debugging?
+-When testing you are often testing the program selected inputs and comparing its results with expected results. Debugging on the other hand is going through selected steps to find the error in the code and then repeating these steps until the error is fixed.
