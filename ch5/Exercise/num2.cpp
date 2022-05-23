@@ -17,15 +17,20 @@ void error(std::string errorMessage){
 
 // converts Celsius to KelvinCHAPTER 5 • ERRORS
 int main(){
-    double c;
-    double minCelsius = -273.15;
-    std::cin >> c;
-
-    while(c < minCelsius){
-        error("ERROR! Below -273.15C");
+    try{
+        double c;
+        double minCelsius = -273.15;
         std::cin >> c;
-    }
 
-    double k = ctok(c);
-    std::cout << k << "\n" ;
+        if(c < minCelsius){
+            //error("ERROR! Below -273.15C");
+            throw c;
+        }
+
+        double k = ctok(c);
+        std::cout << k << "\n" ;
+    }
+    catch(double c){
+        error("Range error\n");
+    }
 }
