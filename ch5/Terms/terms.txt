@@ -1,12 +1,20 @@
 argument error - Arguments that are wrong for example the wront type.
+
 assertion - Statement that asserts an invariant.
+
 catch - Keyword what catches an exception and handles the exception.
+
 compile-time error - Errors that the compiler catches when you compile the program.
-container -
-debugging
-error
-exception
-invariant
+
+container - A holder object that stores a collection of other objects like elements.
+
+debugging - The process of finding and removing bugs.
+
+error - Problems with the program that can be further classfied as compile time error, run time error, and syntax errors just to name a few.
+
+exception - The concept of seperating the detection of the error (which should be done in a called function) from the handling of the error (which should be done from the calling function) while ensuring that a detected error can not be ignored.
+
+invariant - Conditions that should always hold.
 link-time error
 logic error
 post-condition
@@ -15,6 +23,6 @@ range error
 requirement
 run-time error
 syntax error
-testing
+testing bugs
 throw
 type error
