@@ -11,10 +11,21 @@ double ctok(double c){
     return k;
 }
 
+void error(std::string errorMessage){
+  std::cout << errorMessage;
+}
+
 // converts Celsius to KelvinCHAPTER 5 • ERRORS
 int main(){
-    double c = 0;
+    double c;
+    double minCelsius = -273.15;
     std::cin >> c;
+
+    while(c < minCelsius){
+        error("ERROR! Below -273.15C");
+        std::cin >> c;
+    }
+
     double k = ctok(c);
     std::cout << k << "\n" ;
 }
