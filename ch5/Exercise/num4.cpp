@@ -11,7 +11,8 @@ double ctok(double c) {
 
 double ktoc(double k) {
   double c = k - 273.15;
-  if (k < c) {
+  double minK= -541.3;
+  if (k < minK) {
     throw k;
   }
   return c;
@@ -49,5 +50,6 @@ int main() {
     } catch (double c) {
         error("Range error\n");
     }
-  }
+  }else
+    std::cout << "Wrong input...exiting program\n";
 }
