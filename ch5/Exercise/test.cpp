@@ -5,15 +5,8 @@ void error(std::string errorMessage){
 }
 
 int main(){
-    try{
-        std::cout << "Enter a int\n";
-        int n;
-        std::cin >> n;
-        if(n < 20)
-            throw n;
-        std::cout << n << "\n";
-
-    }catch(int n){
-        error("Range error\n");
-    }
+    double x;
+    std::cin >> x;
+    double c = (x - 32) * .5556;
+    std::cout << "f to c is " << c << "\n";
 }
