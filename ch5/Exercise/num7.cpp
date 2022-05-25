@@ -8,15 +8,18 @@ When the program detects an equation with no real roots, have it print
 out a message. How do you know that your results are plausible? Can
 you check that they are correct?*/
 
+//Print out the roots of the quadratic
+//double checkRoots() {}
+
 int main() {
   double b, a, c;
   std::cin >> a >> b >> c;
-  double squaredNum =  std::sqrt(((b * b) - 4 * a * c));
+  double squaredNum = std::sqrt(((b * b) - 4 * a * c));
   double addQuad = -b + squaredNum;
   double minQuad = -b - squaredNum;
 
   double totalAddQuad = addQuad / (2 * a);
   double totalMinQuad = minQuad / (2 * a);
-  std::cout << totalAddQuad << "\n";
-  std::cout << totalMinQuad << "\n";
+   std::cout << totalAddQuad << "\n";
+   std::cout << totalMinQuad << "\n";
 }
