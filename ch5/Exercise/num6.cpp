@@ -8,12 +8,13 @@ To solve these, one uses the quadratic formula:
 
 int main() {
   double b, a, c;
-  double totalQuad;
   std::cin >> a >> b >> c;
   double squaredNum =  std::sqrt(((b * b) - 4 * a * c));
-  //std::cin >> a >> b >> c;
+  double addQuad = -b + squaredNum;
+  double minQuad = -b - squaredNum;
 
-  double quad = -b + squaredNum;
-  totalQuad = quad / (2 * a);
-  std::cout << totalQuad << "\n";
+  double totalAddQuad = addQuad / (2 * a);
+  double totalMinQuad = minQuad / (2 * a);
+  std::cout << totalAddQuad << "\n";
+  std::cout << totalMinQuad << "\n";
 }
