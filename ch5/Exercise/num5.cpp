@@ -32,9 +32,6 @@ int main(){
         std::cout << "Enter 1 to convert f to c and 2 to xoncert c to f\n";
         std::cin >> x;
 
-        //std::cout << "Enter the temp\n";
-        //std::cin >> z;
-
         if(x == 1){
             double c = ftoc();
             std::cout << "f to c is " << c << "\n";
