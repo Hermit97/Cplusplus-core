@@ -1,5 +1,6 @@
 #include <cmath>
 #include <iostream>
+#include <vector>
 
 /*Quadratic equations are of the form
 a ⋅ x^2 + b ⋅ x + c = 0
@@ -7,13 +8,17 @@ To solve these, one uses the quadratic formula:
 */
 
 int main() {
-  double b, a, c;
-  double totalQuad;
-  std::cin >> a >> b >> c;
-  double squaredNum =  std::sqrt(((b * b) - 4 * a * c));
-  //std::cin >> a >> b >> c;
+      std::vector<int> nums;
+      int howMany;
+      int vectorSize;
 
-  double quad = -b + squaredNum;
-  totalQuad = quad / (2 * a);
-  std::cout << totalQuad << "\n";
+      std::cout << "How many numbers\n";
+      std::cin >> howMany;
+
+      for(int num; std::cin >> num;)
+          nums.push_back(num);
+
+      vectorSize = nums.size();
+      if(vectorSize > howMany)
+          std::cout << "Vector size is bigger than n\n:";
 }
