@@ -24,6 +24,7 @@ int main(){
 
         std::cout << "How many numbers\n";
         std::cin >> howMany;
+
         if(!std::cin)
           throw std::runtime_error(intError);
 
@@ -37,7 +38,6 @@ int main(){
           if(end != '|')
             throw std::runtime_error(intError);
         }
-
 
         //Check amount of inputs
         checkAmount(howMany, nums);
