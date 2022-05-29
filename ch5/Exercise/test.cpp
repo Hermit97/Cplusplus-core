@@ -7,8 +7,10 @@
 
 int main() {
   try{
-    int num;
+    double num;
     std::cin >> num;
+    if(!(std::cin))
+      std::cout << "ERRRRP\n";
     //if(std::cin >> num && std::isspace(std::cin.peek() ))
     if(!(std::isspace(std::cin.peek()) ))
       throw std::runtime_error("Not an int");
