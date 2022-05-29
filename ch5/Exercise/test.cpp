@@ -6,14 +6,16 @@
 #include <vector>
 
 int main() {
-  int num;
-  int num2;
-  std::vector<int> nums;
+  try{
+    int num;
+    std::cin >> num;
+    //if(std::cin >> num && std::isspace(std::cin.peek() ))
+    if(!(std::isspace(std::cin.peek()) ))
+      throw std::runtime_error("Not an int");
 
-  std::cin >> num;
-  //if(std::cin >> num && std::isspace(std::cin.peek() ))
-  if(std::isspace(std::cin.peek() ))
-    return num;
+    std::cout << "HUUHUHUH\n";
 
-  std::cout << "Not an int\n";
+  }catch(std::exception& e){
+    std::cerr << "Error " << e.what() << "\n";
+  }
 }

@@ -1,3 +1,4 @@
+#include <cctype>
 #include <exception>
 #include <iostream>
 #include <stdexcept>
@@ -15,6 +16,12 @@ void checkAmount(int n, std::vector<int> nums){
           throw std::runtime_error(rangeError);
 }
 
+void checkInt(int num){
+  //If the next character in the input stream is not a white space throw an error
+  if(!(std::isspace(std::cin.peek())))
+    throw std::runtime_error(intError);
+}
+
 int main(){
     try{
         std::vector<int> nums;
@@ -25,19 +32,21 @@ int main(){
         std::cout << "How many numbers\n";
         std::cin >> howMany;
 
-        if(!std::cin)
-          throw std::runtime_error(intError);
+        checkInt(howMany);
 
         for(int num; std::cin >> num;)
             nums.push_back(num);
 
-        if(!std::cin.eof()){
+        checkInt(howMany);
+
+        /*if(!std::cin.eof()){
           std::cin.clear();
           char end = ' ';
           std::cin >> end;
           if(end != '|')
             throw std::runtime_error(intError);
         }
+        */
 
         //Check amount of inputs
         checkAmount(howMany, nums);
@@ -50,8 +59,8 @@ int main(){
         //print sum
         std::cout << "Sum is " << sum << "\n";
         std::cout << "The size of the vector is " << nums.size() << "\n";
+
     }catch(std::exception &e){
-        //std::cout << "Out of range\n";
         std::cerr << "Error " << e.what() << "\n";
     }
 }
