@@ -10,7 +10,9 @@ int main() {
   int num2;
   std::vector<int> nums;
 
-  if(std::cin >> num && std::isspace(std::cin.peek() ))
+  std::cin >> num;
+  //if(std::cin >> num && std::isspace(std::cin.peek() ))
+  if(std::isspace(std::cin.peek() ))
     return num;
 
   std::cout << "Not an int\n";
