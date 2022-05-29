@@ -12,62 +12,74 @@ cent values and write out that vector of differences.
 const std::string doubleError = "Not an double";
 const std::string rangeError = "Out of bounds";
 
-//Check amount of integers
-void checkAmount(double n, std::vector<double> nums){
-      if(nums.size() > n)
-          throw std::runtime_error(rangeError);
+// Check amount of integers
+void checkAmount(double n, std::vector<double> nums) {
+  if (nums.size() > n)
+    throw std::runtime_error(rangeError);
 }
 
-void checkDouble(double num){
-  //If the next character in the input stream is not a white space throw an error
-  if(!(std::isspace(std::cin.peek())))
+void checkDouble(double num) {
+  // If the next character in the input stream is not a white space throw an
+  // error
+  if (!(std::isspace(std::cin.peek())))
     throw std::runtime_error(doubleError);
 }
 
-std::vector<double> getDiff(std::vector<double> nums, std::vector<double> diff){
-    double totalDiff;
-    for(int i = 0; i < nums.size(); i++){
-        totalDiff = nums[i] - nums[i + 1];
-        diff.push_back(totalDiff);
-    }
-    return diff;
+void getDiff(std::vector<double> nums, std::vector<double> diff) {
+  double totalDiff;
+  for (int i = 0; i < nums.size(); i++) {
+    totalDiff = nums[i] - nums[i + 1];
+    diff.push_back(totalDiff);
+  }
 }
 
-int main(){
-    try{
-        std::vector<double> nums;
-        std::vector<double> diff;
-        double sum = 0;
-        double howMany;
-        double vectorSize;
 
-        std::cout << "How many numbers\n";
-        std::cin >> howMany;
+int main() {
+  try {
+    std::vector<double> nums;
+    std::vector<double> diff;
+    double sum = 0;
+    double howMany;
+    double vectorSize;
 
-        checkDouble(howMany);
+    std::cout << "How many numbers\n";
+    std::cin >> howMany;
+    checkDouble(howMany);
+    if(howMany == 0)
+        exit(0);
 
-        for(int num; std::cin >> num;)
-            nums.push_back(num);
-
-        checkDouble(howMany);
-
-        //Check amount of inputs
-        checkAmount(howMany, nums);
-
-        //sum
-        for(int i = 0; i < nums.size(); i++){
-            sum = nums[i] + sum;
-        }
-
-        //print sum
-        std::cout << "Sum is " << sum << "\n";
-        std::cout << "The size of the vector is " << nums.size() << "\n";
-
-        //Diff vector
-        std::vector<double>foundDiff = getDiff(nums,diff);
-        //print the diff vector...
-
-    }catch(std::exception &e){
-        std::cerr << "Error " << e.what() << "\n";
+    for (double num; std::cin >> num;){
+        nums.push_back(num);
     }
+
+     checkDouble(howMany);
+
+    // Check amount of inputs
+    checkAmount(howMany, nums);
+
+    // sum
+    for (int i = 0; i < nums.size(); i++) {
+      sum = nums[i] + sum;
+    }
+
+    // print sum
+    std::cout << "Sum is " << sum << "\n";
+    std::cout << "The size of the vector is " << nums.size() << "\n";
+
+    // Diff vector
+    // getDiff(nums, diff);
+    double totalDiff;
+    for (int i = 0; i < nums.size(); i++) {
+      totalDiff = nums[i] - nums[i + 1];
+      diff.push_back(totalDiff);
+    }
+
+      // print the diff vector...
+      std::cout << "The diff vector is \n";
+      for (int i = 0; i < diff.size(); i++)
+        std::cout << diff[i] << " \n ";
+
+  } catch (std::exception &e) {
+    std::cerr << "Error " << e.what() << "\n";
+  }
 }
