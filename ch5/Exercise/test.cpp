@@ -1,3 +1,4 @@
+#include <cctype>
 #include <cmath>
 #include <exception>
 #include <iostream>
@@ -8,14 +9,9 @@ int main() {
   int num;
   int num2;
   std::vector<int> nums;
-  std::cin >> num;
 
-  if(!std::cin.eof()){
-    std::cin.clear();
-    std::cout << "Error";
-  }
+  if(std::cin >> num && std::isspace(std::cin.peek() ))
+    return num;
 
-
-  std::cin >> num2;
-
+  std::cout << "Not an int\n";
 }
