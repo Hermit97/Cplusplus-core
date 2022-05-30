@@ -6,18 +6,35 @@
 #include <vector>
 
 int main() {
-  try{
-    double num;
-    std::cin >> num;
-    if(!(std::cin))
-      std::cout << "ERRRRP\n";
-    //if(std::cin >> num && std::isspace(std::cin.peek() ))
-    if(!(std::isspace(std::cin.peek()) ))
-      throw std::runtime_error("Not an int");
+  std::vector<int> fib;
+  int num;
 
-    std::cout << "HUUHUHUH\n";
+  fib.push_back(1);
+  fib.push_back(1);
 
-  }catch(std::exception& e){
-    std::cerr << "Error " << e.what() << "\n";
+
+  std::cout << "Enter  number\n";
+  std::cin >> num;
+
+  for(int i = 0; i < fib.size(); i++){
+    std::cout << fib[i] << "\n";
   }
+
+  int total = 0;
+  std::cout << "----------\n";
+  for(int i = 0; i <= num; i++){
+    total = fib[i] + fib[i + 1];
+    //total = fib[0] + fib[1];
+    fib.push_back(total);
+  }
+
+  for(int i = 0; i < fib.size(); i++){
+    std::cout << fib[i] << "\n";
+  }
+
+  //find the biggest fib
+  std::cout << "The biggest fib is \n";
+  while(fib[fib.size() - 1] + fib[fib.size() - 2] > fib[fib.size() - 1])
+    fib.push_back(fib[fib.size()-1] + fib[fib.size()-2]);
+  std::cout << fib[fib.size() - 1] << "\n";
 }
