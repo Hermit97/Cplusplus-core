@@ -9,8 +9,9 @@ int main() {
   std::vector<int> fib;
   fib.push_back(1);
   fib.push_back(2);
-  //std::cout << fib[fib.size() - 1]  + fib[fib.size() - 2]<< "\n";
+  std::cout << fib[fib.size() - 1]  + fib[fib.size() - 2]<< "\n";
   std::cout << fib[fib.size() - 1] << "\n";
+  std::cout << fib[fib.size() - 1] + fib[fib.size() - 2];
 
 
   std::cout << "---------\n";
