@@ -1,3 +1,6 @@
+#include <algorithm>
+#include <iostream>
+#include <cstdlib>
 #include <iostream>
 #include <vector>
 
@@ -11,14 +14,34 @@ and one digit (3) right but in the wrong position (a cow). The guessing
 continues until the user gets four bulls, that is, has the four digits correct
 and in the correct order.*/
 int main() {
-  std::vector<int> fib;
-  fib.push_back(1);
-  fib.push_back(2);
-  std::cout << fib[fib.size() - 1]  + fib[fib.size() - 2]<< "\n";
+  std::vector<int> origNums;
+  std::vector<int> nums;
 
+  //2 vectors one with 1 thorugh 9. Other vector pulls 4 random numbers from the first vector that dont repeat.
+  for(int i = 1; i <= 9; i++){
+    origNums.push_back(i);
+  }
 
-  std::cout << "---------\n";
-  while (fib[fib.size() - 1] + fib[fib.size() - 2] > fib[fib.size() - 1])
-    fib.push_back(fib[fib.size() - 1] + fib[fib.size() - 2]);
-  std::cout << fib[fib.size() -1] << "\n";
+  //Makes the vectors order random.
+  std::srand(time(0));
+  std::random_shuffle(origNums.begin(), origNums.end());
+
+  //print the random orig vector
+  for(int i = 0; i < origNums.size(); i++){
+    std::cout << origNums[i] << "\n";
+  }
+
+  //Push 4 elements from origNum and push them into nums vector
+  //for(int i = 0; i < origNums.size(); ++i){
+  for(int i = 0; i <= 3; ++i){
+    nums.push_back(origNums[i]);
+  }
+
+  std::cout << "Nums vector\n\n";
+  //print the random orig vector
+  for(int i = 0; i < nums.size(); i++){
+    std::cout << nums[i] << "\n";
+  }
+
+ //std::cout << "Welcome to Bulls and Cows\n";
 }
