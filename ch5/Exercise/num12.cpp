@@ -18,6 +18,8 @@ int main() {
   std::vector<int> origNums;
   std::vector<int> nums;
   std::vector<int> playerGuess;
+  int num1, num2, num3, num4;
+  int n1, n2, n3, n4;
 
   //2 vectors one with 1 thorugh 9. Other vector pulls 4 random numbers from the first vector that dont repeat.
   for(int i = 1; i <= 9; i++){
@@ -45,7 +47,6 @@ int main() {
   }
 
   //Game starts
-  int n1, n2, n3, n4;
   std::cout << "Welcome to Bulls and Cows!\n";
   std::cout << "Their are 4 numbers ranging from 1 - 9.\n";
   std::cout << "Enter 4 integers that match these numbers.\n";
@@ -60,18 +61,24 @@ int main() {
 
   //Check if user input equals the num vector in order
   bool notCorrect = true;
-  while(notCorrect == true){
+  bool match = true;
+//  while(notCorrect == true){
     for(int i = 0; i < nums.size(); i++){
       //if(n1 == nums[i] && n2 != nums[i + 1] && n3 != nums[i + 2] && n4 != nums[i + 3])
       if(playerGuess[i] == nums[i]){
-        std::cout << "4 bull\n";
-    }else {
-        std::cout << "1 bull and 1 cow\n";
-        return notCorrect = false;
+	  //std::cout << i << "bull\n";
+	  match = true;
+      }else if(playerGuess[i] != nums[i]){
+	  //std::cout << "1 bull and 1 cow\n";
+	  match = false;
+	  break;
+	  //return notCorrect = false;
       }
     }
-  }
+    //}
 
-
-
+  if(match == true)
+      std::cout << "4 bulls\n";
+  else if(match == false)
+      std::cout << "1 Bull 1 Cow\n";
 }
