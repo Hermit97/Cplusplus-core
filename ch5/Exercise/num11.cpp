@@ -5,13 +5,17 @@
 #include <stdexcept>
 #include <vector>
 // The highest num for fib is
+
+
 int main() {
   try {
     std::vector<int> fib;
     int num;
+    int num1 = 1;
+    int num2 = 1;
 
-    fib.push_back(1);
-    fib.push_back(1);
+    fib.push_back(num1);
+    fib.push_back(num1);
 
     std::cout << "Enter  number\n";
     std::cin >> num;
@@ -21,15 +25,15 @@ int main() {
     }
 
     int total = 0;
-    std::cout << "----------\n";
     // Check for the largest number int can fit from fib
     for (int i = 0; i <= num; i++) {
       total = fib[i] + fib[i + 1];
-      fib.push_back(total);
-    }
 
-    for (int i = 0; i < fib.size(); i++) {
-      std::cout << fib[i] << "\n";
+     if(total < num1)
+        throw std::runtime_error("Cant fit anymore in an int");
+
+      fib.push_back(total);
+      std::cout << total << "\n";
     }
   }catch(std::exception& e){
       std::cerr << "Error " << e.what() << "\n";
