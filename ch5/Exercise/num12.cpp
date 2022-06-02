@@ -20,6 +20,7 @@ int main() {
   std::vector<int> playerGuess;
   int num1, num2, num3, num4;
   int n1, n2, n3, n4;
+  int bull, cow;
 
   //2 vectors one with 1 thorugh 9. Other vector pulls 4 random numbers from the first vector that dont repeat.
   for(int i = 1; i <= 9; i++){
@@ -62,23 +63,31 @@ int main() {
   //Check if user input equals the num vector in order
   bool notCorrect = true;
   bool match = true;
+  bull = 0;
+  cow = 0;
 //  while(notCorrect == true){
     for(int i = 0; i < nums.size(); i++){
-      //if(n1 == nums[i] && n2 != nums[i + 1] && n3 != nums[i + 2] && n4 != nums[i + 3])
       if(playerGuess[i] == nums[i]){
-	  //std::cout << i << "bull\n";
 	  match = true;
       }else if(playerGuess[i] != nums[i]){
-	  //std::cout << "1 bull and 1 cow\n";
 	  match = false;
 	  break;
 	  //return notCorrect = false;
       }
+
+      //Count bulls and cows total
+      if(playerGuess[i] == nums[i] || playerGuess[i] == nums[i + 1])
+	  ++bull;
+      else if(playerGuess[i] == nums[i + 1] || playerGuess[i] == nums[i + 2])
+	  ++cow;
     }
     //}
 
-  if(match == true)
-      std::cout << "4 bulls\n";
+      std::cout << bull << "bulls and " << cow << " cows\n";
+      //std::cout << "1 Bull 1 Cow\n";
+    /*if(match == true)
+      std::cout << bull << "bulls and " << cow << " cows\n";
   else if(match == false)
       std::cout << "1 Bull 1 Cow\n";
+    */
 }
