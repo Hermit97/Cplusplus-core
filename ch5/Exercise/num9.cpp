@@ -48,7 +48,6 @@ int main() {
         throw std::runtime_error(intError);
     }
 
-
     // Check amount of inputs
     checkAmount(howMany, nums);
 
