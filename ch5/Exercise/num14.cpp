@@ -6,6 +6,14 @@ values in each vector . Ignore illegal days of the week, such as Funday ,
 but accept common synonyms*/
 
 #include <iostream>
+#include <vector>
+
+const std::vector<int> values;
+
+void getDays(std::vector<int> days){
+    for(int i = 0; i < 7; ++i)
+        days.push_back(i);
+}
 
 int main(){
 
