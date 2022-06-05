@@ -6,54 +6,74 @@ values in each vector . Ignore illegal days of the week, such as Funday ,
 but accept common synonyms*/
 
 #include <iostream>
+#include <stdexcept>
 #include <vector>
 
-std::vector<std::string> monday;
-std::vector<std::string> tuesday;
-std::vector<std::string> wednsday;
-std::vector<std::string> thursday;
-std::vector<std::string> friday;
-std::vector<std::string> saturday;
-std::vector<std::string> sunday;
+std::vector<int> monday;
+std::vector<int> tuesday;
+std::vector<int> wednsday;
+std::vector<int> thursday;
+std::vector<int> friday;
+std::vector<int> saturday;
+std::vector<int> sunday;
 
-std::vector<int> val;
-
-void getDays(std::string day) {
-
+/*void getDays(std::string day, int val) {
   if (day == "Monday" || day == "monday" || day == "mon")
-    monday.push_back(day);
+    std::cout << "Monday " << monday[0];
   if (day == "Tuesday" || day == "tuesday" || day == "tues")
-    tuesday.push_back(day);
+    std::cout << "Tuesday" << tuesday[0];
   if (day == "Wednsday" || day == "wedsnday" || day == "weds")
-    wednsday.push_back(day);
-  if (day == "Thurday" || day == "thursday" || day == "thurs")
-    thursday.push_back(day);
+    std::cout << "Wednsday" << wednsday[0];
+  if (day == "Thursday" || day == "thursday" || day == "thurs")
+    std::cout << "Thursday" << thursday[0];
   if (day == "Friday" || day == "friday" || day == "fri")
-    friday.push_back(day);
+    std::cout << "Friday" << friday[0];
   if (day == "Saturday" || day == "saturday" || day == "sat")
-    saturday.push_back(day);
+    std::cout << "Saturday" << saturday[0];
   if (day == "Sunday" || day == "sunday" || day == "sun")
-    sunday.push_back(day);
+    std::cout << "Sunday" << sunday[0];
+  else
+    throw std::runtime_error("Invalid input");
+}
+*/
+
+void getDays(std::string day, int val) {
+  if (day == "Monday" || day == "monday" || day == "mon")
+    monday.push_back(val);
+  if (day == "Tuesday" || day == "tuesday" || day == "tues")
+    tuesday.push_back(val);
+  if (day == "Wednsday" || day == "wedsnday" || day == "weds")
+    wednsday.push_back(val);
+  if (day == "Thursday" || day == "thursday" || day == "thurs")
+    thursday.push_back(val);
+  if (day == "Friday" || day == "friday" || day == "fri")
+    friday.push_back(val);
+  if (day == "Saturday" || day == "saturday" || day == "sat")
+    saturday.push_back(val);
+  if (day == "Sunday" || day == "sunday" || day == "sun")
+    sunday.push_back(val);
+  else
+    throw std::runtime_error("Invalid input");
 }
 
-void result(int val) {
-    std::cout << monday[0] << " " << val << "\n";
+int getValue(int val){
+  std::cout << "Enter a value\n";
+  std::cin >> val;
+  if(!std::cin)
+    throw std::runtime_error("Invalid input");
+  return val;
 }
 
-int getSum(int sum){
+int getSum(){
 
+  return sum;
 }
 
-int main() {
-  bool done = false;
-  std::string day;
-  int value;
-  while (done == false) {
-    std::cout << "Enter the day followed by the value\n";
-    std::cin >> day >> value;
-    getDays(day);
-    if (day == "null" && value == 0)
-	break;
-  }
-  result(value);
+void printInfo(std::string day, std::vector<int> v){
+  std::cout << day << "Sum: " << getSum();
+}
+
+int main(){
+
+
 }
