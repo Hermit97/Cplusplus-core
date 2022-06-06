@@ -5,6 +5,7 @@ the values of the seven day-of-the-week vector s. Print out the sum of the
 values in each vector . Ignore illegal days of the week, such as Funday ,
 but accept common synonyms*/
 
+#include <exception>
 #include <iostream>
 #include <stdexcept>
 #include <vector>
@@ -17,32 +18,17 @@ std::vector<int> friday;
 std::vector<int> saturday;
 std::vector<int> sunday;
 
-/*void getDays(std::string day, int val) {
-  if (day == "Monday" || day == "monday" || day == "mon")
-    std::cout << "Monday " << monday[0];
-  if (day == "Tuesday" || day == "tuesday" || day == "tues")
-    std::cout << "Tuesday" << tuesday[0];
-  if (day == "Wednsday" || day == "wedsnday" || day == "weds")
-    std::cout << "Wednsday" << wednsday[0];
-  if (day == "Thursday" || day == "thursday" || day == "thurs")
-    std::cout << "Thursday" << thursday[0];
-  if (day == "Friday" || day == "friday" || day == "fri")
-    std::cout << "Friday" << friday[0];
-  if (day == "Saturday" || day == "saturday" || day == "sat")
-    std::cout << "Saturday" << saturday[0];
-  if (day == "Sunday" || day == "sunday" || day == "sun")
-    std::cout << "Sunday" << sunday[0];
-  else
-    throw std::runtime_error("Invalid input");
-}
-*/
+const std::string invalidInput = "Invalid input";
 
-void getDays(std::string day, int val) {
+/*Monday Sum = 20 \n...etc
+ *push value into vector */
+
+void setVal(std::string day, int val) {
   if (day == "Monday" || day == "monday" || day == "mon")
     monday.push_back(val);
   if (day == "Tuesday" || day == "tuesday" || day == "tues")
     tuesday.push_back(val);
-  if (day == "Wednsday" || day == "wedsnday" || day == "weds")
+  if (day == "Wednsday" || day == "wednsday" || day == "weds")
     wednsday.push_back(val);
   if (day == "Thursday" || day == "thursday" || day == "thurs")
     thursday.push_back(val);
@@ -52,28 +38,52 @@ void getDays(std::string day, int val) {
     saturday.push_back(val);
   if (day == "Sunday" || day == "sunday" || day == "sun")
     sunday.push_back(val);
-  else
-    throw std::runtime_error("Invalid input");
 }
 
-int getValue(int val){
-  std::cout << "Enter a value\n";
-  std::cin >> val;
-  if(!std::cin)
-    throw std::runtime_error("Invalid input");
-  return val;
-}
-
-int getSum(){
-
+int getSum(std::string day, std::vector<int> v) {
+  int sum = 0;
+  for (int i = 0; i < v.size(); ++i) {
+    sum = v[i] + sum;
+  }
   return sum;
 }
 
-void printInfo(std::string day, std::vector<int> v){
-  std::cout << day << "Sum: " << getSum();
+void setPrint(std::string day, std::vector<int> v) {
+  std::cout << day << " sum = " << getSum(day, v) << "\n";
 }
 
-int main(){
+void getPrint() {
+  setPrint("Monday", monday);
+  setPrint("Tuesday", tuesday);
+  setPrint("Wednsday", wednsday);
+  setPrint("Thursday", thursday);
+  setPrint("Friday", friday);
+  setPrint("Saturday", saturday);
+  setPrint("Sunday", sunday);
+}
 
+int main() {
+  try {
+    bool dontStop = true;
 
+    while (dontStop == true) {
+      std::string day;
+      int val;
+
+      std::cout << "Enter a day and a value\n";
+      std::cin >> day >> val;
+
+      if(day == "null" || val == 0)
+        break;
+
+      if(!std::cin)
+        throw std::runtime_error(invalidInput);
+
+      setVal(day, val);
+      getPrint();
+    }
+      getPrint();
+  }catch(std::exception& e){
+    std::cerr << "Error: " << e.what() << "\n";
+  }
 }
