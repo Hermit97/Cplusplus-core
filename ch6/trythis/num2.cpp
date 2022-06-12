@@ -48,7 +48,6 @@ Token get_token()    // read a token from cin
 }
 */
 //------------------------------------------------------------------------------
-
 class Token_stream {
     public:
         Token get();            // get a Token
