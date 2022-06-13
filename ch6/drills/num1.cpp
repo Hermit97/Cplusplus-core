@@ -187,6 +187,11 @@ double expression()
 int main()
 try
 {
+
+    cout << "Welcome to our simple calculator.\n" 
+         << "Please enter expressions using floating-point numbers.\n";
+
+    cout << "Operators avalible: \t +, -, *, /\nTo enter: =\nTo exit: x\n";
     double val = 0;
     while (cin) {
         Token t = ts.get();
