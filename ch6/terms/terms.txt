@@ -1,0 +1,35 @@
+analysis - Finding the problem that you are solving for.
+
+class - A simple user defined type.
+
+class member - Integer constants, functions, or typoes that can be defined/intitlilized in either in class or out of class (Private is usually in class and public usually out of class).
+
+data member
+
+design
+
+divide by zero
+
+grammar
+
+implementation
+
+interface
+
+member function
+
+parser
+
+private
+
+prototype
+
+pseudo code
+
+public
+
+syntax analyzer
+
+token
+
+use case
