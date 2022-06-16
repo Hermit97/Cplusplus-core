@@ -14,38 +14,6 @@ Write a program to play a numbers guessing game. The user thinks of a number bet
 no more than seven questions. Hint: Use the < and <= operators and the
 if-else construct.*/
 
-
-
-/*char answer(){
-    char usrAnswer;
-
-    std::cin >> usrAnswer;
-    while(usrAnswer != 'y' && usrAnswer != 'Y' && usrAnswer != 'n' && usrAnswer != 'N'){
-        std::cout << "Wrong input, try again.\n";
-        //std::cin.clear();
-        //std::cin.ignore(256, '\n');
-        std::cin >> usrAnswer;
-    }
-    return usrAnswer;
-}
-
-int userNum(){
-    int usrNumber;
-    std::cout << "Enter a number: \n";
-    std::cin >> usrNumber;
-
-    //Check for invalid input
-    while(std::cin.fail()){
-        std::cout << "Not an int\n";
-        std::cin.clear();
-        std::cin.ignore(256,'\n');
-        std::cout << "Enter another number: \n";
-        std::cin >> usrNumber;
-    }
-
-    return usrNumber;
-}*/
-
 int main(){
     int lowerBound = 1;
     int upperBound = 100;
@@ -65,7 +33,6 @@ int main(){
         std::cout << "Enter another number: \n";
         std::cin >> usrNumber;
     }
-
 
     while(questions <= maxQuestions){
         midPoint = (upperBound + lowerBound) / 2;

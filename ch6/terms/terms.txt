@@ -4,25 +4,25 @@ class - A simple user defined type.
 
 class member - Integer constants, functions, or typoes that can be defined/intitlilized in either in class or out of class (Private is usually in class and public usually out of class).
 
-data member
+data member - Data that is a member of a class.
 
-design
+design - Create an overall structure for the system deciding what parts the implementation should have.
 
-divide by zero
+divide by zero - You cant divide by zero. The computer hardware will detect it and throw an error.
 
-grammar
+grammar - Rules that have to be used to communicate.
 
-implementation
+implementation - Actually executing the development part.
 
-interface
+interface - Describes the class without actually implmenting anything.
 
-member function
+member function - A function that is aprt of a class.
 
-parser
+parser - A program that implments a grammar.
 
-private
+private - Implementation details that the users of the class dont have access to.
 
-prototype
+prototype - Limited intitial version aimed at experimentation.
 
 pseudo code
 

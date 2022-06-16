@@ -41,11 +41,6 @@ int main() {
     for (int j = i + 1; j < num.size(); j++) {
       // Check if i + 1 is bigger than i, if so swap them other wise move on
       if (num[i] > num[j]) {
-        /*temp = num[i];
-        num[i] = num[j];
-        num[j] = temp;
-        */
-
         temp = num[j];
         num[j] = num[i];
         num[i] = temp;
