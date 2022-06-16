@@ -24,12 +24,12 @@ private - Implementation details that the users of the class dont have access to
 
 prototype - Limited intitial version aimed at experimentation.
 
-pseudo code
+pseudo code - Code used in the earlier stages of design when your not sure what the notation means. example being a function calc. You dont know how many arugments it will have or how you want the structure of the program to be.
 
-public
+public - User has acess to this and can use it.
 
-syntax analyzer
+syntax analyzer - Another word for parser.
 
-token
+token - is a type like int or char. It can be used to define variables and hold values.
 
-use case
+use case - Discussions of design and analysis such as examples of use.
