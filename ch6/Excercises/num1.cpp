@@ -83,6 +83,7 @@ Token Token_stream::get() {
   case '-':
   case '*':
   case '/':
+  case '!':
     return Token{ch}; // let each character represent itself
   case '.':
   case '0':
@@ -186,6 +187,9 @@ double expression() {
       left -= term(); // evaluate Term and subtract
       t = ts.get();
       break;
+    case '!':
+     //calculation for factorial 
+
     default:
       ts.putback(t);
       return left; // finally: no more + or -: return the answer
