@@ -120,6 +120,10 @@ double term(); // read and evaluate a Term
 
 //------------------------------------------------------------------------------
 
+double factorial(); // read and evaluate a factorial
+
+//------------------------------------------------------------------------------
+
 double primary() // read and evaluate a Primary
 {
   Token t = ts.get();
@@ -134,12 +138,13 @@ double primary() // read and evaluate a Primary
   }
 
   case '{': {
-      double d = expression();
-      t = ts.get();
-      if(t.kind != '}')
-          error("'}' expected");
-      return d;
+    double d = expression();
+    t = ts.get();
+    if (t.kind != '}')
+      error("'}' expected");
+    return d;
   }
+
   case '8':         // we use '8' to represent a number
     return t.value; // return the number's value
   default:
@@ -160,15 +165,12 @@ int main() try {
     else
       ts.putback(t);
     val = expression();
-    // keep_window_open("~0");
   }
 } catch (exception &e) {
   cerr << e.what() << endl;
-  // keep_window_open ("~1");
   return 1;
 } catch (...) {
   cerr << "exception \n";
-  // keep_window_open ("~2");
   return 2;
 }
 
@@ -187,8 +189,6 @@ double expression() {
       left -= term(); // evaluate Term and subtract
       t = ts.get();
       break;
-
-
     default:
       ts.putback(t);
       return left; // finally: no more + or -: return the answer
@@ -199,28 +199,22 @@ double expression() {
 //------------------------------------------------------------------------------
 
 double term() {
-  double left = primary();
+  double left = factorial();
   Token t = ts.get(); // get the next token
 
   while (true) {
     switch (t.kind) {
     case '*':
-      left *= primary();
+      left *= factorial();
       t = ts.get();
       break;
     case '/': {
-      double d = primary();
+      double d = factorial();
       if (d == 0)
         error("divide by zero");
       left /= d;
       t = ts.get();
       break;
-    }
-    case '!': {
-      int fact = 1;
-      for(int i = 1; i < left; left--){
-        fact = left * fact;
-      }
     }
     default:
       ts.putback(t);
@@ -230,3 +224,24 @@ double term() {
 }
 
 //------------------------------------------------------------------------------
+
+double factorial() {
+  double left = primary();
+  Token t = ts.get();
+  while (true) {
+    if (t.kind == '!') {
+      if(left == 0)
+        return 1;
+
+      int f = left - 1;
+      while (f > 0){
+        left = left * f;
+        --f;
+      }
+      t = ts.get();
+    } else {
+      ts.putback(t);
+      return left;
+    }
+  }
+}
