@@ -10,4 +10,7 @@ class Name_value{
         Name_value(std::string n, int s)
             : names(n), scores(s){} //Read more on page 183
 
+        //And read this scroll down almost to the end
+        /**https://cplusplus.com/doc/tutorial/classes/*/
+
 };
