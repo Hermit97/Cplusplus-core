@@ -35,16 +35,14 @@ int main() {
         duplicate = true;
       }
     }
-    //Somethign wrong with stuff being pushed possibly the duplicate flase thingy
 
     if (duplicate) {
-        duplicate = false;
-    }else
-        info.push_back(Name_value(name, score));
+      duplicate = false;
+    } else
+      info.push_back(Name_value(name, score));
   }
 
-  std::cout << "Results: "
-            << " ";
+  std::cout << "Results: " << " ";
   for (Name_value x : info)
     std::cout << x.names << " " << x.scores << "\n";
 
@@ -53,12 +51,13 @@ int main() {
   std::cin >> enterName;
   for (Name_value x : info) {
     if (x.names == enterName) {
-        nameFound = true;
-        std::cout << x.names << " : " << x.scores << "\n"; //or just print enterName?
-        break;
-    }else
-        nameFound = false;
+      nameFound = true;
+      std::cout << x.names << " : " << x.scores
+                << "\n"; // or just print enterName?
+      break;
+    } else
+      nameFound = false;
   }
   if (nameFound == false)
-      std::cout << "Name not found\n";
+    std::cout << "Name not found\n";
 }
