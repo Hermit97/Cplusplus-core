@@ -37,9 +37,10 @@ int main() {
     }
     //Somethign wrong with stuff being pushed possibly the duplicate flase thingy
 
-    if (duplicate == false) {
-      info.push_back(Name_value(name, score));
-    }
+    if (duplicate) {
+        duplicate = false;
+    }else
+        info.push_back(Name_value(name, score));
   }
 
   std::cout << "Results: "
@@ -53,7 +54,7 @@ int main() {
   for (Name_value x : info) {
     if (x.names == enterName) {
         nameFound = true;
-        std::cout << x.names; //or just print enterName?
+        std::cout << x.names << " : " << x.scores << "\n"; //or just print enterName?
         break;
     }else
         nameFound = false;
