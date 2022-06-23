@@ -45,7 +45,7 @@ int main() {
     }
 
     if(repeat){
-       repeat = true;
+       repeat = false;
     }else{
         names.push_back(name);
         scores.push_back(score);
