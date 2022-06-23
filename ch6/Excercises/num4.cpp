@@ -53,7 +53,7 @@ int main() {
     if (x.names == enterName) {
       nameFound = true;
       std::cout << x.names << " : " << x.scores
-                << "\n"; // or just print enterName?
+                << "\n";
       break;
     } else
       nameFound = false;
