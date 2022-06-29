@@ -1,48 +1,63 @@
 #include <iostream>
-#include <utility>
 #include <vector>
-
-class string_stream {
-public:
-  std::string get();
-  void putBack(std::string);
-
-public:
-  bool full{false};
-  std::string buffer = {'0'};
-};
 
 void error(std::string er) { std::cout << er << "\n"; }
 
-void string_stream::putBack(std::string s){
-    if(full) error("putback() into a full buffer");
-    buffer = s;
-    full = true;
+class String_stream{
+    public:
+        std::string get();
+        void putback(std::string);
+
+    private:
+        bool full {false};
+        std::string buffer = {'0'};
+};
+
+void String_stream::putback(std::string s){
+    if(full){
+        buffer = s;
+        full = true;
+    }
 }
 
-std::string string_stream::get(){
+std::string String_stream::get(){
     if(full){
         full = false;
         return buffer;
     }
+
     std::string s;
     std::cin >> s;
+
+    return s;
 }
 
-string_stream stream;
+String_stream stream;
 
 bool noun();
-bool conjunction();
+bool conjunctoin();
 bool verb();
 bool sentence();
 
 bool noun(){
-    std::vector<std::string> noun = {"birds", "fish", "C++"};
+    std::vector<std::string> nouns = {"birds", "fish", "C++"};
+    std::string s = stream.get();
     bool found = false;
 
-    std::string n = stream.string_stream::get();
-    for(std::string x : noun){
-        if(x == n)
+    for(std::string x : nouns){
+        if(x == s){
             found = true;
+        }else{
+            error("Noun expected here");
+            found = false;
+            stream.putback(s);
+        }
     }
+
+    return found;
+}
+
+bool conjunction(){
+    std::vector<std::string> conj = {"and", "or", "but"};
+
 }
