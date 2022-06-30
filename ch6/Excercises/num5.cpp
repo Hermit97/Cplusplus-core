@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <iostream>
 #include <vector>
 
@@ -6,18 +7,16 @@ void error(std::string er) { std::cout << er << "\n"; }
 class String_stream {
 public:
   std::string get();
-  void putback(std::string);
-
+  void putback(std::string s);
 private:
   bool full{false};
-  std::string buffer = {'0'};
+  std::string buffer = "";
 };
 
 void String_stream::putback(std::string s) {
-  if (full) {
-    buffer = s;
-    full = true;
-  }
+  if (full) error("Buffer full, putback fail");
+  buffer = s;
+  full = true;
 }
 
 std::string String_stream::get() {
@@ -31,26 +30,36 @@ std::string String_stream::get() {
 }
 
 String_stream stream;
-
 bool noun();
 bool conjunctoin();
 bool verb();
 bool sentence();
+
+
+bool article()
+{
+    std::vector<std::string> articles = { "the" };
+    bool found = false;
+    std::string s = stream.get();
+
+    for (std::string a : articles)
+        if (a == s)
+            found = true;
+
+    if (!found) stream.putback(s);
+
+    return found;
+}
 
 bool noun() {
   std::vector<std::string> nouns = {"birds", "fish", "C++"};
   std::string s = stream.get();
   bool found = false;
 
-  for (std::string x : nouns) {
-    if (x == s) {
+  for (std::string x : nouns)
+    if (x == s)
       found = true;
-    } else {
-      error("Noun expected here");
-      found = false;
-      stream.putback(s);
-    }
-  }
+  if (!found) stream.putback(s);
   return found;
 }
 
@@ -59,15 +68,10 @@ bool conjunction() {
   std::string s = stream.get();
   bool found = false;
 
-  for (std::string x : conj) {
-    if (x == s) {
+  for (std::string x : conj)
+    if (x == s)
       found = true;
-    } else {
-      found = false;
-      error("Conj expected here");
-      stream.putback(s);
-    }
-  }
+  if (!found) stream.putback(s);
   return found;
 }
 
@@ -76,15 +80,10 @@ bool verb() {
   std::string s = stream.get();
   bool found = false;
 
-  for (std::string x : verbs) {
+  for (std::string x : verbs)
     if (x == s)
       found = true;
-    else {
-      found = false;
-      error("Verb expected here");
-      stream.putback(s);
-    }
-  }
+  if (!found) stream.putback(s);
   return found;
 }
 
@@ -113,6 +112,8 @@ int main() {
         std::cout << "Not okay\n";
     } else if (s == "q") {
       end = true;
+      exit(0);
+
     } else
       stream.putback(s);
 
