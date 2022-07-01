@@ -1,15 +1,11 @@
 #include <iostream>
-
-int get(){
-    int n;
-    std::cout << "Enter a num\n";
-    std::cin >> n;
-
-    return n;
-}
+#include <vector>
 
 int main(){
-    int s = get();
-
-    std::cout << s << "\n";
+    char user;
+    std::vector<char> letters;
+    for(int i = 0; i < 4; i++){
+        std::cin >> user;
+        letters.push_back(user);
+    }
 }
