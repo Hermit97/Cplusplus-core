@@ -6,37 +6,23 @@
 using namespace std;
 
 vector<string> num_words;
+void error(std::string er) { std::cout << er << "\n"; }
 
-
-void error(std::string er){
-  std::cout << er << "\n";
-}
-
-// initialise vector with words
-void init()
-{
+void init(){
     num_words.push_back("thousand");
     num_words.push_back("hundred");
     num_words.push_back("ten");
     num_words.push_back("one");
 }
 
-// calculates integer from vector of characters
-int char_to_int(vector<int> v)
-{
-    if (v.size() == 0)
-        error("empty vector handed to char_to_int()");
-    if (v.size() > 4)
-        error("char_to_int can handle only up to four digits");
+int char_to_int(vector<int>v){
     int num = 0;
-    for (int i = 0; i<v.size(); ++i)
+    for(int i = 0; i < v.size(); ++i)
         num = 10*num + v[i];
     return num;
 }
 
-// handle the plural s: print an 's' if input is bigger than 1 or exactly 0
-void plural_s(int n)
-{
+void plural_s(int n){
     if (n==0 || n>1)
         cout << 's';
     if (n == 1)
@@ -45,25 +31,19 @@ void plural_s(int n)
         error("plural_s can handle only non-negative numbers");
 }
 
-// prints number as text
-void print_number(vector<int> v, int num)
-{
-    if (num>9999 || v.size()>4)
-        error("print_number can only handle numbers with four digits");
-    if (v.size() == 0)
-        error("print_number was handed an empty vector");
-    cout << num << " is ";
-    for (int i = 0; i<v.size(); ++i) {
-        cout << v[i] << ' ' << num_words[i+4-v.size()];
+void print_number(vector<int>v, int num){
+    //print
+    cout << num << " is \n";
+    for(int i = 0; i < v.size(); ++i){
+        cout << v[i] << ' ' << num << num_words[i+4-v.size()];
         plural_s(v[i]);
         if (i < v.size()-1)
             cout << " and ";
     }
-    cout << endl;
+    cout << "\n";
 }
 
-int main()
-try {
+int main(){
     init();
 
     cout << "Enter number with up to four digits, followed by a ';' and a newline.\n";
@@ -91,12 +71,4 @@ try {
         cout << "Try again:\n";
     }
     return 0;
-}
-catch (exception& e) {
-    cerr << "error: " << e.what() << '\n';
-    return 1;
-}
-catch (...) {
-    cerr << "Oops: unknown exception!\n";
-    return 2;
 }
