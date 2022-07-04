@@ -7,70 +7,39 @@ that is, '5' – '0'==5 .*/
 
 #include <iostream>
 #include <vector>
-
-void error(std::string er){
-    std::cout << er << "\n";
-}
-
-int check_digits(int num){
-    int counter  = 0;
-    while(num != 0){
-        num = num / 10;
-        ++counter;
-    }
-    return counter;
-}
-
-int seperateDigits(int num){
-
-}
+using namespace std;
 
 int main(){
-    int num;
-    std::vector<int> list;
-    bool fourdigits = false;
-    bool threedigits = false;
-    bool twodigits = false;
-    bool onedigit = false;
+    vector<int> parse;
+    vector<string> num_words = {"Thousands", "Hundreds", "Tens", "Ones"};
+    string in;
 
-    std::cout << "Enter between 1 - 4 numbers\n";
-    for(int i = 0; i <= 1; i++){
-        std::cin >> num;
-
-        //Exit program
-        if(num < 0)
-            break;
-
-        //accept only up to 4 digits
-        if(check_digits(num) > 4)
-            error("You entered more than 4 digits");
-
-        //Push valid numbers into vector
-        if(check_digits(num) > 0 && check_digits(num) < 5)
-            list.push_back(num);
-
-    //Get the 1 hundree 2 tens 3 ones
-        if(check_digits(num) == 4){
-            std::cout << "returning 4?\n";
-            fourdigits = true;
-        }else if(check_digits(num) == 3){
-            std::cout << "returning 3?\n";
-            return threedigits = true;
-        }else if(check_digits(num) == 2){
-            std::cout << "returning 2?\n";
-            twodigits = true;
-        }else if(check_digits(num) == 1)
-            std::cout << "returning 1?\n";
-            onedigit = true;
-
+    cin >> in;
+    for(char d : in){
+        if(parse.size() != 0 || d != '0')
+            parse.push_back(d - '0');
     }
 
-    std::cout << "Vector is " << "\n";
-    for(int i = 0; i < list.size(); i++){
-        std::cout << list[i] << "\n";
+    if(parse.size() > 4){
+        cout << "Input is to big to handle exiting program\n";
+        exit(0);
     }
 
-    std::cout << "Required result\n";
-    if(fourdigits)
-      std::cout << list[0] << " Thousands " << list[1] << " Hundreds " << list[2] << " Tens " << list[3] << " Ones\n";
+    if(parse.size() == 0)
+        parse.push_back(0);
+
+    for(int i = 0; i < parse.size(); ++i){
+        std::cout << parse[i] << "\n";
+    }
+
+    cout << "\n\n";
+
+    if(parse.size() == 1)
+        cout << parse[0] << " " << num_words[3] << "\n";
+    else if(parse.size() == 2)
+        cout << parse[0] << " " << num_words[2] << " " << parse[1] << " " << num_words[3] << "\n";
+    else if(parse.size() == 3)
+        cout << parse[0] << " " << num_words[1] << " " << parse[1] << " " << num_words[2] << " " << parse[2] << " " << num_words[3] << "\n";
+    else if(parse.size() == 4)
+        cout << parse[0] << " " << num_words[0] << " " << parse[1] << " " << num_words[1] << " " << parse[2] << " " << num_words[2] << " " << parse[3] << " " << num_words[3] << "\n";
 }
