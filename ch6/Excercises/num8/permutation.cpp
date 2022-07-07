@@ -1,5 +1,8 @@
+#include <exception>
 #include <iostream>
 #include "permutation.h"
+#include <ostream>
+#include <stdexcept>
 
 void error(std::string er){
     std::cout << er << "\n";
@@ -8,17 +11,20 @@ void error(std::string er){
 int permutation::getA(int a){
     std::cout << "Enter the first number\n";
     std::cin >> a;
-    while(!std::cin){
-        error("Not a valid input.");
+    if(!std::cin){
+        throw std::runtime_error("Not a valid input exiting program.");
+        std::cout << "Enter the first number again\n";
+        std::cin >> a;
     }
     return a;
 }
 
 int permutation::getB(int b){
+    std::cin.clear();
     std::cout << "Enter the second number\n";
     std::cin >> b;
-    while(!std::cin){
-        error("Not a valid input.");
+    if(!std::cin){
+        throw std::runtime_error("Not a valid input exiting program.");
     }
     return b;
 }
@@ -54,6 +60,10 @@ int permutation::answer(){
 }
 
 int main(){
-    int final = num.answer();
-    std::cout << final << "\n";
+    try{
+        int final = num.answer();
+        std::cout << final << "\n";
+    }catch(std::exception& e){
+        std::cerr << "ERROR " << e.what() << "\n";
+    }
 }
