@@ -3,14 +3,10 @@
 #include "permutation.h"
 #include "combinations.h"
 
+permutation num;
 int combinations::getB(int b){
-    std::cin.clear();
-    std::cout << "Enter the second number\n";
-    std::cin >> b;
-    if(!std::cin){
-        throw std::runtime_error("Not a valid input exiting program.");
-    }
-    return b;
+    int denom = num.getA(b);
+    return denom;
 }
 
 int combinations::denomentator(int b){
