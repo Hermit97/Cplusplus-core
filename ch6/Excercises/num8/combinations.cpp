@@ -3,15 +3,22 @@
 #include "permutation.h"
 #include "combinations.h"
 
-permutation num;
-int combinations::getB(int b){
-    int denom = num.getA(b);
-    return denom;
+permutation number;
+combinations n2;
+int combinations::getNumerator(){
+    int numer = number.answer();
+    return numer;
 }
 
-int combinations::denomentator(int b){
+int combinations::denomentator(){
+    int b = number.getA();
     int factorial = 1;
     for(int i = b; i > 0; --i)
         factorial = factorial * i;
     return factorial;
+}
+
+int combinations::answer(){
+    int result = n2.getNumerator() / n2.denomentator();
+    return result;
 }

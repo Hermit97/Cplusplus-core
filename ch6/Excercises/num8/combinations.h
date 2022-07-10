@@ -2,6 +2,7 @@
 
 class combinations {
     public:
-        int denomentator(int b);
-        int getB(int b);
+        int denomentator();
+        int getNumerator();
+        int answer();
 };
