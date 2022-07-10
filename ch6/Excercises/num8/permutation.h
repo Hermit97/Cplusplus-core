@@ -2,9 +2,9 @@
 
 class permutation{
 public:
-    int numerator();
-    int denaminator();
+    int numerator(int a);
+    int denaminator(int a, int b);
     int answer();
-    int getA();
-    int getB();
+    int getA(int a);
+    int getB(int b);
 };

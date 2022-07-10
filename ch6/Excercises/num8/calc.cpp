@@ -4,11 +4,10 @@
 
 int main(){
     try{
-        //runningProgram num;
-        permutation qw;
+        runningProgram num;
+        num.run();
+         
 
-        int a = qw.permutation::answer();
-        std::cout << a << "\n";
     }catch(std::exception& e){
         std::cerr << "ERROR " << e.what() << "\n";
     }

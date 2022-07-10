@@ -10,8 +10,10 @@ int combinations::getNumerator(){
     return numer;
 }
 
-int combinations::denomentator(){
-    int b = number.getA();
+int combinations::denomentator(){ 
+    int a;
+    std::cin >> a;
+    int b = number.getA(a);
     int factorial = 1;
     for(int i = b; i > 0; --i)
         factorial = factorial * i;

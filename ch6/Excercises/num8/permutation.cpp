@@ -10,8 +10,7 @@ void error(std::string er){
 
 permutation ch;
 
-int permutation::getA(){
-    int a;
+int permutation::getA(int a){
     std::cout << "Enter the first number\n";
     std::cin >> a;
     if(!std::cin){
@@ -19,30 +18,26 @@ int permutation::getA(){
         std::cout << "Enter the first number again\n";
         std::cin >> a;
     }
-    return a;
 }
 
-int permutation::getB(){
-    int b;
+int permutation::getB(int b){
     std::cin.clear();
     std::cout << "Enter the second number\n";
     std::cin >> b;
     if(!std::cin){
         throw std::runtime_error("Not a valid input exiting program.");
     }
-    return b;
 }
 
-int permutation::numerator(){
-    int a = ch.getA();
+int permutation::numerator(int a){
     int factorial = 1;
     for(int i = a; i > 0; --i)
         factorial = factorial * i;
     return factorial;
 }
 
-int permutation::denaminator(){
-    int diff = ch.getA() - ch.getB();
+int permutation::denaminator(int a, int b){
+    int diff = a - b;
     int factorial = 1;
     for(int i = diff; i > 0; --i)
         factorial = factorial * i;
@@ -51,10 +46,13 @@ int permutation::denaminator(){
 
 int permutation::answer(){
     int numerator, denom, result;
+    int a, b;
 
+    std::cout << "Enter 2 numbers\n";
+    std::cin >> a >> b;
 
-    numerator = ch.numerator();
-    denom = ch.denaminator();
+    numerator = ch.numerator(permutation::getA(a));
+    denom = ch.denaminator(numerator, permutation::getB(b));
     result = numerator/denom;
 
     return result;
