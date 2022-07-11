@@ -11,9 +11,7 @@ int combinations::getNumerator(){
 }
 
 int combinations::denomentator(){ 
-    int a;
-    std::cin >> a;
-    int b = number.getA(a);
+    int b = number.bot;
     int factorial = 1;
     for(int i = b; i > 0; --i)
         factorial = factorial * i;
