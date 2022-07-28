@@ -14,6 +14,7 @@
 
 using namespace std;
 
+//All tokens have  a kind and the value and name are optionial. 
 struct Token {
 	char kind;
 	double value;
@@ -63,12 +64,14 @@ const char quit = 'Q';
 const char print = ';';
 const char number = '8';
 const char name = 'a';
+const string declareKey = "let";
 
+//Gets tokens
 Token Token_stream::get()
 {
 	if (full) { full = false; return buffer; }
 	char ch;
-	cin >> ch;
+	cin >> ch; //Enter tokens
 	switch (ch) {
 	case '(':
 	case ')':
@@ -91,7 +94,7 @@ Token Token_stream::get()
 	case '7':
 	case '8':
 	case '9':
-	{	cin.unget();
+	{	cin.unget(); //This is cin.unget() it takes the last input and puts it back into the stream
 	double val;
 	cin >> val;
 	return Token(number, val);
@@ -101,9 +104,9 @@ Token Token_stream::get()
 			string s;
 			s += ch;
 			while (cin.get(ch) && (isalpha(ch) || isdigit(ch))) s = ch;
-			cin.unget();
-			if (s == "let") return Token(let);
-			if (s == "quit") return Token(name);
+			cin.putback(ch); //3rd error was unget but that just puts the last ch back in the stream, putback puts 
+			if (s == declareKey) return Token(let); //2nd error found returns let token
+			if (s == "q") return Token(quit);
 			return Token(name, s);
 		}
 		error("Bad token");
@@ -223,7 +226,7 @@ double expression()
 double declaration()
 {
 	Token t = ts.get();
-	if (t.kind != 'a') error("name expected in declaration");
+	if (t.kind != name) error("name expected in declaration"); //error 1 found t.kind = 'a' instead of name
 	string name = t.name;
 	if (is_declared(name)) error(name, " declared twice");
 	Token t2 = ts.get();
