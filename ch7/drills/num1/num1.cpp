@@ -223,7 +223,7 @@ double expression()
 	}
 }
 
-double declaration()
+double declaration(bool b)
 {
 	Token t = ts.get();
 	if (t.kind != name) error("name expected in declaration"); //error 1 found t.kind = 'a' instead of name
@@ -241,7 +241,7 @@ double statement()
 	Token t = ts.get();
 	switch (t.kind) {
 	case let:
-		return declaration();
+		return declaration(false);
 	default:
 		ts.unget(t);
 		return expression();
