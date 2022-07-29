@@ -55,7 +55,7 @@ public:
 
 	Token get();
 	void unget(Token t) { buffer = t; full = true; }
-
+	void putback(Token t);
 	void ignore(char);
 };
 
@@ -94,7 +94,7 @@ Token Token_stream::get()
 	case '7':
 	case '8':
 	case '9':
-	{	cin.unget(); //This is cin.unget() it takes the last input and puts it back into the stream
+	{	cin.putback(ch); //This is cin.unget() it takes the last input and puts it back into the stream
 	double val;
 	cin >> val;
 	return Token(number, val);
@@ -111,6 +111,15 @@ Token Token_stream::get()
 		}
 		error("Bad token");
 	}
+}
+
+// put Token back into Token stream
+void Token_stream::putback(Token t)
+{
+    if (full) 
+		error("putback() into full buffer");
+    buffer = t;     // copy t to buffer
+    full = true;    // buffer is now full
 }
 
 void Token_stream::ignore(char c)
@@ -198,7 +207,7 @@ double term()
 		break;
 		}
 		default:
-			ts.unget(t);
+			ts.putback(t);
 			return left;
 		}
 	}
@@ -217,13 +226,13 @@ double expression()
 			left -= term();
 			break;
 		default:
-			ts.unget(t);
+			ts.putback(t);
 			return left;
 		}
 	}
 }
 
-double declaration(bool b)
+double declaration()
 {
 	Token t = ts.get();
 	if (t.kind != name) error("name expected in declaration"); //error 1 found t.kind = 'a' instead of name
@@ -241,9 +250,9 @@ double statement()
 	Token t = ts.get();
 	switch (t.kind) {
 	case let:
-		return declaration(false);
+		return declaration();
 	default:
-		ts.unget(t);
+		ts.putback(t);
 		return expression();
 	}
 }
@@ -263,7 +272,7 @@ void calculate()
 		Token t = ts.get();
 		while (t.kind == print) t = ts.get();
 		if (t.kind == quit) return;
-		ts.unget(t);
+		ts.putback(t);
 		cout << result << statement() << endl;
 	}
 	catch (runtime_error& e) {
