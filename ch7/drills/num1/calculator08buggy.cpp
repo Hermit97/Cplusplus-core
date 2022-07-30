@@ -7,50 +7,64 @@
 	We have inserted 3 bugs that the compiler will catch and 3 that it won't.
 */
 
-
 #include "std_lib_facilities.h"
-
 
 using namespace std;
 
-//All tokens have  a kind and the value and name are optionial. 
-struct Token {
-	char kind;
-	double value;
-	string name;
-	Token(char ch) :kind(ch), value(0) { }
-	//Token(char ch) :kind{ch} { }
-	Token(char ch, double val) :kind(ch), value(val) { }
-	Token(char ch, string n) :kind(ch), name(n) { }
+//Token class (User defined type) has different kinds of data in it
+class Token {
+	public:
+		char kind;
+		double value;
+		string name;
+
+		//3 seperate constructors first one is (kind, name)
+		Token(char ch, string n) :kind(ch), name(n) { }
+		//(kind, optional value)
+		Token(char ch) :kind(ch), value(0) { }
+		//(kind, value)
+		Token(char ch, double val) :kind(ch), value(val) { }
 };
 
+//Models cin as a token stream
 class Token_stream {
+	//bool full;
+	//Token buffer;
+public:
+	//Tokem stream constructor
+	Token_stream() :full(0), buffer(0) { }
+	Token get();
+	//Removes a token fromt the stream
+	void unget(Token t) { buffer = t; full = true; }
+	void ignore(char c);
+private:
+	//Check if the buffer is full
 	bool full;
 	Token buffer;
-public:
-	Token_stream() :full(0), buffer(0) { }
-
-	Token get();
-	void unget(Token t) { buffer = t; full = true; }
-	void putback(Token t) { buffer=t; full=true; }
-
-	void ignore(char c);
 };
 
+//The let token
 const char let = 'L';
+//Quit token
 const char quit = 'Q';
+//Print token
 const char print = ';';
+//Number token
 const char number = '8';
+//Name token
 const char name = 'a';
+//let keyword
 const string declareKey = "let";
-const string quitKey = "quit";
+//Quit keyword
+const string declareQuit = "quit";
 
-//Gets tokens
+//Function gets input from cin then forms tokens
 Token Token_stream::get()
 {
+	//If their already is a token in the buffer then it resets it
 	if (full) { full = false; return buffer; }
 	char ch;
-	cin >> ch; //Enter tokens
+	cin >> ch;
 	switch (ch) {
 	case '(':
 	case ')':
@@ -61,7 +75,7 @@ Token Token_stream::get()
 	case '%':
 	case ';':
 	case '=':
-		return Token(ch);
+		return Token(ch); //Each character represents itself
 	case '.':
 	case '0':
 	case '1':
@@ -73,25 +87,26 @@ Token Token_stream::get()
 	case '7':
 	case '8':
 	case '9':
-	{	cin.putback(ch); //This is cin.unget() it takes the last input and puts it back into the stream
+	{	cin.unget(); //Put digit back into stream
 	double val;
-	cin >> val;
-	return Token{number, val};
+	cin >> val; //read a floating-point number
+	return Token(number, val); //represents a token as a (number, value)
 	}
-	default:
-		if (isalpha(ch)) {
+	default: //If the input is not a char or a number then its read as one of the following below
+		if (isalpha(ch)) { //checks if ch is a letter
 			string s;
 			s += ch;
-			while (cin.get(ch) && (isalpha(ch) || isdigit(ch))) s += ch;
-			cin.putback(ch); //3rd error was unget but that just puts the last ch back in the stream, putback puts 
-			if (s == declareKey) return Token{let}; //2nd error found returns let token
-			if (s == quitKey) return Token{quit};
-			return Token{name, s};
+			while (cin.get(ch) && (isalpha(ch) || isdigit(ch))) s = ch; //cin.get reads the entire line including the whitespaces
+			cin.unget(); //Put the digit back into the stream
+			if (s == declareKey) return Token(let); //declaration keyword
+			if (s == declareQuit) return Token(quit); //quit keyword
+			return Token(name, s);
 		}
-		error("Bad token");
+		error("Bad token"); //If its anything else then its a bad token
 	}
 }
 
+//
 void Token_stream::ignore(char c)
 {
 	if (full && c == buffer.kind) {
@@ -177,7 +192,7 @@ double term()
 		break;
 		}
 		default:
-			ts.putback(t);
+			ts.unget(t);
 			return left;
 		}
 	}
@@ -196,7 +211,7 @@ double expression()
 			left -= term();
 			break;
 		default:
-			ts.putback(t);
+			ts.unget(t);
 			return left;
 		}
 	}
@@ -205,7 +220,7 @@ double expression()
 double declaration()
 {
 	Token t = ts.get();
-	if (t.kind != name) error("name expected in declaration"); //error 1 found t.kind = 'a' instead of name
+	if (t.kind != name) error("name expected in declaration");
 	string name = t.name;
 	if (is_declared(name)) error(name, " declared twice");
 	Token t2 = ts.get();
@@ -222,7 +237,7 @@ double statement()
 	case let:
 		return declaration();
 	default:
-		ts.putback(t);
+		ts.unget(t);
 		return expression();
 	}
 }
@@ -242,7 +257,7 @@ void calculate()
 		Token t = ts.get();
 		while (t.kind == print) t = ts.get();
 		if (t.kind == quit) return;
-		ts.putback(t);
+		ts.unget(t);
 		cout << result << statement() << endl;
 	}
 	catch (runtime_error& e) {
