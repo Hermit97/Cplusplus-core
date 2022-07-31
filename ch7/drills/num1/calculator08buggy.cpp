@@ -106,15 +106,17 @@ Token Token_stream::get()
 	}
 }
 
-//
+//Ignores a token in the stram
 void Token_stream::ignore(char c)
 {
 	if (full && c == buffer.kind) {
-		full = false;
+		full = false; //if the kind of tokens == the kind of token in the buffer then empty the buffer and exit the ignore function
 		return;
 	}
+	//Empty the buffer
 	full = false;
 
+	//Now search input if invalid token entered
 	char ch;
 	while (cin >> ch)
 		if (ch == c) return;
