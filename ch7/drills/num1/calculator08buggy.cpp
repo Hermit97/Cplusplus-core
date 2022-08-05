@@ -19,28 +19,24 @@ class Token {
 		string name;
 
 		//3 seperate constructors first one is (kind, name)
-		Token(char ch, string n) :kind(ch), name(n) { }
-		//(kind, optional value)
-		Token(char ch) :kind(ch), value(0) { }
-		//(kind, value)
-		Token(char ch, double val) :kind(ch), value(val) { }
+		Token(char ch):kind{ch}{}
+		Token(char ch, double val) :kind{ch}, value{val} { }
+		Token(char ch, string n) :kind{ch}, name{n} { }
 };
 
 //Models cin as a token stream
 class Token_stream {
-	//bool full;
-	//Token buffer;
-public:
-	//Tokem stream constructor
-	Token_stream() :full(0), buffer(0) { }
-	Token get();
-	//Removes a token fromt the stream
-	void unget(Token t) { buffer = t; full = true; }
-	void ignore(char c);
-private:
-	//Check if the buffer is full
-	bool full;
-	Token buffer;
+	public:
+		//Tokem stream constructor
+		Token_stream() :full(0), buffer(0) { }
+		Token get();
+		//Removes a token fromt the stream
+		void unget(Token t) { buffer = t; full = true; }
+		void ignore(char c);
+	private:
+		//Check if the buffer is full
+		bool full;
+		Token buffer;
 };
 
 //The let token
@@ -95,11 +91,12 @@ Token Token_stream::get()
 	default: //If the input is not a char or a number then its read as one of the following below
 		if (isalpha(ch)) { //checks if ch is a letter
 			string s;
+			//Intilizes s with s + ch
 			s += ch;
-			while (cin.get(ch) && (isalpha(ch) || isdigit(ch))) s = ch; //cin.get reads the entire line including the whitespaces
+			while (cin.get(ch) && (isalpha(ch) || isdigit(ch))) s += ch; //cin.get reads the entire line including the whitespaces while the loop is true
 			cin.unget(); //Put the digit back into the stream
-			if (s == declareKey) return Token(let); //declaration keyword
-			if (s == declareQuit) return Token(quit); //quit keyword
+			if (s == declareKey) return Token{let}; //declaration keyword
+			if (s == declareQuit) return Token{quit}; //quit keyword
 			return Token(name, s);
 		}
 		error("Bad token"); //If its anything else then its a bad token
@@ -122,42 +119,50 @@ void Token_stream::ignore(char c)
 		if (ch == c) return;
 }
 
-struct Variable {
-	string name;
-	double value;
-	Variable(string n, double v) :name(n), value(v) { }
+//Defines the variable (name, value)
+class Variable {
+	public:
+		string name;
+		double value;
+		Variable(string n, double v) :name(n), value(v) { }
 };
+vector<Variable> var_table;
 
-vector<Variable> names;
-
+//Get the value from the vector of variables
 double get_value(string s)
 {
-	for (int i = 0; i < names.size(); ++i)
-		if (names[i].name == s) return names[i].value;
-	error("get: undefined name ", s);
+	//Iterates through the vector checking is the name member matches the name token entered.
+	for(const Variable& v : var_table)
+		if(v.name == s) return v.value;
+	error("get: undefined variable ", s);
 }
 
+//If a valid token name is entered then its valued is assigned to it
 void set_value(string s, double d)
 {
-	for (int i = 0; i <= names.size(); ++i)
-		if (names[i].name == s) {
-			names[i].value = d;
+	//Iterates through the vector checking is the name member matches the name token entered. If yes then it gets the value
+	for(Variable& v : var_table)
+		if(v.name == s){
+			v.value = d;
 			return;
-		}
+	}
 	error("set: undefined name ", s);
 }
 
+//Checks if the variable is already declared
 bool is_declared(string s)
 {
-	for (int i = 0; i < names.size(); ++i)
-		if (names[i].name == s) return true;
+	for(Variable& v : var_table)
+		if(v.name == s) return true;
 	return false;
 }
 
+//Token object created with Token_stream type
 Token_stream ts;
 
 double expression();
 
+//Takes care of parenthesis and uary +/- and calls expression
 double primary()
 {
 	Token t = ts.get();
@@ -178,6 +183,7 @@ double primary()
 	}
 }
 
+//Takes care of multiplication/division
 double term()
 {
 	double left = primary();
@@ -189,17 +195,18 @@ double term()
 			break;
 		case '/':
 		{	double d = primary();
-		if (d == 0) error("divide by zero");
+		if (d == 0) error("divide by zero"); //error if number divided by 0
 		left /= d;
 		break;
 		}
 		default:
-			ts.unget(t);
+			ts.unget(t);//Empties the buffer
 			return left;
 		}
 	}
 }
 
+//calls expression and takes care of addition/substraction
 double expression()
 {
 	double left = term();
@@ -219,6 +226,7 @@ double expression()
 	}
 }
 
+//Makes sure after let is a name followed by a = followed by an expression
 double declaration()
 {
 	Token t = ts.get();
@@ -226,12 +234,17 @@ double declaration()
 	string name = t.name;
 	if (is_declared(name)) error(name, " declared twice");
 	Token t2 = ts.get();
+	//If second token kind is not equal to = then error
 	if (t2.kind != '=') error("= missing in declaration of ", name);
+	//Call expression
 	double d = expression();
-	names.push_back(Variable(name, d));
+	//Push Variable consturctor name and d into the vector
+	var_table.push_back(Variable(name, d));
+	//return d which is the expression
 	return d;
 }
 
+//Takes care of declaration and expression if their is no declaration
 double statement()
 {
 	Token t = ts.get();
@@ -244,6 +257,7 @@ double statement()
 	}
 }
 
+//Cleans up after an error
 void clean_up_mess()
 {
 	ts.ignore(print);
@@ -252,12 +266,14 @@ void clean_up_mess()
 const string prompt = "> ";
 const string result = "= ";
 
+//prints the result
 void calculate()
 {
 	while (true) try {
 		cout << prompt;
 		Token t = ts.get();
 		while (t.kind == print) t = ts.get();
+		if(t.kind != print) error("no print");
 		if (t.kind == quit) return;
 		ts.unget(t);
 		cout << result << statement() << endl;
@@ -269,7 +285,6 @@ void calculate()
 }
 
 int main()
-
 try {
 	calculate();
 	return 0;
