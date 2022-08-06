@@ -164,6 +164,15 @@ bool is_declared(string s)
 	return false;
 }
 
+//predefined name k = 1000
+void predefined(string name, int value){
+	if(is_declared(name)) error("Declared twice");
+	var_table.push_back(Variable(name, value));
+}
+
+void set_predefined(){
+	predefined("k", 1000);
+}
 //Token object created with Token_stream type
 Token_stream ts;
 
@@ -292,6 +301,7 @@ void calculate()
 
 int main()
 try {
+	set_predefined();
 	calculate();
 	return 0;
 }
