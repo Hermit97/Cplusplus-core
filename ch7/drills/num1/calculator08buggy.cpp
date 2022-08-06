@@ -8,6 +8,7 @@
 */
 
 #include "std_lib_facilities.h"
+#include <cctype>
 
 using namespace std;
 
@@ -19,7 +20,7 @@ class Token {
 		string name;
 
 		//3 seperate constructors first one is (kind, name)
-		Token(char ch):kind{ch}{}
+		Token(char ch):kind{ch}, value{0}{}
 		Token(char ch, double val) :kind{ch}, value{val} { }
 		Token(char ch, string n) :kind{ch}, name{n} { }
 };
@@ -59,8 +60,14 @@ Token Token_stream::get()
 {
 	//If their already is a token in the buffer then it resets it
 	if (full) { full = false; return buffer; }
+
 	char ch;
-	cin >> ch;
+	cin.get(ch); //Reads input and keeps it in the stream
+	while(isspace(ch)){ //Checks for white space
+		if(ch == '\n') return Token(print); //Checks for next line and prints
+		cin.get(ch); //Reads the result
+	}
+	//cin >> ch;
 	switch (ch) {
 	case '(':
 	case ')':
@@ -273,7 +280,6 @@ void calculate()
 		cout << prompt;
 		Token t = ts.get();
 		while (t.kind == print) t = ts.get();
-		if(t.kind != print) error("no print");
 		if (t.kind == quit) return;
 		ts.unget(t);
 		cout << result << statement() << endl;
