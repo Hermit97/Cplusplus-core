@@ -9,6 +9,7 @@
 
 #include "std_lib_facilities.h"
 #include <cctype>
+#include <cmath>
 
 using namespace std;
 
@@ -54,7 +55,10 @@ const char name = 'a';
 const string declareKey = "let";
 //Quit keyword
 const string declareQuit = "quit";
-
+//Sqrt token
+const char sq = 's';
+//Sqrt keyword
+const string declareSqrt = "sqr";
 //Function gets input from cin then forms tokens
 Token Token_stream::get()
 {
@@ -104,6 +108,7 @@ Token Token_stream::get()
 			cin.unget(); //Put the digit back into the stream
 			if (s == declareKey) return Token{let}; //declaration keyword
 			if (s == declareQuit) return Token{quit}; //quit keyword
+			if (s == declareSqrt) return Token{sq};
 			return Token(name, s);
 		}
 		error("Bad token"); //If its anything else then its a bad token
@@ -172,7 +177,9 @@ void predefined(string name, int value){
 
 void set_predefined(){
 	predefined("k", 1000);
+	//predefined(name, sqrt(value))
 }
+
 //Token object created with Token_stream type
 Token_stream ts;
 
@@ -186,7 +193,7 @@ double primary()
 	case '(':
 	{	double d = expression();
 	t = ts.get();
-	if (t.kind != ')') error("'(' expected");
+	if (t.kind != ')') error("')' expected");
 	}
 	case '-':
 		return -primary();
@@ -194,6 +201,24 @@ double primary()
 		return t.value;
 	case name:
 		return get_value(t.name);
+	//Case for sqr
+	case sq:
+	{
+		//get the token
+		t = ts.get();
+		//check if the kind is (
+		if(t.kind != '(') error("Expected (");
+		//call expression and assign it to d
+		double d = expression();
+		//if d is less than 0 then error because you cant do sqrt < 0
+		if(d < 0) error("Less than 0 error for sqrt");
+		//get the next token
+		t = ts.get();
+		//if its not ) then errror
+        if (t.kind != ')') error("Expected )");
+		//return the operation sqrt from standard library passing d which holds expressoin wihch does all the calculations
+		return sqrt(d);
+	}
 	default:
 		error("primary expected");
 	}
