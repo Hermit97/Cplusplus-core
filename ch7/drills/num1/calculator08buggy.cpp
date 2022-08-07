@@ -41,6 +41,11 @@ class Token_stream {
 		Token buffer;
 };
 
+class Special_symbol_tree{
+	public:
+		//All functions /vars that are apart of the special symbols tree
+};
+
 //The let token
 const char let = 'L';
 //Quit token
@@ -51,6 +56,8 @@ const char print = ';';
 const char number = '8';
 //Name token
 const char name = 'a';
+//Pow token
+const char p = 'p';
 //let keyword
 const string declareKey = "let";
 //Quit keyword
@@ -59,6 +66,9 @@ const string declareQuit = "quit";
 const char sq = 's';
 //Sqrt keyword
 const string declareSqrt = "sqr";
+//Pow keyword
+const string declarePow = "pow";
+
 //Function gets input from cin then forms tokens
 Token Token_stream::get()
 {
@@ -109,6 +119,7 @@ Token Token_stream::get()
 			if (s == declareKey) return Token{let}; //declaration keyword
 			if (s == declareQuit) return Token{quit}; //quit keyword
 			if (s == declareSqrt) return Token{sq};
+			if (s == declarePow) return Token{p};
 			return Token(name, s);
 		}
 		error("Bad token"); //If its anything else then its a bad token
@@ -218,6 +229,13 @@ double primary()
         if (t.kind != ')') error("Expected )");
 		//return the operation sqrt from standard library passing d which holds expressoin wihch does all the calculations
 		return sqrt(d);
+	}
+	//Case for pow
+	case p:
+	{
+		//get the next token should be pow(
+		t = ts.get();
+		if(t.kind != '(') error("Expecting (");
 	}
 	default:
 		error("primary expected");
