@@ -281,7 +281,7 @@ double expression(); // declaration so that primary() can call expression()
 
 // simple power function
 // handles only integers >= 0 as exponents
-double my_pow(double base, int expo) {
+int my_pow(double base, int expo) {
   if (expo == 0) {
     if (base == 0)
       return 0; // special case: pow(0,0)

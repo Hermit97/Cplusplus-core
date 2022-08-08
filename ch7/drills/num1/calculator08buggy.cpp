@@ -10,6 +10,7 @@
 #include "std_lib_facilities.h"
 #include <cctype>
 #include <cmath>
+#include <math.h>
 
 using namespace std;
 
@@ -41,11 +42,6 @@ class Token_stream {
 		Token buffer;
 };
 
-class Special_symbol_tree{
-	public:
-		//All functions /vars that are apart of the special symbols tree
-};
-
 //The let token
 const char let = 'L';
 //Quit token
@@ -57,7 +53,7 @@ const char number = '8';
 //Name token
 const char name = 'a';
 //Pow token
-const char p = 'p';
+const char power = 'p';
 //let keyword
 const string declareKey = "let";
 //Quit keyword
@@ -67,7 +63,7 @@ const char sq = 's';
 //Sqrt keyword
 const string declareSqrt = "sqr";
 //Pow keyword
-const string declarePow = "pow";
+const string powkey = "pow";
 
 //Function gets input from cin then forms tokens
 Token Token_stream::get()
@@ -119,7 +115,7 @@ Token Token_stream::get()
 			if (s == declareKey) return Token{let}; //declaration keyword
 			if (s == declareQuit) return Token{quit}; //quit keyword
 			if (s == declareSqrt) return Token{sq};
-			if (s == declarePow) return Token{p};
+			if (s == powkey) return Token{power};
 			return Token(name, s);
 		}
 		error("Bad token"); //If its anything else then its a bad token
@@ -191,10 +187,27 @@ void set_predefined(){
 	//predefined(name, sqrt(value))
 }
 
+
+
 //Token object created with Token_stream type
 Token_stream ts;
 
 double expression();
+
+//ex pow(2, 2) is 2 to the 2nd power
+double pow_num(double n1, double n2){
+	if(n2 == 0){
+		if(n1 == 0)
+			return 0;
+		return 1;
+	}
+
+	double sum = n1;
+	for(int i = 2; i <= n2; ++i){
+		sum *= n1;
+	}
+	return sum;
+}
 
 //Takes care of parenthesis and uary +/- and calls expression
 double primary()
@@ -231,11 +244,22 @@ double primary()
 		return sqrt(d);
 	}
 	//Case for pow
-	case p:
+	case power:
 	{
 		//get the next token should be pow(
 		t = ts.get();
 		if(t.kind != '(') error("Expecting (");
+		double d = expression();
+		t = ts.get();
+		if(t.kind != ',') error("Expecting ,");
+		t = ts.get();
+		if(t.kind != number) error("Second arguemnt of pow is not an number");
+		int n = int(t.value);
+		if(n != t.value) error("Second argument is not an valid number");
+		t = ts.get();
+		if(t.kind != ')') error("Expecting )");
+
+		return pow_num(d, n);
 	}
 	default:
 		error("primary expected");
