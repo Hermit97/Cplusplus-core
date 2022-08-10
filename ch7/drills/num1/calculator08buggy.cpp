@@ -306,6 +306,18 @@ double term() {
       left /= d;
       break;
     }
+    case '%':
+    {
+      int l1 = int(left);
+      if(l1 != left) error("Value is not an integer");
+
+      double d = primary();
+      int l2 = int(d);
+      if(l2 != d) error("Value is not an ingeger");
+
+      left = l1 % l2;
+      break;
+    }
     default:
       ts.unget(t); // Empties the buffer
       return left;
