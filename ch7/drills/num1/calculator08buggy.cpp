@@ -48,7 +48,7 @@ private:
 };
 
 // The let token
-const char let = 'L';
+const char let = '#';
 // Quit token
 const char quit = 'Q';
 // Print token
@@ -60,7 +60,7 @@ const char name = 'a';
 // Pow token
 const char power = 'p';
 // let keyword
-const string declareKey = "let";
+//const string declareKey = "let";
 // Quit keyword
 const string declareQuit = "quit";
 // Sqrt token
@@ -97,6 +97,7 @@ Token Token_stream::get() {
   case ';':
   case '=':
   case ',':
+  case '#':
     return Token(ch); // Each character represents itself
   case '.':
   case '0':
@@ -124,8 +125,8 @@ Token Token_stream::get() {
         s += ch; // cin.get reads the entire line including the whitespaces
                  // while the loop is true
       cin.unget(); // Put the digit back into the stream
-      if (s == declareKey)
-        return Token{let}; // declaration keyword
+      //if (s == declareKey)
+        //return Token{let}; // declaration keyword
       if (s == declareQuit)
         return Token{quit}; // quit keyword
       if (s == declareSqrt)
