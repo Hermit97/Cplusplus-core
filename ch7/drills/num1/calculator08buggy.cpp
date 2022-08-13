@@ -62,7 +62,7 @@ const char power = 'p';
 // let keyword
 //const string declareKey = "let";
 // Quit keyword
-const string declareQuit = "quit";
+const string declareQuit = "exit";
 // Sqrt token
 const char sq = 's';
 // Sqrt keyword
