@@ -15,3 +15,44 @@ the token. Creating an constat since the value will not be changing allows for b
 avoid speghittei code.
 
 4) Why split main() into two seperatre functions? What does the new function do and why did we split main()?
+
+5) Why do we split code into mutliple functions? State principles.
+- For redablilty. Also its easier to go back and add features or change stuff. 
+
+6) The purpose of commenting is to inform the reader of what a certain part of the code base does when 
+something seems a bit ambigous. 
+
+7) Checks if something can fit.
+
+8) Gives a constant a symbolic meaning. Like int const number = '8'; This is a symbolic constant because it symbolizes the number token.
+
+9) Code layout organizes code allowing it to make better sense.
+
+10) It throws an error if any non integer values are entered.
+
+11) Checks if a variable is already declared.
+
+12) The input representation for let is more than one character. How is it
+accepted as a single token in the modified code?
+- The token constructor allows more than one input.
+
+13) What are the rules for what names can and cannot be in the calculator
+program?
+- The names should be related to the functionality of the calculator and should refrain from using unrelated names.
+
+14) Why is it a good idea to build a program incrementally?
+- It allows the programmer to concentrate on one part of the program rather than trying to build the whole thing as a whole which would lead to bugs that could have been avoided. Coding the program in small steps allows the programmer to utilize more rigours testing reuducing the bugs instead of testing at the end which can often be overwhelming. Programmers may need to re think certain parts because their was no testing implemented early on resulting in nasty bugs.
+
+15) You should start testing as you code. For example if you add a new feature or just a new function, you shoud test it to ensure its correctly working.
+
+16) You retest when you make any changes like refactoring a part of the code or adding features/chaning etc.
+
+17) A function should just be doing one thing. For example you might have a add function that returns the sum of two integers. Now you might want to add some substractoin to return the difference of two integers. Instead of adding the logic for substraction you could just make a seperate function just for substractoin. Now this might seem like over kill since its such a simple thing and it could make sense to have both in one function like we do in out program. But a similar situation with more complicated logic would make be much better suited since its doing something different and you dont want the function to be to clutered.
+
+18) The names you choose for variables and functions are important because people after you will read it. And if its just you maintaining it then you want to pick good names because you might return to a old part of your code. If the function is calculating the conversion to kilometers you could name it convertToKilo. Something like calculate may not be such a good idea because you might add other functions later on that calculate feet to meters etc. Another issue with calculate is its to vague. Its just not clear enough what this functoin is calculating.
+
+19) You add comments to code that are vague and need some explaining.
+
+20) Comments should be short and to the point. If you have a functoin that calculates the distance between the two images on a tile map then you would add a comment briefly stating that //Calculates distance between two images. You dont want to say something like //This function calculates something. This comment is irrelevent because it fails to explain what the function does.
+
+21) A program is never truly done. It will have a ton of bugs and will require rigours testing. A lot of times you may want to add features or change somethign which will introducde new bugs and require more testing.
