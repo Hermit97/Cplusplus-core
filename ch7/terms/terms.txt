@@ -1,0 +1,10 @@
+code layout - The way code is structured.
+commenting - Small info regarding a part of the code that needs explaining.
+error handling - Breaking your code to find bugs and fix them. Keep repeating. With error handling, the program will catch errors and take action. Printing an error message is an example of an action. Another helpful result of error handling is, the program wont automatically close if an error is caught. Instead itll take whatever action you tell it to.
+feature creep - When you try going to big which ends up having projects that become way to complicated and difficult to achieve.
+maintenance - Improving the code by making it more clear and shorter and adding comments or just better commenents. Continue to add features and ensure the program stays stable.
+recovery - Program recovers from an invalid input.
+revision history - Github and gitlab allow you to view the revision history which contains all the different changes you've made on the project.
+scaffolding
+symbolic constant
+testing
