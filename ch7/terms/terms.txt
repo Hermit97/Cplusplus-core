@@ -6,5 +6,5 @@ maintenance - Improving the code by making it more clear and shorter and adding 
 recovery - Program recovers from an invalid input.
 revision history - Github and gitlab allow you to view the revision history which contains all the different changes you've made on the project.
 scaffolding - Start the program, end the program, handle fatal errors.
-symbolic constant
-testing
+symbolic constant - Name that ius used to represent a fixed value that never changes.
+testing - Ensuring the program is working as intended and finding bugs.
