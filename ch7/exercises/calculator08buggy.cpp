@@ -7,6 +7,13 @@
 variable after you introduce it using let . Discuss why that can be useful
 and how it can be a source of problems.
 
+3.Provide named constants that you really can’t change the value of. Hint:
+You have to add a member to Variable that distinguishes between con-
+stants and variables and check for it in set_value() . If you want to let
+the user define constants (rather than just having pi and e defined as
+constants), you’ll have to add a notation to let the user express that, for
+example, const pi = 3.14; .
+
 */
 
 #include "std_lib_facilities.h"
@@ -71,6 +78,11 @@ const char sq = 's';
 const string declareSqrt = "sqr";
 // Pow keyword
 const string powkey = "pow";
+// Const token
+const char tokenConstant = 'C';
+// Constant keyword
+const string constKeyWord = "const";
+
 
 // Function gets input from cin then forms tokens
 Token Token_stream::get() {
@@ -136,6 +148,8 @@ Token Token_stream::get() {
         return Token{sq};
       if (s == powkey)
         return Token{power};
+      if(s == constKeyWord)
+        return Token{tokenConstant};
       return Token(name, s);
     }
     error("Bad token"); // If its anything else then its a bad token
@@ -164,6 +178,7 @@ class Variable {
 public:
   string name;
   double value;
+  bool checkConstant();
   Variable(string n, double v) : name(n), value(v) {}
 };
 vector<Variable> var_table;
@@ -182,12 +197,16 @@ double get_value(string s) {
 void set_value(string s, double d) {
   // Iterates through the vector checking is the name member matches the name
   // token entered. If yes then it gets the value
-  for (Variable &v : var_table)
+  for (Variable &v : var_table){
+    if(v.checkConstant()){
+      predefined();
+    }
     if (v.name == s) {
       v.value = d;
       return;
     }
-  error("set: undefined name ", s);
+    error("set: undefined name ", s);
+  }
 }
 
 // Checks if the variable is already declared
@@ -196,17 +215,6 @@ bool is_declared(string s) {
     if (v.name == s)
       return true;
   return false;
-}
-
-//Changes value of already declared variable
-//# x = 5; x gets a new value
-void reassignValue(string name, int value){
-  bool reAssign = true;
-  while(is_declared(name)){
-    if(reAssign){
-
-    }
-  }
 }
 
 // predefined name k = 1000
@@ -226,6 +234,18 @@ void set_predefined() {
 Token_stream ts;
 
 double expression();
+
+// Checks between constatns and variables
+bool Variable::checkConstant(){
+  bool isConst = true;
+  Token t = ts.get();
+  if(t.name == constKeyWord){
+    return isConst;
+  }else {
+    return isConst = false;
+  }
+  return isConst;
+}
 
 // ex pow(2, 2) is 2 to the 2nd power
 double pow_num(double n1, double n2) {
@@ -398,6 +418,8 @@ double statement() {
   Token t = ts.get();
   switch (t.kind) {
   case let:
+    return declaration();
+  case tokenConstant:
     return declaration();
   default:
     ts.unget(t);
