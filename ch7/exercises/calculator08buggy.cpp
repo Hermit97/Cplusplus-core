@@ -1,7 +1,11 @@
 /*
         calculator08buggy.cpp
 
-1. Allow underscores in the calculator’s variable names.
+1. Allow underscores in the calculator’s variable names. Done.
+
+2. Provide an assignment operator, = , so that you can change the value of a
+variable after you introduce it using let . Discuss why that can be useful
+and how it can be a source of problems.
 
 */
 
@@ -9,6 +13,7 @@
 #include <cctype>
 #include <cmath>
 #include <math.h>
+#include <pthread.h>
 
 using namespace std;
 
@@ -17,7 +22,7 @@ class Token {
 public:
   char kind;
   double value;
-  string name;
+string name;
 
   // 3 seperate constructors first one is (kind, name)
   Token(char ch) : kind{ch}, value{0} {}
@@ -193,6 +198,17 @@ bool is_declared(string s) {
   return false;
 }
 
+//Changes value of already declared variable
+//# x = 5; x gets a new value
+void reassignValue(string name, int value){
+  bool reAssign = true;
+  while(is_declared(name)){
+    if(reAssign){
+
+    }
+  }
+}
+
 // predefined name k = 1000
 void predefined(string name, int value) {
   if (is_declared(name))
@@ -204,6 +220,7 @@ void set_predefined() {
   predefined("k", 1000);
   // predefined(name, sqrt(value))
 }
+
 
 // Token object created with Token_stream type
 Token_stream ts;
@@ -238,9 +255,19 @@ double primary() {
   case '-':
     return -primary();
   case number:
-    return t.value;
+    return t.value; //Whatsss wronggg hereee?
   case name:
-    return get_value(t.name);
+  {
+    Token t2 = ts.get();
+    if(t2.kind == '='){
+      double d = expression();
+      set_value(t.name, d);
+      return d;
+    }else{
+      ts.unget(t2);
+      return get_value(t.name);
+    }
+  }
   // Case for sqr
   case sq: {
     // get the token
@@ -349,8 +376,11 @@ double declaration() {
   if (t.kind != name)
     error("name expected in declaration");
   string name = t.name;
-  if (is_declared(name))
-    error(name, " declared twice");
+  if (is_declared(name)){
+    //error(name, " declared twice");
+    double d  = expression();
+    var_table.push_back(Variable(name, d));
+    }
   Token t2 = ts.get();
   // If second token kind is not equal to = then error
   if (t2.kind != '=')
@@ -400,7 +430,7 @@ void calculate() {
 }
 
 int main() try {
-  set_predefined();
+  //set_predefined();
   calculate();
   return 0;
 } catch (exception &e) {
