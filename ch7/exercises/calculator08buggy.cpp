@@ -178,7 +178,7 @@ class Variable {
 public:
   string name;
   double value;
-  bool checkConstant();
+  bool isConstant;
   Variable(string n, double v) : name(n), value(v) {}
 };
 vector<Variable> var_table;
@@ -194,17 +194,16 @@ double get_value(string s) {
 }
 
 // If a valid token name is entered then its valued is assigned to it
-void set_value(string s, double d) {
+double set_value(string s, double d) {
   // Iterates through the vector checking is the name member matches the name
   // token entered. If yes then it gets the value
   for (Variable &v : var_table){
-    if(v.checkConstant() && v.name == s){
-      error("Constant cannot be reassigned");
-    }
-
     if (v.name == s) {
-      v.value = d;
-      return;
+      if(v.isConstant){
+        v.value = d;
+        return d;
+      }else
+        error("Cant reassign value to a constant");
     }
     error("set: undefined name ", s);
   }
@@ -235,19 +234,6 @@ void set_predefined() {
 Token_stream ts;
 
 double expression();
-
-// Checks between constatns and variables
-bool Variable::checkConstant(){
-  bool isConst = true;
-  Token t = ts.get();
-  for (Variable &v : var_table)
-    if(v.name == constKeyWord){
-      return isConst;
-    }else {
-      return isConst = false;
-    }
-    return isConst;
-}
 
 // ex pow(2, 2) is 2 to the 2nd power
 double pow_num(double n1, double n2) {
