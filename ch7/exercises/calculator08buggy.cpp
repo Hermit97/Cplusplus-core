@@ -159,7 +159,7 @@ Token Token_stream::get() {
 // Ignores a token in the stram
 void Token_stream::ignore(char c) {
   if (full && c == buffer.kind) {
-    full = false; // if the kind of tokens == the kind of token in the buffer
+    full = false; // If the kind of tokens == the kind of token in the buffer
                   // then empty the buffer and exit the ignore function
     return;
   }
@@ -198,9 +198,10 @@ void set_value(string s, double d) {
   // Iterates through the vector checking is the name member matches the name
   // token entered. If yes then it gets the value
   for (Variable &v : var_table){
-    if(v.checkConstant()){
-      predefined();
+    if(v.checkConstant() && v.name == s){
+      error("Constant cannot be reassigned");
     }
+
     if (v.name == s) {
       v.value = d;
       return;
@@ -239,12 +240,13 @@ double expression();
 bool Variable::checkConstant(){
   bool isConst = true;
   Token t = ts.get();
-  if(t.name == constKeyWord){
+  for (Variable &v : var_table)
+    if(v.name == constKeyWord){
+      return isConst;
+    }else {
+      return isConst = false;
+    }
     return isConst;
-  }else {
-    return isConst = false;
-  }
-  return isConst;
 }
 
 // ex pow(2, 2) is 2 to the 2nd power
