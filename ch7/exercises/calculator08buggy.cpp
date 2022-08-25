@@ -14,6 +14,12 @@ the user define constants (rather than just having pi and e defined as
 constants), you’ll have to add a notation to let the user express that, for
 example, const pi = 3.14; .
 
+4. The get_value() , set_value() , is_declared() , and define_name() functions
+all operate on the variable var_table . Define a class called Symbol_table
+with a member var_table of type vector<Variable> and member functions
+get() , set() , is_declared() , and declare() . Rewrite the calculator to use a
+variable of type Symbol_table .
+
 */
 
 #include "std_lib_facilities.h"
@@ -181,10 +187,21 @@ public:
   bool isConstant;
   Variable(string n, double v) : name(n), value(v) {}
 };
-vector<Variable> var_table;
+
+//num 4
+class Symbol_table{
+    vector<Variable> var_table;
+  public:
+    double get_value(string s);
+    double set_value(string s, double d);
+    bool is_declared(string name);
+    void predefined(string name, int value);
+};
+
+Symbol_table sym;
 
 // Get the value from the vector of variables
-double get_value(string s) {
+double Symbol_table::get_value(string s) {
   // Iterates through the vector checking is the name member matches the name
   // token entered.
   for (const Variable &v : var_table)
@@ -194,7 +211,7 @@ double get_value(string s) {
 }
 
 // If a valid token name is entered then its valued is assigned to it
-double set_value(string s, double d) {
+double Symbol_table::set_value(string s, double d) {
   // Iterates through the vector checking is the name member matches the name
   // token entered. If yes then it gets the value
   for (Variable &v : var_table){
@@ -210,7 +227,7 @@ double set_value(string s, double d) {
 }
 
 // Checks if the variable is already declared
-bool is_declared(string s) {
+bool Symbol_table::is_declared(string s) {
   for (Variable &v : var_table)
     if (v.name == s)
       return true;
@@ -218,24 +235,18 @@ bool is_declared(string s) {
 }
 
 // predefined name k = 1000
-void predefined(string name, int value) {
+void Symbol_table::predefined(string name, int value) {
   if (is_declared(name))
     error("Declared twice");
   var_table.push_back(Variable(name, value));
 }
-
-void set_predefined() {
-  predefined("k", 1000);
-  // predefined(name, sqrt(value))
-}
-
 
 // Token object created with Token_stream type
 Token_stream ts;
 
 double expression();
 
-// ex pow(2, 2) is 2 to the 2nd power
+  // ex pow(2, 2) is 2 to the 2nd power
 double pow_num(double n1, double n2) {
   if (n2 == 0) {
     if (n1 == 0)
@@ -269,11 +280,11 @@ double primary() {
     Token t2 = ts.get();
     if(t2.kind == '='){
       double d = expression();
-      set_value(t.name, d);
+      sym.set_value(t.name, d);
       return d;
     }else{
       ts.unget(t2);
-      return get_value(t.name);
+      return sym.get_value(t.name);
     }
   }
   // Case for sqr
@@ -381,25 +392,18 @@ double expression() {
 // Makes sure after let is a name followed by a = followed by an expression
 double declaration() {
   Token t = ts.get();
-  if (t.kind != name)
-    error("name expected in declaration");
+  if (t.kind != name) error("name expected in declaration");
   string name = t.name;
-  if (is_declared(name)){
-    //error(name, " declared twice");
-    double d  = expression();
-    var_table.push_back(Variable(name, d));
-    }
+
   Token t2 = ts.get();
-  // If second token kind is not equal to = then error
-  if (t2.kind != '=')
-    error("= missing in declaration of ", name);
-  // Call expression
+  if(t2.kind != '=') error("= missing");
+
   double d = expression();
-  // Push Variable consturctor name and d into the vector
-  var_table.push_back(Variable(name, d));
-  // return d which is the expression
+  sym.predefined(name, d);
   return d;
+
 }
+
 
 // Takes care of declaration and expression if their is no declaration
 double statement() {
