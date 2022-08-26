@@ -24,6 +24,9 @@ variable of type Symbol_table .
 line. This implies looking for whitespace characters and treating newline
 ( '\n' ) specially. You might find the standard library function isspace(ch) ,
 which returns true if ch is a whitespace character, useful.
+
+6. Modify the calculator to operate on int s (only); give errors for overflow
+and underflow. Hint: Use narrow_cast (§7.5).
 */
 
 #include "std_lib_facilities.h"
