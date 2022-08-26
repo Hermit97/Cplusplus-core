@@ -20,6 +20,10 @@ with a member var_table of type vector<Variable> and member functions
 get() , set() , is_declared() , and declare() . Rewrite the calculator to use a
 variable of type Symbol_table .
 
+5. Modify Token_stream::get() to return Token(print) when it sees a new-
+line. This implies looking for whitespace characters and treating newline
+( '\n' ) specially. You might find the standard library function isspace(ch) ,
+which returns true if ch is a whitespace character, useful.
 */
 
 #include "std_lib_facilities.h"
@@ -62,6 +66,11 @@ private:
   Token buffer;
 };
 
+void help(){
+  cout << "Enter integers to calculate.\n";
+  cout << "Enter ; to print the output.\n";
+}
+
 // The let token
 const char let = '#';
 // Quit token
@@ -88,6 +97,7 @@ const string powkey = "pow";
 const char tokenConstant = 'C';
 // Constant keyword
 const string constKeyWord = "const";
+const char helpToken = 'h';
 
 
 // Function gets input from cin then forms tokens
@@ -105,6 +115,7 @@ Token Token_stream::get() {
       return Token(print); // Checks for next line and prints
     cin.get(ch);           // Reads the result
   }
+
   // cin >> ch;
   switch (ch) {
   case '(':
@@ -119,6 +130,8 @@ Token Token_stream::get() {
   case ',':
   case '#':
   case '_':
+  case 'h':
+  case 'H':
     return Token(ch); // Each character represents itself
   case '.':
   case '0':
@@ -204,9 +217,10 @@ Symbol_table sym;
 double Symbol_table::get_value(string s) {
   // Iterates through the vector checking is the name member matches the name
   // token entered.
-  for (const Variable &v : var_table)
+  for (const Variable &v : var_table){
     if (v.name == s)
       return v.value;
+  }
   error("get: undefined variable ", s);
 }
 
@@ -330,6 +344,7 @@ double primary() {
 
     return pow_num(d, n);
   }
+
   default:
     error("primary expected");
   }
@@ -435,6 +450,11 @@ void calculate() {
         t = ts.get();
       if (t.kind == quit)
         return;
+      if(t.kind == 'h' || t.kind == 'H'){
+        help();
+        t = ts.get();
+        continue;
+      }
       ts.unget(t);
       cout << result << statement() << endl;
     } catch (runtime_error &e) {
