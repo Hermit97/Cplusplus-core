@@ -136,7 +136,7 @@ Token Token_stream::get() {
   case 'h':
   case 'H':
     return Token(ch); // Each character represents itself
-  case '.':
+  //case '.':
   case '0':
   case '1':
   case '2':
@@ -292,7 +292,7 @@ int primary() {
   case '-':
     return -primary();
   case number:
-    return t.value; //Whatsss wronggg hereee?
+    return t.value;
   case name:
   {
     Token t2 = ts.get();
@@ -308,9 +308,7 @@ int primary() {
   }
   // Case for sqr
   case sq: {
-    // get the token
     t = ts.get();
-    // check if the kind is (
     if (t.kind != '(')
       error("Expected (");
     // call expression and assign it to d
@@ -319,16 +317,11 @@ int primary() {
     // if d is less than 0 then error because you cant do sqrt < 0
     if (d < 0)
       error("Less than 0 error for sqrt");
-    // get the next token
     t = ts.get();
-    // if its not ) then errror
     if (t.kind != ')')
       error("Expected )");
-    // return the operation sqrt from standard library passing d which holds
-    // expressoin wihch does all the calculations
     return sqrt(d);
   }
-  // Case for pow
   case power: {
     // get the next token should be pow(
     t = ts.get();
