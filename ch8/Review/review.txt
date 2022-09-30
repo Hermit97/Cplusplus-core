@@ -1,0 +1,60 @@
+1. Declaration introduces a a object, allocates space for it in memory and gives it a name/type.
+Definition does the same thing expcet it gives it data as well.
+
+2. A function declaration wont havve a function body. A Definition will. 
+
+3. A Variable declaration wont have a value. A Definition will. 
+
+4. Their are 2 reasons when it comes to the calc program. First reason is we have certain fucntions
+that are apart of a class that need to be declared so that they are apart of that class.
+The second reason is that some functions use other functins before they are defined. So declaring them allow 
+no errors since they exist. 
+
+5. Its a declaration. 
+6. Because it prevents future errors as you code up your program. 
+7. Type, name, and arguements.
+8. Keeps the program organized and easier to read. 
+9. Header files are used to manage declarations. 
+10. Depends on the scope. If its declared on a global scope then its avalible through out the program. 
+If its declared on a local scope then it can only be used where its first declared in the scope and where the
+scope ends. 
+
+12. Class scope means the declaration can be used through out the class but not outside of it. Local scope means 
+it can only be used wittin that function. 
+
+13. To many global variables can become difficult to manage as the program and its complexity increase. 
+
+14. Pass-by-value express the arugument as a copy of the object the caller function passes. 
+Pass-by-reference is when the arguemnts refers to the location of the object instead of making an copy of it. 
+Pass by reference is more ideal for something large while copy is more ideal for something small.
+
+15. Pass by reference values can be change because they are non constant. Constant reference objects cant be 
+changed becasuse they are constant. 
+
+16. Swap() swaps elements in a vector.
+17. It would depend on the size of the vecotr. If the vector is big with a lot of strings then reference 
+would make more sense. Otherwise pass by value would be used. 
+
+18. Because they lead to errors and illogical behavior.  Another reason is that their is no gurantee that
+the compiler will evalutate the left side of the assignment before the right. 
+
+19. Logical and. Returns true or false and it evaluates y only if x is true. 
+x||y means logical or; returns true or false; evaluates y only if x is false.
+
+20. Functions witthin classes and classes witthin classes.
+
+21. Another word for the stack. last in first out data structure. 
+
+22. Call stack is a linear data structure that holds local objects and destroys them once they are returned. 
+It uses Last in first out.
+
+23. Namepsace orgnize classes, functions, data, and types into identifiable and named part of a program without
+defining types. This prevents from clashes with out classes, functions etc. from occuring since they are in
+different namespaces. 
+
+24. Classes containd ata members and function as members. Namespaces contain variables and functions 
+by grouping them into one. Namespaces cannot create objects.They are just their for organiziation. 
+
+25. Using makes everything froma  namespace accessible without needing to use the namespace name 
+followed by the ::.
+
