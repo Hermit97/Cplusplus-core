@@ -1,0 +1,15 @@
+Activation Record - Another word for the stack.
+
+Function - A way to represent actions and computation, also organize code. 
+
+Pass-by-reference - Passing a regerence arugment. 
+
+Arguments - Values that you pass to a function when calling it (Calling function).
+
+Functin definiton - Body of the function. 
+
+Pass-by-value - Give the function a copy of the value you use as an argument. 
+
+Argument passing - passint data as an argument. 
+
+Global scope - 
