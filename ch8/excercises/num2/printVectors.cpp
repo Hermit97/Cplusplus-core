@@ -14,13 +14,18 @@ void print(std::string label, std::string output){
 	std::cin >> s;
 
 	for(int i = 0; i < bunchOfNums.size(); i++){
-
+		bunchOfNums.push_back(i);
 	}
 
+	for(int i = 0; i < bunchOfNums; i++){
+		std::cout bunchOfNums[i] << "\n";
+	}
 
 }
 
 int main(){
+	std::string l, o;
 
+	print(
 
 }
