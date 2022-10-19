@@ -20,44 +20,40 @@ void print(std::string label, std::vector<int> bunchOfNums) {
 
 void fibonacci(int x, int y, std::vector<int> v, int n) {
   std::string label = "Num";
-  std::cout << "Enter a number or q to quit\n";
-  std::string quit;
-  while (std::cin) {
-    std::cin >> quit;
-    if (quit == "q")
-      break;
-    else {
-      int num = atoi(quit.c_str());
-      v.push_back(num);
-    }
-  }
-
-  //Fib written here
+  // std::cout << "Enter a number for x and y range\n";
+  // Fib written here
   int fib;
   std::vector<int> totalFib;
+  v.push_back(x);
 
-  for(int i = x; i <= y; ++i){
-    //this part below does not make sense because x and y are used in the for loop for the range
-      x = v[i];
-      y = v[i + 1];
-      fib = x + y;
-      totalFib.push_back(fib);
+  for (int i = x; i <= y; ++i) {
+    // this part below does not make sense because x and y are used in the for
+    // loop for the range
+    int before;
+    int after;
+    before = i;
+    after = i + 1;
+    fib = before + after;
+    // totalFib.push_back(fib);
+    v.push_back(fib);
   }
-  
+
   print(label, v);
 
-  //print new fib function
-  for(int i = 0; i < totalFib.size(); ++i){
-      std::cout << totalFib[i] << "\n";
+  // print new fib function
+  for (int i = 0; i < totalFib.size(); ++i) {
+    std::cout << totalFib[i] << "\n";
   }
 }
 
 void intilize() {
   int x, y, n;
-  x = 1;
-  y = 2;
+  std::cout << "Enter a number for x and y range\n";
+  std::cin >> x;
+  std::cin >> y;
   std::vector<int> v;
-  n = 23;
+
+  // what does n = ?
 
   fibonacci(x, y, v, n);
 }
