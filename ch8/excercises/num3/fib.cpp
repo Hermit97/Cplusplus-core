@@ -31,11 +31,7 @@ void fibonacci(int x, int y, std::vector<int> v, int n) {
       v.push_back(num);
     }
   }
-
-  for (int i = 0; i < v.size(); i++) {
-    std::cout << label << ":" << v[i] << "\n";
-  }
-
+  print(label, v);
 }
 
 void intilize() {
