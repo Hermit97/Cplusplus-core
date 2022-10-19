@@ -12,6 +12,7 @@ sequence starting with its x and y arguments.
 #include <stdlib.h>
 #include <vector>
 
+//Print the vector
 void print(std::string label, std::vector<int> bunchOfNums) {
   for (int i = 0; i < bunchOfNums.size(); i++) {
     std::cout << label << ":" << bunchOfNums[i] << "\n";
@@ -20,45 +21,35 @@ void print(std::string label, std::vector<int> bunchOfNums) {
 
 void fibonacci(int x, int y, std::vector<int> v, int n) {
   std::string label = "Num";
-  std::cout << "Enter a number or q to quit\n";
-  std::string quit;
-  while (std::cin) {
-    std::cin >> quit;
-    if (quit == "q")
-      break;
-    else {
-      int num = atoi(quit.c_str());
-      v.push_back(num);
-    }
-  }
-
-  //Fib written here
-  int fib;
-  std::vector<int> totalFib;
-
   int total;
-  totalFib.push_back(x);
-  for(int i = 1; i <= n; ++i){
-    //this part below does not make sense because x and y are used in the for loop for the range
-      total = i + totalFib[i];
-      totalFib.push_back(total); //example 1 first then
-  }
-  
-  print(label, v);
+  //Push the first and second user input into vector
+  v.push_back(x);
+  v.push_back(y);
+  total = x + y;
 
-  //print new fib function
-  for(int i = 0; i < totalFib.size(); ++i){
-      std::cout << totalFib[i] << "\n";
+  //For loop = takes the first element and adds it to the second element.
+  //pushes that to vector.
+  //Takes the second element and adds it to the third element and pushes it.
+  //I continues to increment so it takes the third element next and adds it the fourth and pushes and repeats.
+  //Reason for i - 1 is the intitial I value is 1 because it iterates till it is equal to n and have 1 made more
+  //sense than 0.
+  for (int i = 1; i <= n; ++i) {
+    total = v[i - 1] + v[i];
+    v.push_back(total);
   }
+  print(label, v);
 }
 
 void intilize() {
   int x, y, n;
-  x = 1;
-  y = 2;
-  std::vector<int> v;
-  n = 23;
+  std::cout << "Enter the first and second numbers\n";
+  std::cin >> x;
+  std::cin >> y;
 
+  std::cout << "Enter the maximum number of numbers\n";
+  std::cin >> n;
+
+  std::vector<int> v;
   fibonacci(x, y, v, n);
 }
 
