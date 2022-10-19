@@ -31,7 +31,23 @@ void fibonacci(int x, int y, std::vector<int> v, int n) {
       v.push_back(num);
     }
   }
+
+  //Fib written here
+  int fib;
+  std::vector<int> totalFib;
+  for(int i = 0; i < v.size(); ++i){
+      x = v[i];
+      y = v[i + 1];
+      fib = x + y;
+      totalFib.push_back(fib);
+  }
+  
   print(label, v);
+
+  //print new fib function
+  for(int i = 0; i < totalFib.size(); ++i){
+      std::cout << totalFib[i] << "\n";
+  }
 }
 
 void intilize() {
