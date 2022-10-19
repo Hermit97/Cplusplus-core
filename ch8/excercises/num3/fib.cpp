@@ -13,6 +13,13 @@ sequence starting with its x and y arguments.
 #include <vector>
 
 void print(std::string label, std::vector<int> bunchOfNums) {
+  for (int i = 0; i < bunchOfNums.size(); i++) {
+    std::cout << label << ":" << bunchOfNums[i] << "\n";
+  }
+}
+
+void fibonacci(int x, int y, std::vector<int> v, int n) {
+  std::string label = "Num";
   std::cout << "Enter a number or q to quit\n";
   std::string quit;
   while (std::cin) {
@@ -21,12 +28,24 @@ void print(std::string label, std::vector<int> bunchOfNums) {
       break;
     else {
       int num = atoi(quit.c_str());
-      bunchOfNums.push_back(num);
+      v.push_back(num);
     }
   }
 
-  for (int i = 0; i < bunchOfNums.size(); i++) {
-    std::cout << label << ":" << bunchOfNums[i] << "\n";
+  for (int i = 0; i < v.size(); i++) {
+    std::cout << label << ":" << v[i] << "\n";
   }
+
 }
 
+void intilize() {
+  int x, y, n;
+  x = 1;
+  y = 2;
+  std::vector<int> v;
+  n = 23;
+
+  fibonacci(x, y, v, n);
+}
+
+int main() { intilize(); }
