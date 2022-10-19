@@ -36,12 +36,12 @@ void fibonacci(int x, int y, std::vector<int> v, int n) {
   int fib;
   std::vector<int> totalFib;
 
-  for(int i = x; i <= y; ++i){
+  int total;
+  totalFib.push_back(x);
+  for(int i = 1; i <= n; ++i){
     //this part below does not make sense because x and y are used in the for loop for the range
-      x = v[i];
-      y = v[i + 1];
-      fib = x + y;
-      totalFib.push_back(fib);
+      total = i + totalFib[i];
+      totalFib.push_back(total); //example 1 first then
   }
   
   print(label, v);

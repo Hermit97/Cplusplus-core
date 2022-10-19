@@ -20,41 +20,28 @@ void print(std::string label, std::vector<int> bunchOfNums) {
 
 void fibonacci(int x, int y, std::vector<int> v, int n) {
   std::string label = "Num";
-  // std::cout << "Enter a number for x and y range\n";
-  // Fib written here
-  int fib;
-  std::vector<int> totalFib;
+  int total;
+  //Push the first and second user input into vector
   v.push_back(x);
-
-  for (int i = x; i <= y; ++i) {
-    // this part below does not make sense because x and y are used in the for
-    // loop for the range
-    int before;
-    int after;
-    before = i;
-    after = i + 1;
-    fib = before + after;
-    // totalFib.push_back(fib);
-    v.push_back(fib);
+  v.push_back(y);
+  total = x + y;
+  for (int i = 1; i <= n; ++i) {
+    total = v[i - 1] + v[i];
+    v.push_back(total);
   }
-
   print(label, v);
-
-  // print new fib function
-  for (int i = 0; i < totalFib.size(); ++i) {
-    std::cout << totalFib[i] << "\n";
-  }
 }
 
 void intilize() {
   int x, y, n;
-  std::cout << "Enter a number for x and y range\n";
+  std::cout << "Enter the first and second numbers\n";
   std::cin >> x;
   std::cin >> y;
+
+  std::cout << "Enter the maximum number of numbers\n";
+  std::cin >> n;
+
   std::vector<int> v;
-
-  // what does n = ?
-
   fibonacci(x, y, v, n);
 }
 
