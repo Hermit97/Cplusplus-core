@@ -12,20 +12,23 @@ sequence starting with its x and y arguments.
 #include <stdlib.h>
 #include <vector>
 
-void print(std::string label, std::vector<int> bunchOfNums) {
+void print(std::string& label, std::vector<int>& bunchOfNums) {
+
+  int it = 1;
   for (int i = 0; i < bunchOfNums.size(); i++) {
-    std::cout << label << ":" << bunchOfNums[i] << "\n";
+    std::cout << label  << it <<  ":" << bunchOfNums[i] << "\n";
+    ++it;
   }
 }
 
-void fibonacci(int x, int y, std::vector<int> v, int n) {
+void fibonacci(int& x, int& y, std::vector <int>& v, int& n) {
   std::string label = "Num";
   int total;
   //Push the first and second user input into vector
   v.push_back(x);
   v.push_back(y);
   total = x + y;
-  for (int i = 1; i <= n; ++i) {
+  for (int i = 1; i < n - 1; ++i) {
     total = v[i - 1] + v[i];
     v.push_back(total);
   }
