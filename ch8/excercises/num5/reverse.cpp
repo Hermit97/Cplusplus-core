@@ -63,13 +63,10 @@ void ReverseVector::reVector() {
   // int vectorSize = r1.originalVector().size();
   // Could try bubble sort to get the largest i first push it then the low one
   // at the end. for(int i = 0; i < vectorSize; ++i){
-  for (int i = 0; i < oldVector.size(); ++i) {
-    for (int j = i; j < oldVector.size(); ++j) {
-      if (i > j)
-        swap(i, j);
-    }
-  newVector.push_back(i);
-  }
+  // for (int i = 0; i < oldVector.size(); ++i) {
+  int i = oldVector.size();
+  while (i > 0)
+      newVector.push_back(oldVector[--i]);
 }
 
 void ReverseVector::printNewVector() {
