@@ -20,6 +20,8 @@ public:
   std::vector<int> oldVector;
   std::vector<int> newVector;
   void printNewVector();
+  void bubbleSort();
+  void printAgain();
 };
 
 void ReverseVector::swap(int x, int y) {
@@ -66,7 +68,22 @@ void ReverseVector::reVector() {
   // for (int i = 0; i < oldVector.size(); ++i) {
   int i = oldVector.size();
   while (i > 0)
-      newVector.push_back(oldVector[--i]);
+    newVector.push_back(oldVector[--i]);
+}
+
+void ReverseVector::bubbleSort() {
+  std::cout << "This is the old vector bubble sorted\n";
+  std::cout << "New vector\n";
+  for (int i = 0; i < oldVector.size(); ++i) {
+    for (int j = 0; j < oldVector.size() - 1; ++j) {
+	if(oldVector[j] < oldVector[j+1]){
+	    //swap(oldVector[j], oldVector[j+1]);
+	    int temp = oldVector[j];
+	    oldVector[j] = oldVector[j+1];
+	    oldVector[j+1] = temp;
+	}
+    }
+  }
 }
 
 void ReverseVector::printNewVector() {
@@ -76,9 +93,19 @@ void ReverseVector::printNewVector() {
   }
 }
 
+void ReverseVector::printAgain(){
+  std::cout << "Sorted old vector\n";
+  for (int i = 0; i < oldVector.size(); ++i) {
+    std::cout << oldVector[i] << "\n";
+  }
+    
+}
+
 int main() {
   ReverseVector r1;
   r1.originalVector();
   r1.reVector();
   r1.printNewVector();
+  r1.bubbleSort();
+  r1.printAgain();
 }
