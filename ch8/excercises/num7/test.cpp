@@ -50,7 +50,7 @@ void ageMatch() {
 }
 
 void bubbleSort() {
-    //ageCopy = ages;
+    ageCopy = ages;
     namesCopy = names;;
   for (int i = 0; i < names.size(); ++i) {
     for (int j = 0; j < names.size() - 1; ++j) {
