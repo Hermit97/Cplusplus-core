@@ -6,8 +6,8 @@
 std::vector<std::string> names;
 std::vector<int> ages;
 std::string name;
-std::vector<std::string> namesCopy = names;
-std::vector<int> ageCopy = ages;
+std::vector<std::string> namesCopy;
+std::vector<int> ageCopy;
 
 // Get names
 std::string getNames() {
@@ -40,27 +40,18 @@ void setUp() {
   setUpVectorAge();
 }
 
-/*std::vector<std::string> nameCopy() {
-  std::vector<std::string> namesCopy = names;
-  return namesCopy;
-  }*/
-
-/*std::vector<int> agesCopy() {
-  std::vector<int> ageCopy = ages;
-  return ageCopy;
-  }*/
-
 void ageMatch() {
-  // agesCopy();
-  for (std::string n : names) {
-    for (int i = 0; i < namesCopy.size(); ++i) {
-      if (namesCopy[i] == n)
+  // std::vector<std::string> namesCopy = names;
+  // std::vector<int> ageCopy = ages;
+    for (int i = 0; i < names.size(); ++i) {
+      if (names[i] == namesCopy[i])
         ageCopy.push_back(ages[i]);
     }
-  }
 }
 
 void bubbleSort() {
+    //ageCopy = ages;
+    namesCopy = names;;
   for (int i = 0; i < names.size(); ++i) {
     for (int j = 0; j < names.size() - 1; ++j) {
       if (names[j] > names[j + 1]) {
@@ -70,6 +61,7 @@ void bubbleSort() {
       }
     }
   }
+  //ageMatch();
 }
 
 void printFirst() {
@@ -77,13 +69,12 @@ void printFirst() {
   for (int i = 0; i < names.size(); ++i) {
     std::cout << "Names: " << names[i] << " age: " << ages[i] << "\n";
   }
-
   bubbleSort();
   ageMatch();
   std::cout << "After sort\n";
-  for (int i = 0; i < 5; ++i) {
-      //std::cout << "Names: " << namesCopy[i] << " age: " << ageCopy[i] << "\n";
-      std::cout << "hi\n";
+  for (int i = 0; i < names.size(); ++i) {
+    std::cout << "Names: " << names[i] << " age: " << ageCopy[i] << "\n";
+    // std::cout << "hi\n";
   }
 }
 
