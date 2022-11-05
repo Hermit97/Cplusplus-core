@@ -5,12 +5,12 @@
 /*Get name and age. Then print them both side by side. Take 5 names/ages*/
 std::vector<std::string> names;
 std::vector<int> ages;
-std::string name;
 std::vector<std::string> namesCopy;
 std::vector<int> ageCopy;
 
 // Get names
 std::string getNames() {
+  std::string name;
   std::cin >> name;
   return name;
 }
@@ -22,14 +22,14 @@ int getAge() {
 }
 
 void setUpName() {
-  for (int i = 0; i < 2; ++i) {
+  for (int i = 0; i < 5; ++i) {
     names.push_back(getNames());
   }
   std::cout << "Names end\n";
 }
 
 void setUpVectorAge() {
-  for (int i = 0; i < 2; ++i) {
+  for (int i = 0; i < 5; ++i) {
     ages.push_back(getAge());
   }
   std::cout << "Ages end\n";
@@ -41,17 +41,22 @@ void setUp() {
 }
 
 void ageMatch() {
-  // std::vector<std::string> namesCopy = names;
-  // std::vector<int> ageCopy = ages;
+  /*outter loop n checks if n[0] == namesCopy[0] they dont
+   *then n[0] checks == namesCopy[1] they are so it pushes the i value of copy
+   *which is 2 into the ageCopy vector.
+   *n[0] increments and becomes n[1]
+   *and checks if n[1] == nameCopy[0] it does so it pushes ages[i] which is 1 into the vector hecnce
+   *getting the result we want.*/
+  for (std::string n : names) {
     for (int i = 0; i < names.size(); ++i) {
-      if (names[i] == namesCopy[i])
+      if (namesCopy[i] == n)
         ageCopy.push_back(ages[i]);
     }
+  }
 }
 
 void bubbleSort() {
-    ageCopy = ages;
-    namesCopy = names;;
+  namesCopy = names;
   for (int i = 0; i < names.size(); ++i) {
     for (int j = 0; j < names.size() - 1; ++j) {
       if (names[j] > names[j + 1]) {
@@ -61,7 +66,7 @@ void bubbleSort() {
       }
     }
   }
-  //ageMatch();
+  ageMatch();
 }
 
 void printFirst() {
@@ -69,12 +74,14 @@ void printFirst() {
   for (int i = 0; i < names.size(); ++i) {
     std::cout << "Names: " << names[i] << " age: " << ages[i] << "\n";
   }
+
   bubbleSort();
-  ageMatch();
+  std::cout << "size of agecopy\n";
+  std::cout << ageCopy.size() << "\n";
+
   std::cout << "After sort\n";
   for (int i = 0; i < names.size(); ++i) {
     std::cout << "Names: " << names[i] << " age: " << ageCopy[i] << "\n";
-    // std::cout << "hi\n";
   }
 }
 
