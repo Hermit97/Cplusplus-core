@@ -9,22 +9,36 @@ sure to have weight.size()==price.size() .*/
 std::vector<double> price;
 std::vector<double> weight;
 
-bool getPrice(){
-    std::string w;
-    double yourWeight;
-    bool isTrue = true;
-    while(isTrue){
-        std::cin >> yourWeight;
-        if(w == "q")
-            return isTrue = false;
-        yourWeight= std::atoi(w.c_str());
-        weight.push_back(yourWeight);
+void error(std::string er) { std::cout << er; }
+
+void getPrice() {
+  std::string w;
+  double yourWeight;
+  bool isTrue = true;
+  while (isTrue == true) {
+    std::cin >> w;
+    if (w == "q")
+      break;
+    else {
+      error("Invalid input\n");
+      std::cout << "Try again"
+                << "\n";
+      break;
     }
+    yourWeight = std::atoi(w.c_str());
+    weight.push_back(yourWeight);
+  }
 }
 
-int main(){
+int main() {
+  try {
     getPrice();
-    for(double d : weight){
-        std::cout << d << "\n";
+    for (double d : weight) {
+      std::cout << d << "\n";
     }
+
+  } catch (std::exception &e) {
+      std::cerr << "Error: " << e.what() << "\n";
+    return 1;
+  }
 }
