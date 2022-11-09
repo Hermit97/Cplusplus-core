@@ -1,0 +1,2 @@
+If the two vectors are uneven then make them even by taking more inpnut or popping off values until they
+are even.
