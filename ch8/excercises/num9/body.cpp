@@ -28,8 +28,9 @@ void getPrice() {
       std::cin >> w;
       if(w == "q")
         break;
-      else
-        throw std::runtime_error(wrongInput);
+      else{
+        std::cout << wrongInput << "\n";
+      }
     }
 
   }
