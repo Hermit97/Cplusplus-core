@@ -19,29 +19,25 @@ void error(std::string er) { std::cout << er; }
 void getPrice() {
   std::string w;
   double yourWeight;
-  bool isTrue = true;
-  while (isTrue == true){
-    if(std::cin >> yourWeight){
+  while (yourWeight > 0) {
+    if (!(std::cin >> yourWeight)) {
+        if(std::cin >> w){
+            if(w == "q")
+                std::cout << "Quiting\n";
+        }
+    } else {
       weight.push_back(yourWeight);
-    }else{
-      std::cin.clear();
-      std::cin >> w;
-      if(w == "q")
-        break;
-      else
-        throw std::runtime_error(wrongInput);
     }
-
   }
 }
 
-  int main() {
-    try {
-      getPrice();
-      for (double d : weight)
-        std::cout << d << "\n";
-    } catch (std::exception &e) {
-      std::cerr << "Error: " << e.what() << "\n";
-      return 1;
-    }
+int main() {
+  try {
+    getPrice();
+    for (double d : weight)
+      std::cout << d << "\n";
+  } catch (std::exception &e) {
+    std::cerr << "Error: " << e.what() << "\n";
+    return 1;
   }
+}
