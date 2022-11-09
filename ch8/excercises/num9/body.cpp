@@ -57,6 +57,14 @@ void equalSize(std::vector<double> &w, std::vector<double> &p) {
     throw std::runtime_error(notEqual);
 }
 
+double getProduct(std::vector<double> &w, std::vector<double> &p){
+  double product;
+  for(int i = 0; i < w.size(); ++i){
+    product = w[i] * p[i];
+  }
+  return product;
+}
+
 int main() {
   try {
     std::vector<double> weight;
@@ -70,6 +78,9 @@ int main() {
     std::cout << "Prices: \n";
     for (double p : price)
       std::cout << p << "\n";
+
+    std::cout << "The sum of the 2 vectors is: \n";
+    std::cout << getProduct(weight, price) << "\n";
 
     equalSize(weight,price);
   } catch (std::exception &e) {
