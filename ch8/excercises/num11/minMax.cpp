@@ -77,7 +77,7 @@ int findMax(std::vector<int> &v) {
 }
 
 double findMean(std::vector<int> v) {
-  int sum = 0;
+  double sum = 0;
   int size;
   double mean;
   for (int i = 0; i < v.size(); ++i) {
