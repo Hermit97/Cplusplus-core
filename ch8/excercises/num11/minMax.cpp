@@ -47,6 +47,8 @@ void print(std::vector<int> &v) {
 int findMin(std::vector<int> &v) {
   int minValue;
   for (int i = 0; i < v.size(); ++i) {
+    //Reason for the - 1 is becasue the index starts at 0 not 1 so it using the next index instead of the
+    //correct one it would have if it started at 1 so we - 1 from it.
     for (int j = 0; j < v.size() - 1; ++j) {
       if (v[j] > v[j + 1]) {
         int temp = v[j];
@@ -93,8 +95,7 @@ double findMedian(std::vector<double> copy) {
 
   if (size % 2 == 0) {
     //study these 2 below and the results
-    //return (copy[size / 2 - 1] + copy[size / 2]) / 2;
-    return (copy[size / 2] + copy[size / 2 + 1]) / 2;
+    return (copy[size / 2 - 1] + copy[size / 2]) / 2;
   } else
     return copy[size / 2];
 }
