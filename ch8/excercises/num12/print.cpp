@@ -71,19 +71,20 @@ void getNewVector(vector<string> v) {
   }
 
   cout << "New vector displayed till \n";
-  //print_until_ss(v);
+  // print_until_ss(v);
 
-  for (int x = 0; x < v.size(); ++x) {
-    cout << v[x] << "\n";
+  //for (int x = 0; x < v.size(); ++x) {
+    // cout << v[x] << "\n";
     for (int i = 0; i < v.size(); ++i) {
       for (int j = j + 1; j < v.size(); ++j) {
+        cout << v[i] << "\n";
         if (v[i] == v[j]) {
           cout << "Duplicate found\n";
           return;
         }
       }
     }
-  }
+ // }
 }
 
 int main() {
