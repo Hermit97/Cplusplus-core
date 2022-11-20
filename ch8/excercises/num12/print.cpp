@@ -53,6 +53,10 @@ void getVector(vector<string> v) {
   print_until_ss(v);
 }
 
+bool duplicateFound(int i){
+  ++i;
+}
+
 void getNewVector(vector<string> v) {
   string s;
   string quit = "q";
@@ -75,9 +79,11 @@ void getNewVector(vector<string> v) {
 
   //for (int x = 0; x < v.size(); ++x) {
     // cout << v[x] << "\n";
+
     for (int i = 0; i < v.size(); ++i) {
+      cout << v[i] << "\n";
       for (int j = j + 1; j < v.size(); ++j) {
-        cout << v[i] << "\n";
+        cout << v[j] << "\n";
         if (v[i] == v[j]) {
           cout << "Duplicate found\n";
           return;
