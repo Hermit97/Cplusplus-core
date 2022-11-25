@@ -7,23 +7,29 @@ Why?*/
 #include <iostream>
 #include <vector>
 
-void getStringVector(std::vector<std::string> &v){
-    std::string input;
-    for(int i = 0; i < v.size(); ++i){
-        std::cin >> input;
-        if(input == "q")
-            return;
-        v.push_back(input);
-    }
+void getStringVector(std::vector<std::string> &v) {
+  std::string input;
+  for (int i = 0; i < v.size(); ++i) {
+    std::cin >> input;
+    if (input == "q")
+      return;
+    v.push_back(input);
+  }
 }
 
-void getVectorCharacterSize(std::vector<string> &v){
-    for(int i = 0; i < v.size(); ++i){
-
-    }
+void getVectorCharacterSize(std::vector<std::string> &v,
+                            std::vector<std::string> &c) {
+  int n;
+  std::string s;
+  for (int i = 0; i < v.size(); ++i) {
+      s = v[i].size();
+      c.push_back(s);
+  }
 }
 
-int main(){
-    std::vector<int> numbers;
-    std::vector<std::string> characters;
+int main() {
+    std::vector<std::string> numbers;
+  std::vector<std::string> characters;
+  getStringVector(numbers);
+  getVectorCharacterSize(numbers,characters);
 }
