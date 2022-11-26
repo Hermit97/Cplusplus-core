@@ -27,18 +27,13 @@ void getVectorCharacterSize(std::vector<std::string> &v,
 }
 
 std::string getLargestString(std::vector<std::string> &v){
-      int iSize, jSize;
-      std::string longest;
+  int iSize, jSize;
+  std::string longest;
   for(int i = 0; i < v.size(); ++i){
     for(int j = 0; j < v.size(); ++j){
       iSize = v[i].size();
       jSize = v[j].size();
       if(v[i].size() > v[j].size()){
-        /*int temp = iSize;
-        iSize = jSize;
-        jSize = temp;
-        */
-
         std::string temp = v[i];
         v[i] = v[j];
         v[j] = temp;
@@ -48,6 +43,24 @@ std::string getLargestString(std::vector<std::string> &v){
     longest = v[0];
   }
   return longest;
+}
+
+std::string getSmallestString(std::vector<std::string> &v){
+  int iSize, jSize;
+  std::string smallest;
+  for(int i = 0; i < v.size(); ++i){
+    for(int j = 0; j < v.size(); ++j){
+      iSize = v[i].size();
+      jSize = v[j].size();
+      if(v[i].size() < v[j].size()){
+        std::string temp = v[i];
+        v[i] = v[j];
+        v[j] = temp;
+      }
+    }
+    smallest = v[0];
+  }
+  return smallest;
 }
 
 void getSmallest(std::vector<std::string> &v){
@@ -77,10 +90,12 @@ int main() {
   std::cout << getLargestString(numbers) << "\n";
 
   std::cout << "The smallest string is : ";
+  std::cout << getSmallestString(numbers) << "\n";
 
   std::cout << "The vector greatest to least\n";
   getSmallest(numbers);
   for(std::string a : numbers)
     std::cout << a << "\n";
+
 
 }
