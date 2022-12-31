@@ -16,14 +16,18 @@ int main(){
 
     while(isTrue == true){
         std::cin >> num1;
+
+        if(!std::cin)
+            break;
+
         //Run these 2 below one time to get the inital values for these 2
-        while(runOneTime == true){
+        if(runOneTime == true){
             small = num1;
             big = num1;
+            std::cout << big << " is the biggiest number so far\n";
+            std::cout << small << " is the smallest number so far\n";
+            runOneTime = false;
         }
-
-        std::cout << big << " is the biggiest number so far\n";
-        std::cout << small << " is the smallest number so far\n";
 
         if(num1 < small){
             small = num1;
