@@ -1,3 +1,5 @@
+/*Enter 1 number. Then compare if that number is bigger ot smaller or the same the new input. */
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -9,20 +11,17 @@ int main(){
     double num1, big, small, current;
     std::string addUnit;
     bool isTrue = true;
+    bool runOneTime = true;
     std::vector<std::string> units = {"cm", "m", "in", "ft"};
 
-    /*std::cout << "Enter a number\n";
-    std::cin >> num1 >> addUnit;
-    small = num1;
-    big = num1;
-    std::cout << big << " is the biggiest number so far\n";
-    std::cout << small << " is the smallest number so far\n";
-    */
-
     while(isTrue == true){
-        std::cin >> num1 >> addUnit;
-        small = num1;
-        big = num1;
+        std::cin >> num1;
+        //Run these 2 below one time to get the inital values for these 2
+        while(runOneTime == true){
+            small = num1;
+            big = num1;
+        }
+
         std::cout << big << " is the biggiest number so far\n";
         std::cout << small << " is the smallest number so far\n";
 
