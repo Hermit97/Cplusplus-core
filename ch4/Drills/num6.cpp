@@ -8,12 +8,13 @@
 
 int main(){
 
-    double num1, big, small, current;
+    double num1, big, small;
     std::string addUnit;
     bool isTrue = true;
     bool runOneTime = true;
     std::vector<std::string> units = {"cm", "m", "in", "ft"};
 
+    //Change it to test for 2 inputs
     while(isTrue == true){
         std::cin >> num1;
 
