@@ -16,6 +16,7 @@ int main() {
     std::cout << "Average temperature: " << sum/temps.size() << '\n';
 
     sort(temps.begin(), temps.end());
+    std::cout << temps.size() << "\n";
 
     //Odd
     if(temps.size() % 2 != 0){
@@ -24,7 +25,6 @@ int main() {
     //Find the two numbers in the middle and divide them both by 2
     }else if(temps.size() % 2 == 0){
         std::cout << "Even median temperature:" << (temps[temps.size()/ 2 - 1] + temps[temps.size() / 2]) / 2 << '\n';
-        std::cout << "Even median temperature:" << (temps[temps.size()/ 2] + temps[temps.size() / 2 + 1]) / 2 << '\n';
 
     }
 
