@@ -1,0 +1,21 @@
+Technicalities: Classes, etc.
+
+9.1 User-defined types
+A type is called built in if the compiler knows how to represent objects of the type and which operation can be done on it (such as + and *) without being told by the declarations supplied by a programmer in source code.
+
+Types that are not built-in are called user-defined types (UDTs). They can be stadndard library types - avalible to all c++ programmers as part of every ISO standard library types avalible to all c++ programmers as part   of every ISO stadnard C++ implementation - such as string, vector, and ostream, or types that we build for outselves such as Token and Token_stream which we have to define in the source code.
+
+Standard library types are basically the same as built in types because they are not defined in a programmers source code they are in the standard library avalible to everyone. The same techniques that are used to make your own types are used on the standard library. These types in the standard library have  User defined types usually are not avalible to everyone instead they are defined by you for a prupose in your program. These standard library types have no special privilege that you dont have when making your own user defined types.
+
+We build types because the compiler might not know all of the different types of types we want in our program. It would never be possible because we make new types every day to meet our needs.
+
+What is the point of types? Types are good for directly representing ideas in code. When we write code, the ideal is to represent out dieas directly in our code so that we, our colleagues, and the compiler can understand what we wrote. When we want to do intetger arithmetic, int is a great help; when we wnat to manipulate text, string is a great help; when we want to manipulate calcualtor input, Token and Token_stream are a great help. The help comes in two forms:
+
+Representation: A type knows how to represent the data needed in an object.
+Operations: A type knows what operations can be applied to objects.
+
+Many ideas follow this pattern: "Something" has data to represent its current value -- somtimes called athe current strate -- and a set of operations that can be applied. Think of a computer file, a web page, a toastr etc. They can all be characterized by some data and all have a more or less ficed set of standard operations that you can perform. in each case the result of the operation depends on the data -- the current state -- of an object.
+
+C++ provides two kinds of userdefined typed: classes and enumerations. The class is by far the most general and important, so we first focus on classes. A class directly represents a concept in a program. A class is a (user-defined) type taht specifies how objects of its type are represented, how those objects can be created, how they are used, and how they can be destroyed. If you think of something as a seperate entity, it is likely that you should define a class to represent that thing in your program.
+
+Examples of this are vector, matrix, input stream, string, FFT (fast Fourier transform), valve controller, rovot arm, device driver, picture on scren etc.
