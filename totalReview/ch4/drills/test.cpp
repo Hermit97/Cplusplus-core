@@ -9,8 +9,11 @@ bool numbersDifferByLessThan(double a, double b, double threshold) {
 }
 
 int main() {
-    double number1 = 1.2;
-    double number2 = 1.5;
+    //double number1 = 1.2;
+    //double number2 = 1.5;
+
+    double number1 = 1.2345;
+    double number2 = 1.2346;
 
     if (numbersDifferByLessThan(number1, number2, 0.01)) {
         std::cout << "The numbers differ by less than 0.01." << std::endl;
