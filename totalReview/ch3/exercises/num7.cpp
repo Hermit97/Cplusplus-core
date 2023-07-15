@@ -33,5 +33,4 @@ int main() {
   }
 
   std::cout << "Large = " << large << " mid = " << mid << " small = " << small;
-
 }

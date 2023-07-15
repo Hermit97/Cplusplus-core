@@ -8,7 +8,7 @@
 /*Reject values without units or with “illegal” representations of units, such
 as y, yard, meter, km, and gallons.*/
 int main(){
-    int convert = 0;
+    double convert = 0;
     double num1;
     double small = 0;
     double big = 0;
@@ -48,7 +48,6 @@ int main(){
         if(addUnit == units[0]){
             convert = num1 / 100;
             std::cout << num1 << units[0]  << " converted to "<< convert << "m\n";
-
             //Convert in to cm
         }else if(addUnit == units[1]){
             convert = num1 * 2.54;

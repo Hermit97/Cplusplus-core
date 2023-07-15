@@ -1,6 +1,5 @@
 #include <iostream>
 
 int main(){
-  std::cout << "HI\n";
-  return 0;
+  std::cout << "Hello\n";
 }

@@ -76,12 +76,12 @@ void ReverseVector::bubbleSort() {
   std::cout << "New vector\n";
   for (int i = 0; i < oldVector.size(); ++i) {
     for (int j = 0; j < oldVector.size() - 1; ++j) {
-	if(oldVector[j] < oldVector[j+1]){
-	    //swap(oldVector[j], oldVector[j+1]);
-	    int temp = oldVector[j];
-	    oldVector[j] = oldVector[j+1];
-	    oldVector[j+1] = temp;
-	}
+      if (oldVector[j] < oldVector[j + 1]) {
+        // swap(oldVector[j], oldVector[j+1]);
+        int temp = oldVector[j];
+        oldVector[j] = oldVector[j + 1];
+        oldVector[j + 1] = temp;
+      }
     }
   }
 }
@@ -93,12 +93,11 @@ void ReverseVector::printNewVector() {
   }
 }
 
-void ReverseVector::printAgain(){
+void ReverseVector::printAgain() {
   std::cout << "Sorted old vector\n";
   for (int i = 0; i < oldVector.size(); ++i) {
     std::cout << oldVector[i] << "\n";
   }
-    
 }
 
 int main() {

@@ -1,0 +1,44 @@
+// - comments
+
+<< - is an operator that is known as the stream insertion operator. Its used for outputting data to an output steram, such as std::cout for printing 
+		 to the console or file. Takes the value on the right sidce of the operator and inserts it into the stream on the left side.  
+
+Compiler - Tool that translates source code written in a high level language into a lower level 
+					 representation like machine code or bytecode, that can be executed directly by a computer
+					 or a virtual machine. he process of compilation involves several stages, including lexical analysis, syntax analysis, semantic analysis, code generation, and optimization.
+
+When a programmer writes code in a high-level programming language such as C++, Java, or Python, the compiler acts as a translator that converts that code into a format that the computer can understand and execute. The source code is processed by the compiler according to the rules and syntax of the programming language, and it generates an executable file or an intermediate representation.
+
+The main tasks performed by a compiler include:
+
+    Lexical Analysis: The compiler breaks down the source code into a sequence of tokens, such as keywords, identifiers, operators, and literals.
+
+    Syntax Analysis: The compiler parses the tokens to determine if they conform to the syntax rules of the programming language. It checks for correct grammar and structure, building a parse tree or an abstract syntax tree (AST) in the process.
+
+    Semantic Analysis: The compiler performs checks on the parse tree or AST to ensure the program's semantics are correct. It verifies type compatibility, detects and reports errors, and resolves references to variables and functions.
+
+    Code Generation: The compiler generates the target code based on the validated and optimized representation of the source code. This code can be machine code specific to the target architecture or bytecode for virtual machines.
+
+    Optimization: Some compilers perform various optimization techniques to improve the efficiency and performance of the generated code. This may involve eliminating redundant operations, reordering instructions, and applying other transformations.
+
+Compile time error - Compiler generates errors that occured during compile time. 
+
+cout - cout is an object of the std::ostream class that represents standard output stream. It is an predefined object provided by the c++ standartd library output stream. 
+It is predefined object provided by the c++ standard librtary and is used for output to the console.
+cout object is apart of the <iostream> header and is delcared int he 'std' namespace. It provides 
+varous member functions for outputting data, such as 'operator << ' (stream insertion operator) and other
+formatting options. 
+
+executable
+function
+header
+IDE
+#include
+library
+linker
+main()
+object code
+output
+program
+source code
+statement

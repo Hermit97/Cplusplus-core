@@ -17,7 +17,6 @@ int findMaxValue(std::vector<int> v) {
     int maxValue;
     for(int i = 0; i < v.size(); ++i){
         for(int j = 0; j < v.size(); ++j){
-            int next = j + 1;
             if(v[j] < v[j + 1]){
                 int temp = v[j];
                 v[j] = v[j + 1];

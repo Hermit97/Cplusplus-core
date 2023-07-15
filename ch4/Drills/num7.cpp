@@ -24,7 +24,6 @@ int main(){
     std::cout << "Enter a number\n";
     while(std::cin >> num1 >> addUnit){
 
-        //Convert cm to meters
         if(addUnit == units[0]){
             convert = num1 / 100;
             std::cout << num1 << units[0]  << " converted to "<< convert << "m\n";
@@ -41,6 +40,7 @@ int main(){
             convert = num1 * 12;
             std::cout << num1 << units[3] << " converted to "<< convert << "in\n";
         }
+
 
         if(firstNum){
             small = num1;

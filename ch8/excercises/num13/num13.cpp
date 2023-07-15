@@ -57,7 +57,7 @@ std::string getSmallestString(std::vector<std::string> &v){
         v[i] = v[j];
         v[j] = temp;
       }
-    }
+  }
     smallest = v[0];
   }
   return smallest;
@@ -96,6 +96,4 @@ int main() {
   getSmallest(numbers);
   for(std::string a : numbers)
     std::cout << a << "\n";
-
-
 }
