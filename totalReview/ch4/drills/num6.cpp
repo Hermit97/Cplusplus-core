@@ -11,11 +11,17 @@ bool almost_equal(double num1, double num2, double temp) {
 }
 int main() {
   double num, largest, smallest;
+  bool first = true;
   while (std::cin >> num) {
     std::cout << num << " is the current largest.\n";
 
     largest = num;
-    smallest = num;
+
+    if(first){
+      std::cout << "The largest number is " << largest << "\n";
+      first = false;
+    }
+
     if (largest > smallest)
       std::cout << "num1 is bigger and num2 is smaller"
                 << "\n";
