@@ -11,30 +11,27 @@ bool almost_equal(double num1, double num2, double temp) {
 }
 int main() {
   double num, largest, smallest;
-  bool first = true;
+  largest = 0.0;
+  smallest = 0.0;
+  std::vector<int> numbers;
   while (std::cin >> num) {
-    std::cout << num << " is the current largest.\n";
+    numbers.push_back(num);
 
-    largest = num;
+      if (num > largest || numbers.size() == 1) {
+        largest = num;
+      }
+       if (num < smallest || numbers.size() == 1) {
+        smallest = num;
+      }
 
-    if(first){
-      std::cout << "The largest number is " << largest << "\n";
-      first = false;
-    }
+    std::cout << "The largest number so far is " << largest
+              << ", the smallest is " << smallest << "\n";
 
-    if (largest > smallest)
-      std::cout << "num1 is bigger and num2 is smaller"
-                << "\n";
-    if (largest < smallest)
-      std::cout << "num2 is bigger and num1 is smaller"
-                << "\n";
-    else if (largest == smallest)
-      std::cout << "They are equal\n";
-
-    if (almost_equal(largest, smallest, 0.01))
+    /*if (almost_equal(largest, smallest, 0.01))
       std::cout << "The numbers are almost equal\n";
     else
       std::cout << "The numbers do not differ by less than 0.01\n";
+      */
   }
   return 0;
 }
