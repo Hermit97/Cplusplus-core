@@ -20,7 +20,7 @@ int main() {
       if (num > largest || numbers.size() == 1) {
         largest = num;
       }
-       if (num < smallest || numbers.size() == 1) {
+      if (num < smallest || numbers.size() == 1) {
         smallest = num;
       }
 
