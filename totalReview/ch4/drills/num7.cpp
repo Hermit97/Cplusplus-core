@@ -1,3 +1,4 @@
+//sum, keep track of the number of entries and print both. 
 #include <iostream>
 #include <vector>
 
@@ -10,7 +11,10 @@ bool almost_equal(double num1, double num2, double temp) {
   return diff < temp;
 }
 int main() {
-  double num, largest, smallest;
+  double num, largest, smallest, sum;
+  int small_counter, larger_counter, total_values;
+  small_counter = 0;
+  larger_counter = 0;
   std::string userUnit;
   largest = 0.0;
   smallest = 0.0;
@@ -23,7 +27,7 @@ int main() {
             << "\n";
   while (std::cin >> num >> userUnit) {
     //numbers.push_back(num);
-
+    
     for (int i = 0; i < illegalUnits.size(); ++i) {
       if (userUnit == illegalUnits[i]) {
         std::cout << "Illegal units entered try again.\n";
@@ -32,6 +36,9 @@ int main() {
     }
 
     numbers.push_back(num);
+    ++larger_counter;
+    //++small_counter;
+    total_values = larger_counter + small_counter;
 
     if (userUnit == units[0]) {
       convert = num / 100;
@@ -66,6 +73,11 @@ int main() {
       else
         std::cout << "The numbers do not differ by less than 0.01\n";
     }
+
+    sum = largest + smallest;
   }
+  std::cout << "The sum of all of the entries are " << sum << "\n";
+  //std::cout << "The number of values entered are " << total_values << "\n"; 
+  std::cout << "The number of values entered are " << numbers.size() << "\n"; 
   return 0;
 }
