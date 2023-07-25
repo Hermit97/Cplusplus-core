@@ -1,4 +1,4 @@
-//sum, keep track of the number of entries and print both. 
+// sum, keep track of the number of entries and print both.
 #include <iostream>
 #include <vector>
 
@@ -18,16 +18,18 @@ int main() {
   std::string userUnit;
   largest = 0.0;
   smallest = 0.0;
+  double cm_to_m;
   double convert;
-  std::vector<int> numbers;
+  std::vector<double> numbers;
+  std::vector<double> numbers_converted_m;
   std::vector<std::string> units = {"cm", "m", "in", "ft"};
   std::vector<std::string> illegalUnits = {"y", "yards", "meter", "km",
                                            "gallons"};
   std::cout << "Enter a number and its unit: "
             << "\n";
   while (std::cin >> num >> userUnit) {
-    //numbers.push_back(num);
-    
+    // numbers.push_back(num);
+
     for (int i = 0; i < illegalUnits.size(); ++i) {
       if (userUnit == illegalUnits[i]) {
         std::cout << "Illegal units entered try again.\n";
@@ -66,7 +68,6 @@ int main() {
 
     std::cout << "The largest number so far is " << largest
               << ", the smallest is " << smallest << "\n";
-
     if (numbers.size() > 1) {
       if (almost_equal(largest, smallest, 0.01))
         std::cout << "The numbers are almost equal\n";
@@ -74,10 +75,36 @@ int main() {
         std::cout << "The numbers do not differ by less than 0.01\n";
     }
 
+    // convert all values in the numbers vector to meters and push them into new
+    // vector.
+    for (int i = 0; i < numbers.size(); ++i) {
+      if(userUnit == units[0]){
+        double cm_to_m = numbers[i] / 100;
+        numbers_converted_m.push_back(cm_to_m);
+        //why is the cm number being considered a m value as well?
+      }else if (userUnit == units[1]) {
+        std::cout << "--------------------\n";
+        double m_to_m = numbers[i];
+        std::cout << m_to_m
+                  << " value does not change since its already an m.\n";
+        numbers_converted_m.push_back(m_to_m);
+      }
+    }
     sum = largest + smallest;
   }
-  std::cout << "The sum of all of the entries are " << sum << "\n";
-  //std::cout << "The number of values entered are " << total_values << "\n"; 
-  std::cout << "The number of values entered are " << numbers.size() << "\n"; 
+  /*std::cout << "The sum of all of the entries are " << sum << "m\n";
+  std::cout << "The number of values entered are " << numbers.size() << "\n";
+  for(int i = 0; i < numbers_converted_m.size(); ++i){
+    std::cout << "Here are all the vector values of numbers converted to meters
+  " << numbers_converted_m[i] << "m\n";
+  }
+ */
+  std::cout << "The sum of all of the entries are " << sum << "m\n";
+  std::cout << "The number of values entered are " << numbers.size() << "\n";
+  std::cout << "Here are all the vector values of numbers converted to meters "
+            << "\n";
+  for (int i = 0; i < numbers_converted_m.size(); ++i) {
+    std::cout << numbers_converted_m[i] << "m,\n";
+  }
   return 0;
 }
