@@ -22,6 +22,8 @@ int main() {
       }
     }
 
+    //For loop inside while loop fix it
+    //but first figure out why its printing the first value twice.
     for (int i = 0; i < meters.size(); ++i) {
       std::cout << meters[i] << " "
                 << "\n";
