@@ -13,6 +13,23 @@ int main() {
     // convert num into meters and push it into meters vector
     // Taking out the for loop and leaving the if statements alone also worked.
     // I know their is a big but learn to debug it using lldb to understand whats really happending.
+    /*for (int i = 0; i < numbers.size(); ++i) {
+      if (unitInput == units[0]) {
+        double cm_to_m = numbers[i] / 100;
+        meters.push_back(cm_to_m);
+      } else if (unitInput == units[1]) {
+        // double m_to_m = num
+      }
+    }*/
+
+    //For loop inside while loop fix it
+    //but first figure out why its printing the first value twice.
+    /*for (int i = 0; i < meters.size(); ++i) {
+      std::cout << meters[i] << " cm "
+                << "\n";
+      std::cout << "-------------------\n";
+    }*/
+  }
     for (int i = 0; i < numbers.size(); ++i) {
       if (unitInput == units[0]) {
         double cm_to_m = numbers[i] / 100;
@@ -25,8 +42,8 @@ int main() {
     //For loop inside while loop fix it
     //but first figure out why its printing the first value twice.
     for (int i = 0; i < meters.size(); ++i) {
-      std::cout << meters[i] << " "
+      std::cout << meters[i] << " cm "
                 << "\n";
+      std::cout << "-------------------\n";
     }
-  }
 }

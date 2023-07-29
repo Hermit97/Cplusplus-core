@@ -1,5 +1,6 @@
 // sum, keep track of the number of entries and print both.
 #include <iostream>
+#include <pthread.h>
 #include <vector>
 
 bool almost_equal(double num1, double num2, double temp) {
@@ -15,6 +16,7 @@ int main() {
   int small_counter, larger_counter, total_values;
   small_counter = 0;
   larger_counter = 0;
+  int counter = 0;
   std::string userUnit;
   largest = 0.0;
   smallest = 0.0;
@@ -77,7 +79,7 @@ int main() {
 
     // convert all values in the numbers vector to meters and push them into new
     // vector.
-    for (int i = 0; i < numbers.size(); ++i) {
+    for (int i = counter; i < numbers.size(); ++i) {
       if(userUnit == units[0]){
         double cm_to_m = numbers[i] / 100;
         numbers_converted_m.push_back(cm_to_m);
@@ -88,23 +90,40 @@ int main() {
         std::cout << m_to_m
                   << " value does not change since its already an m.\n";
         numbers_converted_m.push_back(m_to_m);
+      }else if(userUnit == units[2]){
+        double in_to_m = numbers[i] * 2.54;
+        numbers_converted_m.push_back(in_to_m);
+      }else if(userUnit == units[3]){
+       double ft_to_m  = numbers[i] * 12;
+       numbers_converted_m.push_back(ft_to_m);
       }
     }
     sum = largest + smallest;
+    counter++;
   }
-  /*std::cout << "The sum of all of the entries are " << sum << "m\n";
-  std::cout << "The number of values entered are " << numbers.size() << "\n";
-  for(int i = 0; i < numbers_converted_m.size(); ++i){
-    std::cout << "Here are all the vector values of numbers converted to meters
-  " << numbers_converted_m[i] << "m\n";
-  }
- */
+
   std::cout << "The sum of all of the entries are " << sum << "m\n";
   std::cout << "The number of values entered are " << numbers.size() << "\n";
   std::cout << "Here are all the vector values of numbers converted to meters "
             << "\n";
   for (int i = 0; i < numbers_converted_m.size(); ++i) {
-    std::cout << numbers_converted_m[i] << "m,\n";
+    std::cout << numbers_converted_m[i] << "m\n";
   }
+
+  std::cout << "-------------------------------\n";
+  //print out meters vector more neatly
+  std::string comma = ",";
+  std::string empty = "";
+  for(int i = 0; i < numbers_converted_m.size(); ++i){
+    if(numbers_converted_m.size() - 1 == i){
+      std::cout << numbers_converted_m[i] <<"m"<< empty;
+    }else{
+      std::cout << numbers_converted_m[i] <<"m"<< comma;
+
+    }
+  }
+  std::cout << "\n";
+  std::cout << numbers_converted_m.size() << "\n";
+
   return 0;
 }
