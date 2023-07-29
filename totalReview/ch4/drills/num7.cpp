@@ -27,49 +27,54 @@ int main() {
   std::vector<std::string> units = {"cm", "m", "in", "ft"};
   std::vector<std::string> illegalUnits = {"y", "yards", "meter", "km",
                                            "gallons"};
+  std::vector<double> sorted_m;
   std::cout << "Enter a number and its unit: "
             << "\n";
+  bool isTrue = false;
   while (std::cin >> num >> userUnit) {
-    // numbers.push_back(num);
-
-    for (int i = 0; i < illegalUnits.size(); ++i) {
-      if (userUnit == illegalUnits[i]) {
-        std::cout << "Illegal units entered try again.\n";
-        std::cin >> num >> userUnit;
+    bool isTrue = false;
+    for (int i = 0; i < units.size(); ++i) {
+      if (userUnit == units[i]) {
+        isTrue = true;
+        std::cout << "match found\n";
+        break;
       }
     }
 
-    numbers.push_back(num);
-    ++larger_counter;
-    //++small_counter;
-    total_values = larger_counter + small_counter;
+    if (isTrue) {
+      numbers.push_back(num);
 
-    if (userUnit == units[0]) {
-      convert = num / 100;
-      std::cout << num << units[0] << " converted to " << convert << "m\n";
-      // Convert in to cm
-    } else if (userUnit == units[1]) {
-      convert = num * 2.54;
-      std::cout << num << units[1] << " converted to " << convert << "cm\n";
-      // Convert m to ft
-    } else if (userUnit == units[2]) {
-      convert = num * 3.281;
-      std::cout << num << units[2] << " converted to " << convert << "ft\n";
-      // Convert ft to in
-    } else if (userUnit == units[3]) {
-      convert = num * 12;
-      std::cout << num << units[3] << " converted to " << convert << "in\n";
-    }
+      ++larger_counter;
+      total_values = larger_counter + small_counter;
 
-    if (num > largest || numbers.size() == 1) {
-      largest = num;
-    }
-    if (num < smallest || numbers.size() == 1) {
-      smallest = num;
-    }
+      if (userUnit == units[0]) {
+        convert = num / 100;
+        std::cout << num << units[0] << " converted to " << convert << "m\n";
+        // Convert in to cm
+      } else if (userUnit == units[1]) {
+        convert = num * 2.54;
+        std::cout << num << units[1] << " converted to " << convert << "cm\n";
+        // Convert m to ft
+      } else if (userUnit == units[2]) {
+        convert = num * 3.281;
+        std::cout << num << units[2] << " converted to " << convert << "ft\n";
+        // Convert ft to in
+      } else if (userUnit == units[3]) {
+        convert = num * 12;
+        std::cout << num << units[3] << " converted to " << convert << "in\n";
+      }
 
-    std::cout << "The largest number so far is " << largest
-              << ", the smallest is " << smallest << "\n";
+      if (num > largest || numbers.size() == 1) {
+        largest = num;
+      }
+      if (num < smallest || numbers.size() == 1) {
+        smallest = num;
+      }
+
+      std::cout << "The largest number so far is " << largest
+                << ", the smallest is " << smallest << "\n";
+    } else
+      std::cout << "Invalid unit. Try again.\n";
     if (numbers.size() > 1) {
       if (almost_equal(largest, smallest, 0.01))
         std::cout << "The numbers are almost equal\n";
@@ -80,22 +85,22 @@ int main() {
     // convert all values in the numbers vector to meters and push them into new
     // vector.
     for (int i = counter; i < numbers.size(); ++i) {
-      if(userUnit == units[0]){
+      if (userUnit == units[0]) {
         double cm_to_m = numbers[i] / 100;
         numbers_converted_m.push_back(cm_to_m);
-        //why is the cm number being considered a m value as well?
-      }else if (userUnit == units[1]) {
+        // why is the cm number being considered a m value as well?
+      } else if (userUnit == units[1]) {
         std::cout << "--------------------\n";
         double m_to_m = numbers[i];
         std::cout << m_to_m
                   << " value does not change since its already an m.\n";
         numbers_converted_m.push_back(m_to_m);
-      }else if(userUnit == units[2]){
+      } else if (userUnit == units[2]) {
         double in_to_m = numbers[i] * 2.54;
         numbers_converted_m.push_back(in_to_m);
-      }else if(userUnit == units[3]){
-       double ft_to_m  = numbers[i] * 12;
-       numbers_converted_m.push_back(ft_to_m);
+      } else if (userUnit == units[3]) {
+        double ft_to_m = numbers[i] * 12;
+        numbers_converted_m.push_back(ft_to_m);
       }
     }
     sum = largest + smallest;
@@ -111,19 +116,49 @@ int main() {
   }
 
   std::cout << "-------------------------------\n";
-  //print out meters vector more neatly
+  // print out meters vector more neatly
   std::string comma = ",";
   std::string empty = "";
-  for(int i = 0; i < numbers_converted_m.size(); ++i){
-    if(numbers_converted_m.size() - 1 == i){
-      std::cout << numbers_converted_m[i] <<"m"<< empty;
-    }else{
-      std::cout << numbers_converted_m[i] <<"m"<< comma;
-
+  for (int i = 0; i < numbers_converted_m.size(); ++i) {
+    if (numbers_converted_m.size() - 1 == i) {
+      std::cout << numbers_converted_m[i] << "m" << empty;
+    } else {
+      std::cout << numbers_converted_m[i] << "m" << comma;
     }
   }
   std::cout << "\n";
   std::cout << numbers_converted_m.size() << "\n";
+
+  for (int i = 0; i < numbers_converted_m.size(); ++i) {
+    sorted_m.push_back(numbers_converted_m[i]);
+  }
+
+  for (int i = 0; i < sorted_m.size(); ++i) {
+    std::cout << "un sorted " << sorted_m[i] << "m\n";
+  }
+
+  // sort them from decending to ascending
+  // for(int i; numbers_converted_m.size(); ++i){
+
+  bool swaped = true;
+  for(int i = 0; i < sorted_m.size() - 1; ++i){
+    swaped = false;
+    for(int j = 0; j < sorted_m.size()- i - 1; ++j){
+      if(sorted_m[j] > sorted_m[j+1]){
+        int temp = sorted_m[j];
+        sorted_m[j] = sorted_m[j+1];
+        sorted_m[j+1] = temp;
+        swaped = true;
+      }
+    }
+    if(!swaped)
+      break;
+  }
+
+
+  for (int i = 0; i < sorted_m.size(); ++i) {
+    std::cout << "Sorted " << sorted_m[i] << "m\n";
+  }
 
   return 0;
 }
