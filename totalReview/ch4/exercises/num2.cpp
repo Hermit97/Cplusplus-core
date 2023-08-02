@@ -10,6 +10,8 @@ mean distance between two neighboring cities.*/
 int main() {
   std::vector<double> city_distance;
   double distances;
+  double sum = 0;
+  double mean;
   int greatest;
   while (std::cin >> distances) {
     city_distance.push_back(distances);
@@ -21,11 +23,11 @@ int main() {
   // sort city_distances
   for (int i = 0; i < city_distance.size(); ++i) {
     for (int j = 0; j < city_distance.size() - 1; ++j) {
-        if(city_distance[j] > city_distance[j + 1]){
-            int temp = city_distance[j];
-            city_distance[j] = city_distance[j + 1];
-            city_distance[j + 1] = temp;
-        }
+      if (city_distance[j] > city_distance[j + 1]) {
+        int temp = city_distance[j];
+        city_distance[j] = city_distance[j + 1];
+        city_distance[j + 1] = temp;
+      }
     }
   }
   std::cout << "sorted\n";
@@ -34,5 +36,13 @@ int main() {
 
   greatest = city_distance.size() - 1;
 
-  std::cout << "The smallest distance between 2 cities is " << city_distance[0] << " " << " the greatest is " << city_distance[greatest] << "\n";
+  std::cout << "The smallest distance between 2 cities is " << city_distance[0]
+            << " "
+            << " the greatest is " << city_distance[greatest] << "\n";
+  // Find the mean
+  for (int i = 0; i < city_distance.size(); ++i) {
+    sum = city_distance[i] + sum;
+  }
+                                                               mean = sum / city_distance.size();
+                                                               std::cout << "The mean is " << mean << "\n";
 }
