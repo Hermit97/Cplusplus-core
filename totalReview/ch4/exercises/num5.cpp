@@ -4,6 +4,8 @@ spelled-out value; e.g., the input 7 gives the output seven. Have the
 sameCHAPTER 4 EXERCISES program, using the same input loop, convert spelled-out
 numbers into their digit form; e.g., the input seven gives the output 7.*/
 
+/*Modify the “mini calculator” from exercise 5 to accept (just) single-digit
+numbers written as either digits or spelled out.*/
 #include <iostream>
 #include <vector>
 
