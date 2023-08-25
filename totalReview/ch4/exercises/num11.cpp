@@ -5,14 +5,30 @@ program using this method.*/
 #include <iostream>
 #include <vector>
 
-std::vector<int> nums = {2}; //First prime
+std::vector<int> nums; //first prime
+std::vector<int> primes;
 
-bool Sieve_of_eratosthenes_algo(std::vector<int> num){
-    for(int x : nums){
-        nums[x] + 2;
+void fill_vector(){
+    for(int i = 1; i <= 100; ++i)
+        nums.push_back(i);
+}
+void Sieve_of_eratosthenes_algo(std::vector<int> num){
+    int count = 2;
+    fill_vector();
+
+    for(int x : nums){ // maybe use the normal for loop styule instead so it iterates to 3 after 2 to get its multiples
+        if(x % count == 0)
+            primes.push_back(x);
+        ++count;
     }
-    return true;
 }
 int main(){
-    std::vector<int> nums = {2}; //First prime
+    Sieve_of_eratosthenes_algo(nums);
+    for(int x : primes)
+        std::cout << x << "\n";
+    std::cout << "---------------------------------------------------------------------------\n";
+
+    for(int y : nums)
+        std::cout << y << "\n";
+
 }
