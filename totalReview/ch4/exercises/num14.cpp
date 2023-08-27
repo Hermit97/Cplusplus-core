@@ -38,6 +38,7 @@ int main(){
     while(std::cin >> n)
 	numbers.push_back(n);
 
+    std::cout << "Min is " << find_min(numbers) << "\n";
 
 
 }
