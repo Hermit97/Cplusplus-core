@@ -1,48 +1,29 @@
+#include <cmath>
 #include <iostream>
-#include <map>
 #include <vector>
 #include <algorithm>
+#include <math.h>
+/*Write a program to solve quadratic equations. A quadratic equation is of
+the form ax^2+bx+c=0 x = (-b ± √(b^2 - 4ac)) / 2a*/
 
 int main() {
-    std::vector<std::string> sequence;
-    std::string input;
+    int a, x, b, c;
+    int squared;
+    double pos_quadratic;
+    int sq;
+    double pos_final_quad;
 
-    // Read strings into the sequence until the user enters an empty string
-    while (true) {
-        std::cout << "Enter a string (or press Enter to finish): ";
-        std::getline(std::cin, input);
-        if (input.empty()) {
-            break;
-        }
-        sequence.push_back(input);
-    }
+    std::cout << "Enter a x b c\n";
+    std::cin >> a >> x >> b >> c;
 
-    if (sequence.empty()) {
-        std::cout << "No strings entered." << std::endl;
-        return 0;
-    }
+    squared = b*b;
+    sq = squared - (4 * (a*c));
 
-    // Find the minimum and maximum strings
-    std::string minString = *std::min_element(sequence.begin(), sequence.end());
-    std::string maxString = *std::max_element(sequence.begin(), sequence.end());
+    pos_quadratic = -b + std::sqrt(sq);
+    pos_final_quad = pos_quadratic / 2;
+    //std::cout << pos_final_quad << "\n";
+    std::cout << pos_quadratic << "\n";
 
-    // Find the mode (most frequently occurring string)
-    std::map<std::string, int> frequencyMap;
-    for (const std::string& str : sequence) {
-        frequencyMap[str]++;
-    }
-    int maxFrequency = 0;
-    std::string modeString;
-    for (const auto& pair : frequencyMap) {
-        if (pair.second > maxFrequency) {
-            maxFrequency = pair.second;
-            modeString = pair.first;
-        }
-    }
 
-    std::cout << "Minimum string: " << minString << std::endl;
-    std::cout << "Maximum string: " << maxString << std::endl;
-    std::cout << "Mode: " << modeString << " (occurs " << maxFrequency << " times)" << std::endl;
 
-    return 0;
 }
