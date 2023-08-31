@@ -12,6 +12,7 @@ int main() {
     double pos_quadratic;
     int sq;
     double pos_final_quad;
+    int denom = 2 * a;
 
     std::cout << "Enter a x b c\n";
     std::cin >> a >> x >> b >> c;
@@ -19,10 +20,11 @@ int main() {
     squared = b*b;
     sq = squared - (4 * (a*c));
 
-    pos_quadratic = -b + std::sqrt(sq);
-    pos_final_quad = pos_quadratic / 2;
-    //std::cout << pos_final_quad << "\n";
-    std::cout << pos_quadratic << "\n";
+    pos_quadratic = -(b) + std::sqrt(sq);
+
+    pos_final_quad = pos_quadratic / denom;
+    std::cout << pos_final_quad << "\n";
+    //std::cout << pos_quadratic << "\n";
 
 
 
