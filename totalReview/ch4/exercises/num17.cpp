@@ -18,10 +18,10 @@ int main() {
   while (std::cin >> name >> score) {
       if(name == "Noname" && score == 0)
           break;
-    if (name.size() < 1 && scores.size() < 1) {
+    /*if (name.size() < 1 && scores.size() < 1) {
       names.push_back(name);
       scores.push_back(score);
-    }
+    }*/
     for (int i = 0; i < names.size(); ++i) {
       for (int j = 0; j < names.size(); ++j) {
         if (name == names[j] || score == scores[j]) {
