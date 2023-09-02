@@ -14,28 +14,36 @@ int main() {
   std::vector<int> scores;
   std::string name;
   int score;
+  bool still_running = true;
 
-  while (std::cin >> name >> score) {
-      if(name == "Noname" && score == 0)
-          break;
-    /*if (name.size() < 1 && scores.size() < 1) {
+  while (still_running) {
+    std::cin >> name;
+    std::cin >> score;
+    if (name == "Noname" && score == 0)
+      break;
+
+    if (names.size() == 0 && scores.size() == 0) {
       names.push_back(name);
       scores.push_back(score);
-    }*/
+      continue;
+    }
+
     for (int i = 0; i < names.size(); ++i) {
-      for (int j = 0; j < names.size(); ++j) {
-        if (name == names[j] || score == scores[j]) {
-          std::cout << "ERROR\n";
-          exit(0);
-        } else {
-          names.push_back(name);
-          scores.push_back(score);
-        }
+      if (name == names[i]) {
+        std::cout << "ERROR\n";
+        exit(0);
+      }
+      if (name != names[i]) {
+        names.push_back(name);
+        scores.push_back(score);
+        break;
       }
     }
   }
-  std::cout << "Result\n";
-  for(int i = 0; i < names.size(); ++i){
-      std::cout << names[i] << " " << scores[i] << "\n";
-  }
+
+
+std::cout << "Result\n";
+for (int i = 0; i < names.size(); ++i) {
+  std::cout << names[i] << " " << scores[i] << "\n";
+}
 }
