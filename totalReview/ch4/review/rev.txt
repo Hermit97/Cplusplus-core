@@ -1,0 +1,33 @@
+What is a computation?
+     - Act of producing some outputs based on inputs. For example producing an output from the input 40 * 2. The output fromt hese 3 inputs would be 80. This is essentially what computation is.
+
+What do we mean by inputs and outputs to a computation? Give examples.
+     - Input means to give the cpu some sort of data through certain sources that let you ipnut data like keyboards, mouses, or a keyboard. Output displays the data after its inputed on a screen for example.
+
+What are the three requirements a programmer should keep in mind when expressing computations?
+     - Correclty, simply, efficiently.
+
+What does an expression do?
+     - Computes a value from a set of operands.
+
+What is the difference between a statement and an expression, as described
+in this chapter?
+   - An expression computes a value from a set of operands using operators. A statement is when you want to produce several values. Or just do something multiple times. This is called a statement.
+
+What is an lvalue? List the operators that require an lvalue. Why do
+these operators, and not the others, require an lvalue?
+      - lvalue is on the left side of an operator in an expression.
+
+What is an constant expression?
+     - An expression whose value does not change once set.
+
+what is a literal?
+    - A fixed value in code like 12 or 14 in terms of int literal. Also helps with readabilities.
+
+What is a symbolic constant and why do we use them?
+     - An object whose value is fixex and cannot be changed. Its called symbolic because its given a meaningful name.
+
+Magic constant??
+      - Used without a creating a object in memory space. Instead its just a value thats hard coded in.
+
+Abstraction - Hiding unnecessary details allowing you to focus on highler level stuff and not worry about lower level implementations.
