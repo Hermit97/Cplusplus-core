@@ -13,7 +13,7 @@ double ctok(double c){
 
 // convert back to celsius from kelvin
 double ktoc(double k){
-  double c = k - 273.15;
+  double c = k + 273.15;
   if(k < lowest_temp)
      error(s);
   return c;
@@ -27,7 +27,8 @@ int main(){
     double k = ctok(c);
     std::cout << k << " kelvin" <<  '\n';
 
-    //Number 5 done
+    //Use the kelvin after its converted and convert that same one back to celsius using the same output and single input
+    std::cin >> k;
     double c = ktoc(k);
     std::cout << c << " celsius" <<  '\n';
   }
