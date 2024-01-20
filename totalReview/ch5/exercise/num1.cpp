@@ -27,8 +27,10 @@ int main(){
     double k = ctok(c);
     std::cout << k << " kelvin" <<  '\n';
 
+    //Use the kelvin after its converted and convert that same one back to celsius using the same output and single input
     std::cin >> k;
     double c = ktoc(k);
+    std::cout << c << " celsius" <<  '\n';
   }
 
   catch(std::runtime_error& e){
