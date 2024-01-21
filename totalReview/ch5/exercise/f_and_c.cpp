@@ -16,10 +16,12 @@ double c_to_f(double c){
 
 //Celsius c = 5/9 * (F - 32)
 double f_to_c(double f){
+  double absolute_zero = -459.67;
   double half = (9.0/5);
-  //double c = half * (f + 32);
   double c = (f - 32) * 5;
   double result = c / 9;
+  if(f < absolute_zero)
+    error(to_low_c);
   return result;
 }
 
