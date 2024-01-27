@@ -5,64 +5,57 @@
 
 #include <iostream>
 #include "error.h"
+#include <stdexcept>
 #include <string>
 #include <system_error>
 #include <vector>
 
-std::string non_int = "Non integer entered";
-std::vector<int>get_input(){
-  double numbers;
-  std::vector<int> nums;
+std::string invalid_input = "Non integer entered";
+std::vector<int> input_nums(){
+  std::vector<int> numbers;
+  double temp_num;
 
-  std::cout << "Enter a bunch of integers for a vector\n";
   while(true){
-    std::cin >> numbers;
-    // | is not accepted since !std::cin is read
-    if(!std::cin)
-      error(non_int);
-
-    std::string temp_number = std::to_string(numbers);
-
-    if(temp_number == "|")
+    //std::cin >> temp_num;
+    char end = std::cin.peek();
+    if(std::cin.peek() == '|'){
+      std::cin.ignore();
       break;
-    else if(!std::cin)
-      error(non_int);
-    else
-      numbers = static_cast<double>(numbers);
-
-    if(numbers == static_cast<int>(numbers)){
-      nums.push_back(numbers);
-      
-    }else{
-      std::cin.clear();
-      error(non_int);
     }
+    std::cin >> temp_num;
+    //temp_num = static_cast<int>(temp_num);
+    if(end == '|')
+      break;
+    if(std::cin.fail())
+      error(invalid_input);
+    if(temp_num == static_cast<int>(temp_num))
+      numbers.push_back(temp_num);
+    else
+      error(invalid_input);
   }
-  return nums;
+  return numbers;
 }
 
-void print_numbers(){
-  for(int i = 0; i < get_input().size(); ++i)
-    std::cout << get_input()[i];
-}
-
-void test_char_input(){
+void test(){
   int num;
-  std::cout << "Enter a int \n";
-  std::cin >> num;
-
-  if(!std::cin)
-    std::cout << "Error cant enter a string or char\n";
+  if(std::cin.peek() == '|'){
+    std::cin.ignore();
+    std::cout << "Accepted\n";
+  }
+  //std::cin >> num;
 }
+
 
 int main(){
   try{
-    std::cout << get_input().size() << "\n";
-    print_numbers();
-    //test_char_input();
+    std::cout << input_nums().size() << "\n";
+    //test();
   }
 
   catch(std::runtime_error& e){
-    std::cerr << "Runtime error: " << e.what() << '\n';
+    std::cerr << "Runtime error: " << e.what() << "\n";
+  }
+  catch(std::invalid_argument& e){
+    std::cerr << "Runtime error: " << invalid_input << "\n";
   }
 }
