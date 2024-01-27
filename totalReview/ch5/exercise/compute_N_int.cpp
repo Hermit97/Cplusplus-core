@@ -15,10 +15,9 @@ std::vector<int>get_input(){
   std::vector<int> nums;
 
   std::cout << "Enter a bunch of integers for a vector\n";
-
-  //while(std::cin >> numbers){
   while(true){
     std::cin >> numbers;
+    // | is not accepted since !std::cin is read
     if(!std::cin)
       error(non_int);
 
@@ -42,6 +41,11 @@ std::vector<int>get_input(){
   return nums;
 }
 
+void print_numbers(){
+  for(int i = 0; i < get_input().size(); ++i)
+    std::cout << get_input()[i];
+}
+
 void test_char_input(){
   int num;
   std::cout << "Enter a int \n";
@@ -54,6 +58,7 @@ void test_char_input(){
 int main(){
   try{
     std::cout << get_input().size() << "\n";
+    print_numbers();
     //test_char_input();
   }
 
