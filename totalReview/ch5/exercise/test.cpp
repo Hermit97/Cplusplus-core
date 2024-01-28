@@ -1,49 +1,40 @@
 #include <iostream>
-#include <vector>
+#include <limits>  // Include the <limits> header for std::numeric_limits
 #include <string>
 
-const std::string invalid_input = "Non-integer entered";
+void test() {
+    double num;
+    std::string invalidInput;
 
-void error(const std::string& message) {
-    std::cerr << "Error: " << message << std::endl;
-    exit(EXIT_FAILURE);
-}
-
-std::vector<int> input_nums() {
-    std::vector<int> numbers;
-    double temp_double;
-    std::string temp_string;
-
-    std::cout << "Enter an integer or enter | to stop\n";
     while (true) {
-        std::cin >> temp_string;
-        if (temp_string == "|")
-            break;
+        std::cout << "Enter a double (or '|' to exit): ";
+        if (std::cin >> num) {
+            // Input is a valid double
+            std::cout << "Valid input: " << num << std::endl;
+        } else {
+            // Input is not a valid double
+            std::cerr << "Invalid input. Please enter a valid double or '|'.\n";
 
-        try {
-            temp_double = std::stod(temp_string); // Converts string to double
-            if (temp_double == static_cast<int>(temp_double)) {
-                numbers.push_back(static_cast<int>(temp_double));
-            } else {
-                error(invalid_input);
-            }
-        } catch (const std::invalid_argument& e) {
-            error(invalid_input);
-        } catch (const std::out_of_range& e) {
-            error(invalid_input);
+            // Clear the fail state
+            std::cin.clear();
+
+            // Ignore the invalid input
+            std::cin >> invalidInput;
+
+            // Now 'invalidInput' contains the invalid input
+            std::cout << "Invalid input: " << invalidInput << std::endl;
+
+            // You can use or process 'invalidInput' as needed
+        }
+
+        // Check for exit condition
+        if (std::cin.peek() == '|') {
+            std::cin.ignore();  // Ignore '|'
+            break;
         }
     }
-    return numbers;
 }
 
-int main() {
-    std::vector<int> result = input_nums();
-
-    std::cout << "Entered integers: ";
-    for (int num : result) {
-        std::cout << num << " ";
-    }
-    std::cout << std::endl;
-
-    return 0;
+int main(){
+  test();
 }
