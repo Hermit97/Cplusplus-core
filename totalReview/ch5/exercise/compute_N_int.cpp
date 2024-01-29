@@ -13,7 +13,7 @@
 #include <vector>
 
 std::string invalid_input = "Non integer entered";
-std::string end = "|";
+std::string out_of_range_error = "Out of range input entered";
 std::vector<int> input_nums() {
   std::vector<int> numbers;
   double temp_num;
@@ -38,29 +38,52 @@ std::vector<int> input_nums() {
   return numbers;
 }
 
-void calculate_range(std::vector<int> nums){
-  int num;
+void calculate_range(std::vector<int> nums) {
+  double num;
   int total = 0;
+  int real_num;
   std::cout << nums.size() << "\n";
   std::cout << "Enter the number of elements you want to calculate in order.\n";
-  std::cin >> num; //Im thinking to make a seperate function for checking for invalid inputs like here for int num.
-  if(std::cin.fail()){
+  std::cin >> num; // Im thinking to make a seperate function for checking for
+                   // invalid inputs like here for int num.
+  if (std::cin.fail())
     error(invalid_input);
-    
-  for(int i = 0; i < nums.size() - 1; ++i){
-    if(i > num)
+
+  if (num != static_cast<int>(num))
+    error(invalid_input);
+
+  if (num >= nums.size())
+    error(out_of_range_error);
+
+  for (int i = 0; i < nums.size() - 1; ++i) {
+    if (i <= num)
       total = total + nums[i];
     else
       std::cout << "The total is " << total << "\n";
   }
+  std::cout << "The total is " << total << "\n";
 }
 
-void run(){
+//calculate n-1 adjacent values and store them into a double type vector
+//std::vector<double> adjacent_values(std::vector<int> nums){
+std::vector<double> adjacent_values(std::vector<int> nums){
+  std::vector<double> adjacent_nums;
+  int add_adjacent;
+  for(int i = 0; i < nums.size() - 1; ++i){
+    add_adjacent = nums[i] + nums[i] + 1;
+    nums.push_back(add_adjacent);
+  }
+
+  return adjacent_nums;
+}
+
+//random note the program runs but never exits after it shoujld it just akes mroe input
+void run() {
   try {
-    //for (int i : input_nums())
-    //std::cout << i;
     calculate_range(input_nums());
-    
+    for(int i : adjacent_values(input_nums()))
+	  std::cout << i << "\n";
+      
   }
 
   catch (std::runtime_error &e) {
@@ -70,19 +93,5 @@ void run(){
   }
 }
 
-void test() {
-  double temp_num;
-  std::string temp_string;
-  if (std::cin >> temp_num) {
-    std::cout << "valid\n";
-  } else {
-    std::cin.clear();
-    // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    std::cin >> temp_string;
-    std::cout << "The invalid ionput is " << temp_string << "\n";
-  }
-}
 
-int main() {
-  run();
-}
+int main() { run(); }
