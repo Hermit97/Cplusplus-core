@@ -19,6 +19,7 @@ std::vector<int> input_nums() {
   std::vector<int> numbers;
   double temp_num;
   std::string temp_string;
+  int vector_real_size;
   while (true) {
     std::cin >> temp_num;
     if (std::cin.fail()) {
@@ -43,7 +44,8 @@ void calculate_range(std::vector<int> nums) {
   double num;
   int total = 0;
   int real_num;
-  std::cout << nums.size() << "\n";
+  int vector_real_size;
+  // std::cout << nums.size() << "\n";
   std::cout << "Enter the number of elements you want to calculate in order.\n";
   std::cin >> num; // Im thinking to make a seperate function for checking for
                    // invalid inputs like here for int num.
@@ -56,41 +58,44 @@ void calculate_range(std::vector<int> nums) {
   if (num >= nums.size())
     error(out_of_range_error);
 
-  //should be vector 1, 2, 3 user enter 1 then 1 + 2 = 3  if user enter 2 then 2 + 3 = 5 if user enter 0 then just 0 is the answer
+  vector_real_size = nums.size() - 1;
   for (int i = 0; i < nums.size() - 1; ++i) {
-    if (i <= nums.size())
-      total = total + nums[i];
-    else if(i == nums.size()){
-      total = nums[i] + nums[i] - 1
+    if (num > vector_real_size)
+      error(out_of_range_error);
+    else {
+	// if (i == num) // This is the issue
+        //break;
+      total = nums[i] + nums[i] + 1; // issue! total = 0, total = total + num[i]
     }
   }
   std::cout << "The total is " << total << "\n";
 }
 
 // calculate n-1 adjacent values and store them into a double type vector
-std::vector<double> adjacent_values(std::vector<int> nums) {
+/*std::vector<double> adjacent_values(std::vector<int> nums) {
   std::vector<double> adjacent_nums;
   int add_adjacent;
-  for (int i = 0; i < nums.size() - 1; ++i) { // 1, 2, 3 size = 3 max element = 2
-    /*if (i == nums.size() - 1) {
-      int end = nums[i] + nums.size() - 1;
-      adjacent_nums.push_back(end);
-      } else {*/
-      add_adjacent = nums[i] - nums[i] + 1;
-      adjacent_nums.push_back(add_adjacent);
-      // }
+  for (int i = 0; i < nums.size() - 1;
+       ++i) { // 1, 2, 3 size = 3 max element = 2
+              if (i == nums.size() - 1) {
+                int end = nums[i] + nums.size() - 1;
+                adjacent_nums.push_back(end);
+                } else {
+    add_adjacent = nums[i] - nums[i] + 1;
+    adjacent_nums.push_back(add_adjacent);
+    // }
   }
 
   return adjacent_nums;
-}
+  }*/
 
 // random note the program runs but never exits after it shoujld it just akes
 // mroe input
 void run() {
   try {
     calculate_range(input_nums());
-    for (int i : adjacent_values(input_nums()))
-      std::cout << i << "\n";
+    /*for (int i : adjacent_values(input_nums()))
+      std::cout << i << "\n";*/
   }
 
   catch (std::runtime_error &e) {
