@@ -41,11 +41,11 @@ std::vector<int> input_nums() {
 }
 
 void calculate_range(std::vector<int> nums) {
+    std::vector<int> data_to_be_added;
   double num;
   int total = 0;
   int real_num;
   int vector_real_size;
-  int real_total = 0;
   // std::cout << nums.size() << "\n";
   std::cout << "Enter the number of elements you want to calculate in order.\n";
   std::cin >> num; // Im thinking to make a seperate function for checking for
@@ -60,20 +60,24 @@ void calculate_range(std::vector<int> nums) {
     error(out_of_range_error);
 
   vector_real_size = nums.size() - 1;
-  for (int i = 0; i < nums.size(); ++i) {
+  for (int i = 0; i < nums.size() - 1; ++i) {
     if (num > vector_real_size)
       error(out_of_range_error);
     else {
       while (i <= num) {
-        total = total + nums[i];
+        if (i == num) {
+          std::cout << "Total is " << total << "\n";
+          break;
+        }
+        // total = nums[i] + (nums[i] + 1);
+        total = nums[i] + nums[i] + 1;
+
+        std::cout << "The total is " << total << "\n";
         break;
       }
     }
   }
-
-
-  std::cout << "Total\n";
-  std::cout << total << "\n";
+  // std::cout << "The total is " << total << "\n";
 }
 
 // calculate n-1 adjacent values and store them into a double type vector
@@ -96,29 +100,11 @@ void calculate_range(std::vector<int> nums) {
 
 // random note the program runs but never exits after it shoujld it just akes
 // mroe input
-/*std::vector<int> test(){
-    int n;
-    std::vector<int> num;
-    std::cout << "Enter\n";
-    while(n != 0){
-    std::cin >> n;
-    num.push_back(n);
-    }
-    return num;*/
-//}
 void run() {
   try {
-    std::cout << "The values are\n";
-    /*for(int i = 0; i < input_nums().size(); ++i){
-        std::cout << input_nums()[i] << " ";
-        }*/
-    /*for (int i : input_nums()) {
-       std::cout << i << "\n";
-       }*/
-
     calculate_range(input_nums());
-    // for (int i : adjacent_values(input_nums()))
-    // std::cout << i << "\n";*/
+    /*for (int i : adjacent_values(input_nums()))
+      std::cout << i << "\n";*/
   }
 
   catch (std::runtime_error &e) {
