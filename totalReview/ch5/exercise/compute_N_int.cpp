@@ -15,8 +15,10 @@
 
 std::string invalid_input = "Non integer entered";
 std::string out_of_range_error = "Out of range input entered";
-std::vector<int> input_nums() {
-  std::vector<int> numbers;
+//std::vector<int> input_nums;
+std::vector<int> nums;
+std::vector<int> get_input_nums() {
+    //std::vector<int> numbers;
   double temp_num;
   std::string temp_string;
   int vector_real_size;
@@ -33,14 +35,15 @@ std::vector<int> input_nums() {
     if (std::cin.fail())
       error(invalid_input);
     if (temp_num == static_cast<int>(temp_num))
-      numbers.push_back(temp_num);
+      nums.push_back(temp_num);
     else
       error(invalid_input);
   }
-  return numbers;
+  return nums;
 }
 
-void calculate_range(std::vector<int> nums) {
+void calculate_range() {
+    get_input_nums(); //This needs to be run first
   double num;
   int total = 0;
   int real_num;
@@ -71,54 +74,33 @@ void calculate_range(std::vector<int> nums) {
     }
   }
 
-
   std::cout << "Total\n";
   std::cout << total << "\n";
 }
 
 // calculate n-1 adjacent values and store them into a double type vector
-/*std::vector<double> adjacent_values(std::vector<int> nums) {
+std::vector<double> adjacent_values(std::vector<int> nums) {
   std::vector<double> adjacent_nums;
-  int add_adjacent;
-  for (int i = 0; i < nums.size() - 1;
-       ++i) { // 1, 2, 3 size = 3 max element = 2
-              if (i == nums.size() - 1) {
-                int end = nums[i] + nums.size() - 1;
-                adjacent_nums.push_back(end);
-                } else {
-    add_adjacent = nums[i] - nums[i] + 1;
-    adjacent_nums.push_back(add_adjacent);
-    // }
+  int diff_adjacent = 0;
+  for (int i = 0; i < nums.size(); ++i) { // 1, 2, 3 size = 3 max element = 2
+      if(i == nums.size() - 1)
+	  break;
+      diff_adjacent = nums[i] - nums[i+1];
+      adjacent_nums.push_back(diff_adjacent);
   }
 
   return adjacent_nums;
-  }*/
+}
 
-// random note the program runs but never exits after it shoujld it just akes
-// mroe input
-/*std::vector<int> test(){
-    int n;
-    std::vector<int> num;
-    std::cout << "Enter\n";
-    while(n != 0){
-    std::cin >> n;
-    num.push_back(n);
-    }
-    return num;*/
-//}
 void run() {
   try {
     std::cout << "The values are\n";
-    /*for(int i = 0; i < input_nums().size(); ++i){
-        std::cout << input_nums()[i] << " ";
-        }*/
-    /*for (int i : input_nums()) {
-       std::cout << i << "\n";
-       }*/
 
-    calculate_range(input_nums());
-    // for (int i : adjacent_values(input_nums()))
-    // std::cout << i << "\n";*/
+    calculate_range();
+
+    std::cout << "Here are the n-1 adjacent values\n";
+     for (int i : adjacent_values(nums))
+	 std::cout << i << "\n";
   }
 
   catch (std::runtime_error &e) {
