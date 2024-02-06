@@ -1,5 +1,8 @@
 #include <iostream>
 #include "error.h"
+#include <vector>
+#include <cstdlib>  // for rand and srand
+#include <ctime>
 
 /*Implement a little guessing game called (for some obscure reason) “Bulls
 and Cows.” The program has a vector of four different integers in the
@@ -10,3 +13,39 @@ because the user got one digit (1) right and in the right position (a bull)
 and one digit (3) right but in the wrong position (a cow). The guessing
 continues until the user gets four bulls, that is, has the four digits correct
 and in the correct order.*/
+
+std::vector<int> integers(){
+    std::vector<int> num;
+    int i = 0;
+    int randNum;
+    std::srand(std::time(0));
+    //int randnum = (rand() % 10) + 1;
+    while(i < 4){
+	randNum = (rand() % 10) + 1;
+	num.push_back(randNum);
+	++i;
+    }
+    return num;
+}
+
+void check_double(){
+    for(int i = 0; i < integers().size(); ++i){
+	for(int j = 1; j < integers().size(); ++j){
+	    if(integers()[i] == integers()[j]){
+		std::cout << "Double found:" << integers()[i] << " and " << integers()[j] << "\n";
+		integers()[j] = (rand() % 10) + 1;
+		std::cout << "Changed it, now its\n";
+		for(int i : integers())
+		    std::cout << i << " ";
+		//reset i
+		i = 0;
+	    }
+	}
+    }
+}
+int main(){
+    //for(int i : integers())
+    //std::cout << i << " " << "\n";
+    check_double();
+    return 0;
+}
