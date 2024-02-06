@@ -1,0 +1,26 @@
+#include <iostream>
+
+int temp1(int temp){
+  std::cin >> temp;
+  if(!std::cin)
+    return 0;
+  return temp;
+}
+
+int temp2(int temp){
+  std::cin >> temp;
+  if(!std::cin)
+    return 0;
+  return temp;
+}
+
+void check_for_neg(temp1(int temp), temp2(int temp)){
+  if(temp1 < 0 || temp2 < 0)
+    std::cout << "ERROR CANT HAVE A negative number\n";
+}
+
+int main(){
+  
+
+  
+}
