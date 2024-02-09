@@ -28,7 +28,12 @@ std::vector<int> integers() {
   return num;
 }
 
-void check_double() {
+
+void check_double(){
+  
+}
+
+/*void check_double() {
   for (int i = 0; i < integers().size(); ++i) {
     for (int j = 1; j < integers().size(); ++j) {
       int k = 0;
@@ -49,7 +54,8 @@ void check_double() {
       }
     }
   }
-}
+  }*/
+
 int main() {
   // for(int i : integers())
   // std::cout << i << " " << "\n";
