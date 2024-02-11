@@ -25,12 +25,30 @@ std::vector<int> integers() {
     num.push_back(randNum);
     ++i;
   }
+
+  std::cout << "The original vector is \n";
+  for(int i : num)
+      std::cout << i;
+  std::cout << "\n";
+
+  //check for num
+  for(int i = 0; i < num.size(); ++i){
+      for(int j = 1; j < num.size(); ++j){
+          if(num[i] == num[j]){
+            //if the element position is the same then ignore it.
+            if(i == j)
+                continue; //restart the loop since they are in the same spot and are not an actual double
+            std::cout << "Double found at " << num[i] << " and " << num[j] << "\n";
+
+          }
+      }
+  }
+  
   return num;
 }
 
-
-void check_double(){
-  
+void run(){
+    integers();
 }
 
 /*void check_double() {
@@ -59,6 +77,6 @@ void check_double(){
 int main() {
   // for(int i : integers())
   // std::cout << i << " " << "\n";
-  check_double();
+  run();
   return 0;
 }
