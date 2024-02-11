@@ -14,21 +14,23 @@ and one digit (3) right but in the wrong position (a cow). The guessing
 continues until the user gets four bulls, that is, has the four digits correct
 and in the correct order.*/
 
-std::vector<int> integers() {
+std::vector<int> num;
+//std::vector<int> integers() {
+void integers() {
   std::vector<int> num;
   int i = 0;
   int randNum;
   std::srand(std::time(0));
   // int randnum = (rand() % 10) + 1;
   while (i < 4) {
-    randNum = (rand() % 10) + 1;
+    randNum = (rand() % 10);
     num.push_back(randNum);
     ++i;
   }
 
   std::cout << "The original vector is \n";
   for(int i : num)
-      std::cout << i;
+      std::cout << i << " ";
   std::cout << "\n";
 
   //check for num
@@ -38,41 +40,29 @@ std::vector<int> integers() {
             //if the element position is the same then ignore it.
             if(i == j)
                 continue; //restart the loop since they are in the same spot and are not an actual double
+            
+            //If double is found
             std::cout << "Double found at " << num[i] << " and " << num[j] << "\n";
-
+            num[j] = (rand() % 10);
           }
       }
   }
+
+  std::cout << "After checking for doubles the vector is now\n";
+  for(int i : num)
+      std::cout << i << " ";
+  std::cout << "\n";
   
-  return num;
+  //use to be return num here
+}
+
+void guess(){
+    std::cout << "start
 }
 
 void run(){
     integers();
 }
-
-/*void check_double() {
-  for (int i = 0; i < integers().size(); ++i) {
-    for (int j = 1; j < integers().size(); ++j) {
-      int k = 0;
-      while(k < 4){
-	if(k == 3)
-	  std::exit(0);
-	    if(integers()[i] == integers()[j]){
-        std::cout << "Double found:" << integers()[i] << " and "
-                  << integers()[j] << "\n";
-        integers()[j] = (rand() % 10) + 1;
-        std::cout << "Changed it, now its\n";
-        for (int i : integers())
-          std::cout << i << " ";
-        // reset i
-        i = 0;
-	    }
-	    ++k;
-      }
-    }
-  }
-  }*/
 
 int main() {
   // for(int i : integers())
