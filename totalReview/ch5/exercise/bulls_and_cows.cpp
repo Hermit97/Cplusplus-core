@@ -71,7 +71,24 @@ void guess(){
             else
                 ++cow;
         //do the same for g2 g3 g4
+        if(g2 == num[i])
+            if(i == 1)
+                ++bull;
+            else
+                ++cow;
+        if(g3 == num[i])
+            if(i == 1)
+                ++bull;
+            else
+                ++cow;
+        if(g4 == num[i])
+            if(i == 1)
+                ++bull;
+            else
+                ++cow;
     }
+
+    std::cout << "You entered " << bull << " bulls and " << cow << " cows";
 }
 
 void run(){
