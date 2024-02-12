@@ -55,9 +55,23 @@ void integers() {
   
   //use to be return num here
 }
+/*v = 1 2 3 4, g1 = 1 , or should it just be one g since its 1 user and 1 input??
+ * so like g = 1, 0 bull 1 cow since wrong spot but the number is in vector. */
 
 void guess(){
-    std::cout << "start
+    std::cout << "start\n";
+    int g1, g2, g3, g4;
+    int bull = 0;
+    int cow = 0;
+    std::cin >> g1 >> g2 >> g3 >> g4;
+    for(int i = 0; i < num.size(); ++i){
+        if(g1 == num[i])
+            if(i == 1)
+                ++bull;
+            else
+                ++cow;
+        //do the same for g2 g3 g4
+    }
 }
 
 void run(){
