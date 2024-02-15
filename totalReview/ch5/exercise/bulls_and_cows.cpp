@@ -17,7 +17,6 @@ and in the correct order.*/
 std::vector<int> num;
 //std::vector<int> integers() {
 void integers() {
-  std::vector<int> num;
   int i = 0;
   int randNum;
   std::srand(std::time(0));
@@ -66,33 +65,48 @@ void guess(){
     std::cin >> g1 >> g2 >> g3 >> g4;
     for(int i = 0; i < num.size(); ++i){
         if(g1 == num[i])
-            if(i == 1)
+            if(i == 1){
                 ++bull;
-            else
+                continue;
+            }else{
                 ++cow;
+                continue;
+            }
         //do the same for g2 g3 g4
         if(g2 == num[i])
-            if(i == 1)
+            if(i == 1){
                 ++bull;
-            else
+                continue;
+            }else{
                 ++cow;
+                continue;
+            }
+
         if(g3 == num[i])
-            if(i == 1)
+            if(i == 1){
                 ++bull;
-            else
+                continue;
+            }else{
                 ++cow;
+                continue;
+            }
+
         if(g4 == num[i])
-            if(i == 1)
+            if(i == 1){
                 ++bull;
-            else
+                continue;
+            }else{
                 ++cow;
+                continue;
+            }
     }
 
-    std::cout << "You entered " << bull << " bulls and " << cow << " cows";
+    std::cout << "You entered " << bull << " bulls and " << cow << " cows\n";
 }
 
 void run(){
     integers();
+    guess();
 }
 
 int main() {
