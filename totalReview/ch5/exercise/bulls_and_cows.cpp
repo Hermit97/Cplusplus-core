@@ -15,7 +15,7 @@ continues until the user gets four bulls, that is, has the four digits correct
 and in the correct order.*/
 
 std::vector<int> num;
-//std::vector<int> integers() {
+// std::vector<int> integers() {
 void integers() {
   int i = 0;
   int randNum;
@@ -28,85 +28,107 @@ void integers() {
   }
 
   std::cout << "The original vector is \n";
-  for(int i : num)
-      std::cout << i << " ";
+  for (int i : num)
+    std::cout << i << " ";
   std::cout << "\n";
 
-  //check for num
-  for(int i = 0; i < num.size(); ++i){
-      for(int j = 1; j < num.size(); ++j){
-          if(num[i] == num[j]){
-            //if the element position is the same then ignore it.
-            if(i == j)
-                continue; //restart the loop since they are in the same spot and are not an actual double
-            
-            //If double is found
-            std::cout << "Double found at " << num[i] << " and " << num[j] << "\n";
-            num[j] = (rand() % 10);
-          }
+  // check for num
+  for (int i = 0; i < num.size(); ++i) {
+    for (int j = 1; j < num.size(); ++j) {
+      if (num[i] == num[j]) {
+        // if the element position is the same then ignore it.
+        if (i == j)
+          continue; // restart the loop since they are in the same spot and are
+                    // not an actual double
+
+        // If double is found
+        std::cout << "Double found at " << num[i] << " and " << num[j] << "\n";
+        num[j] = (rand() % 10);
       }
+    }
   }
 
   std::cout << "After checking for doubles the vector is now\n";
-  for(int i : num)
-      std::cout << i << " ";
+  for (int i : num)
+    std::cout << i << " ";
   std::cout << "\n";
-  
-  //use to be return num here
+
+  // use to be return num here
 }
-/*v = 1 2 3 4, g1 = 1 , or should it just be one g since its 1 user and 1 input??
- * so like g = 1, 0 bull 1 cow since wrong spot but the number is in vector. */
+/*v = 1 2 3 4, g1 = 1 , or should it just be one g since its 1 user and 1
+ * input?? so like g = 1, 0 bull 1 cow since wrong spot but the number is in
+ * vector. */
 
-void guess(){
-    std::cout << "start\n";
-    int g1, g2, g3, g4;
-    int bull = 0;
-    int cow = 0;
+void guess() {
+  std::cout << "start\n";
+  int g1, g2, g3, g4;
+  int bull = 0;
+  int cow = 0;
+
+  // while (bulls < 4) {
     std::cin >> g1 >> g2 >> g3 >> g4;
-    for(int i = 0; i < num.size(); ++i){
-        if(g1 == num[i])
-            if(i == 0){
-                ++bull;
-                continue;
-            }else{
-                ++cow;
-               continue;
-            }
-        //do the same for g2 g3 g4
-        if(g2 == num[i])
-            if(i == 1){
-                ++bull;
-                continue;
-            }else{
-                ++cow;
-                continue;
-            }
+    for (int i = 0; i < num.size(); ++i) {
+      if (g1 == num[i])
+        if (i == 0) {
+          ++bull;
+          continue;
+        } else {
+          ++cow;
+          continue;
+        }
+      else{
+	++cow;
+	continue;
+      }
 
-        if(g3 == num[i])
-            if(i == 2){
-                ++bull;
-                continue;
-            }else{
-                ++cow;
-                continue;
-            }
+      // do the same for g2 g3 g4
+      if (g2 == num[i])
+        if (i == 1) {
+          ++bull;
+          continue;
+        } else {
+          ++cow;
+          continue;
+        }
+      else{
+	++cow;
+	continue;
+      }
 
-        if(g4 == num[i])
-            if(i == 3){
-                ++bull;
-                continue;
-            }else{
-                ++cow;
-                continue;
-            }
+      if (g3 == num[i])
+        if (i == 2) {
+          ++bull;
+          continue;
+        } else {
+          ++cow;
+          continue;
+        }
+      else{
+	++cow;
+	continue;
+      }
+
+      if (g4 == num[i])
+        if (i == 3) {
+          ++bull;
+          continue;
+        } else {
+          ++cow;
+          continue;
+        }
+      else{
+	++cow;
+	continue;
+      }
     }
 
     std::cout << "You entered " << bull << " bulls and " << cow << " cows\n";
+    //}
 }
 
-void run(){
-    integers();
-    guess();
+void run() {
+  integers();
+  guess();
 }
 
 int main() {
