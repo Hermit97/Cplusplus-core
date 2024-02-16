@@ -65,12 +65,12 @@ void guess(){
     std::cin >> g1 >> g2 >> g3 >> g4;
     for(int i = 0; i < num.size(); ++i){
         if(g1 == num[i])
-            if(i == 1){
+            if(i == 0){
                 ++bull;
                 continue;
             }else{
                 ++cow;
-                continue;
+               continue;
             }
         //do the same for g2 g3 g4
         if(g2 == num[i])
@@ -83,7 +83,7 @@ void guess(){
             }
 
         if(g3 == num[i])
-            if(i == 1){
+            if(i == 2){
                 ++bull;
                 continue;
             }else{
@@ -92,7 +92,7 @@ void guess(){
             }
 
         if(g4 == num[i])
-            if(i == 1){
+            if(i == 3){
                 ++bull;
                 continue;
             }else{
