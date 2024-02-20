@@ -42,13 +42,7 @@ void integers() {
                     // not an actual double
 
         // If double is found
-        std::cout << "Double found at " << num[i] << " and " << num[j] << "\n";
-
-	std::cout << "After checking the vector is \n";
-	  for (int i : num)
-	    std::cout << i << " ";
-	std::cout << "\n";
-
+        //std::cout << "Double found at " << num[i] << " and " << num[j] << "\n";
         num[j] = (rand() % 10);
 	i = 0; //reset i
       }
@@ -65,6 +59,15 @@ void integers() {
  * input?? so like g = 1, 0 bull 1 cow since wrong spot but the number is in
  * vector. */
 
+void check_input(int n1, int n2, int n3, int n4){
+  std::cin >> n1 >> n2 >> n3 >> n4;
+
+  while(std::cin >> n1 >> n2 >> n3 >> n4){
+    
+  }
+
+}
+
 void guess() {
   std::cout << "start\n";
   int g1, g2, g3, g4;
@@ -73,6 +76,8 @@ void guess() {
 
    while (bull < 4) {
     std::cin >> g1 >> g2 >> g3 >> g4;
+
+
       if (g1 == num[0])
           ++bull;
       else{
