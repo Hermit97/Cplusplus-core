@@ -14,12 +14,12 @@ and one digit (3) right but in the wrong position (a cow). The guessing
 continues until the user gets four bulls, that is, has the four digits correct
 and in the correct order.*/
 
-std::vector<int> num = {7, 4, 5, 7};
+std::vector<int> num;
 // std::vector<int> integers() {
 void integers() {
   int i = 0;
   int randNum;
-  //std::srand(std::time(0));
+  std::srand(std::time(0));
   // int randnum = (rand() % 10) + 1;
   while (i < 4) {
     randNum = (rand() % 10);
@@ -43,7 +43,14 @@ void integers() {
 
         // If double is found
         std::cout << "Double found at " << num[i] << " and " << num[j] << "\n";
+
+	std::cout << "After checking the vector is \n";
+	  for (int i : num)
+	    std::cout << i << " ";
+	std::cout << "\n";
+
         num[j] = (rand() % 10);
+	i = 0; //reset i
       }
     }
   }
