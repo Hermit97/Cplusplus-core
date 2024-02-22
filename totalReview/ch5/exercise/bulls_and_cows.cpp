@@ -1,7 +1,9 @@
 #include "error.h"
 #include <cstdlib> // for rand and srand
 #include <ctime>
+#include <exception>
 #include <iostream>
+#include <stdexcept>
 #include <vector>
 
 /*Implement a little guessing game called (for some obscure reason) “Bulls
@@ -42,9 +44,10 @@ void integers() {
                     // not an actual double
 
         // If double is found
-        //std::cout << "Double found at " << num[i] << " and " << num[j] << "\n";
+        // std::cout << "Double found at " << num[i] << " and " << num[j] <<
+        // "\n";
         num[j] = (rand() % 10);
-	i = 0; //reset i
+        i = 0; // reset i
       }
     }
   }
@@ -58,16 +61,26 @@ void integers() {
 /*v = 1 2 3 4, g1 = 1 , or should it just be one g since its 1 user and 1
  * input?? so like g = 1, 0 bull 1 cow since wrong spot but the number is in
  * vector. */
-
-void check_input(int n1, int n2, int n3, int n4){
-  std::cin >> n1 >> n2 >> n3 >> n4;
-
-  while(std::cin >> n1 >> n2 >> n3 >> n4){
-    if(!std::cin)
+void check_input(int n1, int n2, int n3, int n4) {
+  bool isTrue = true;
+  while (isTrue) {
+    std::cin >> n1;
+    if (!std::cin)
       error("Non int entered\n");
-    
-  }
 
+    std::cin >> n2;
+    if (!std::cin)
+      error("Non int entered\n");
+
+    std::cin >> n3;
+    if (!std::cin)
+      error("Non int entered\n");
+
+    std::cin >> n4;
+    if (!std::cin)
+      error("Non int entered\n");
+    isTrue = false;
+  }
 }
 
 void guess() {
@@ -76,110 +89,69 @@ void guess() {
   int bull = 0;
   int cow = 0;
 
-   while (bull < 4) {
-    std::cin >> g1 >> g2 >> g3 >> g4;
+  while (bull < 4) {
+    // std::cin >> g1 >> g2 >> g3n >> g4;
+    // check_input(g1, g2, g3, g4);
+    //  std::cin >> g1 >> g2 >> g3 >> g4;
+    std::cin >> g1;
+    if (!std::cin)
+      error("Non int entered\n");
 
+    std::cin >> g2;
+    if (!std::cin)
+      error("Non int entered\n");
 
-      if (g1 == num[0])
-          ++bull;
-      else{
-	  for(int i = 0; i < num.size(); ++i){
-	      if(g1 == num[i])
-		  ++cow;
-	  }
+    std::cin >> g3;
+    if (!std::cin)
+      error("Non int entered\n");
+
+    std::cin >> g4;
+    if (!std::cin)
+      error("Non int entered\n");
+
+    if (g1 == num[0])
+      ++bull;
+    else {
+      for (int i = 0; i < num.size(); ++i) {
+        if (g1 == num[i])
+          ++cow;
       }
+    }
 
-      // do the same for g2 g3 g4
-      if (g2 == num[1])
-	  ++bull;
-      else{
-	  for(int i = 0; i < num.size(); ++i){
-	      if(g2 == num[i])
-		  ++cow;
-	  }
+    // do the same for g2 g3 g4
+    if (g2 == num[1])
+      ++bull;
+    else {
+      for (int i = 0; i < num.size(); ++i) {
+        if (g2 == num[i])
+          ++cow;
       }
+    }
 
-      if (g3 == num[2])
-          ++bull;
-      else{
-	  for(int i = 0; i < num.size(); ++i){
-	      if(g3 == num[i])
-		  ++cow;
-	  }
+    if (g3 == num[2])
+      ++bull;
+    else {
+      for (int i = 0; i < num.size(); ++i) {
+        if (g3 == num[i])
+          ++cow;
       }
+    }
 
-      if (g4 == num[3])
-          ++bull;
-      else{
-	  for(int i = 0; i < num.size(); ++i){
-	      if(g4 == num[i])
-		  ++cow;
-	  }
+    if (g4 == num[3])
+      ++bull;
+    else {
+      for (int i = 0; i < num.size(); ++i) {
+        if (g4 == num[i])
+          ++cow;
       }
+    }
 
     std::cout << "You entered " << bull << " bulls and " << cow << " cows\n";
-    if(bull < 4){
-	bull = 0;
-	cow = 0;
+    if (bull < 4) {
+      bull = 0;
+      cow = 0;
     }
-   }
-      /*for (int i = 0; i < num.size(); ++i) {
-      if (g1 == num[i])
-        if (i == 0) {
-          ++bull;
-          continue;
-        } else {
-          ++cow;
-          continue;
-        }
-      else{
-	++cow;
-	continue;
-      }
-
-      // do the same for g2 g3 g4
-      if (g2 == num[i])
-        if (i == 1) {
-          ++bull;
-          continue;
-        } else {
-          ++cow;
-          continue;
-        }
-      else{
-	++cow;
-	continue;
-      }
-
-      if (g3 == num[i])
-        if (i == 2) {
-          ++bull;
-          continue;
-        } else {
-          ++cow;
-          continue;
-        }
-      else{
-	++cow;
-	continue;
-      }
-
-      if (g4 == num[i])
-        if (i == 3) {
-          ++bull;
-          continue;
-        } else {
-          ++cow;
-          continue;
-        }
-      else{
-	++cow;
-	continue;
-	}*/
-    //}
-
-//std::cout << "You entered " << bull << " bulls and " << cow << " cows\n";
-//}
+  }
 }
 
 void run() {
@@ -190,6 +162,10 @@ void run() {
 int main() {
   // for(int i : integers())
   // std::cout << i << " " << "\n";
-  run();
-  return 0;
+  try {
+    run();
+    return 0;
+  } catch (const std::runtime_error &e) {
+    std::cerr << e.what();
+  }
 }
