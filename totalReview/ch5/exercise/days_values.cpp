@@ -6,7 +6,7 @@
 
 /*Take input for day of week and value. Dont accept incorrect days, but do accept abbreviations.*/
 
-std::vector<std::string> days;
+std::vector<std::string> days = {"Monday", "monday", "mon", "mon", "Tueday", "tuesday", "tues", "Tues", "Wendsday", "wendsday", "weds", "Weds", "Thursday", "thursday", "turs", "Thurs", "Friday", "friday", "fri", "Fri", "Saturday", "saturday", "sat", "Sat", "Sunday", "sunday", "sun", "Sun"};
 
 void check_invalid_string_input(std::string s){
   if(s == std::string(s)){
@@ -23,20 +23,17 @@ void check_invalid_string_input(std::string s){
     std::cout << "Nope\n";
 }
 
-void check_for_int(){
-  
-}
-
-void test(){
-  std::string s1 = "hello\n";
-  int num = std::stoi(s1);
-  std::cout << num << "\n";
-}
-
 void input_days(){
   std::string day;
   while(true){
     std::cin >> day;
+    for(int i = 0; i < days.size(); ++i){
+      //write logic here to iterate over the whole vector for any matches if not then print invalid input and take inpunt again and repeat. 
+      if(day != days[i]){
+	std::cout << "Invalid input\n";
+	std::cin >> day;
+      }
+    }
     if(!std::cin)
       error("Not a string value\n");
     else
@@ -50,8 +47,6 @@ void input_days(){
 }
 
 int main(){
-  //input_days();
-  //std::string s = "1";
-  //check_invalid_string_input(s);
-  test();
+  input_days();
+  return 0;
 }
