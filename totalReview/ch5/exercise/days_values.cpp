@@ -13,8 +13,10 @@ std::vector<std::string> days = {
     "Thursday", "thursday", "turs",     "Thurs",    "Friday", "friday",
     "fri",      "Fri",      "Saturday", "saturday", "sat",    "Sat",
     "Sunday",   "sunday",   "sun",      "Sun"};
+int num;
+std::string current_day;
 
-std::string input_days() {
+void input_days() {
   std::string day;
   while (true) {
     std::cin >> day;
@@ -33,38 +35,58 @@ std::string input_days() {
           continue;
         }
       } else {
-        std::cout << "Match found\n";
+        //std::cout << "Match found\n";
         std::cin.clear();
         break;
       }
     }
     break;
   }
-  return day;
+  current_day = day;
+  //return day;
 }
 
-int value() {
-  int val;
+void value() {
+  double val;
+  int whole_number;
+  double check_int;
+  int i = 0;
   while (true) {
+    if(i == 1)
+      break;
     std::cout << "Enter a value:\n";
     std::cin >> val;
 
-    // something to exit
-    if (val == 0)
-      break;
+    if(val == 0)
+      exit(0);
 
-    /*if (!std::cin) {
-      std::cout << "Invalid input\n";
-      // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    if(!std::cin){
+      std::cout << "invalid input\n";
+      std::cin.clear();
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       continue;
     }
-    */
-    //break;
+
+    //logic for handling doubles
+    //if(static_cast<double>(val) == static_cast<double>(val))
+    if(val == static_cast<int>(val))
+      whole_number = static_cast<int>(val);
+    else{
+      std::cout << "invalid input\n";
+      std::cin.clear();
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+    ++i;
   }
-  return val;
+  num = whole_number;
 }
 
-void print_day_value() { std::cout << input_days() << " " << value() << "\n"; }
+void print_day_value() {
+  input_days();
+  value();
+  std::cout << "Day is " << current_day << " ";
+  std::cout << "Value is " << num << "\n";
+}
 
 int main() {
   print_day_value();
