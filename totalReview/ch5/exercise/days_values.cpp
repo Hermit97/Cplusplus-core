@@ -21,12 +21,9 @@ void input_days() {
   while (true) {
     std::cin >> day;
     if (day == "q") {
-      // days.pop_back();
       break;
     }
     for (int i = 0; i < days.size(); ++i) {
-      // write logic here to iterate over the whole vector for any matches if
-      // not then print invalid input and take inpunt again and repeat.
       if (day != days[i]) {
         if (i == days.size() - 1) {
           std::cout << "Invalid input\n";
@@ -43,7 +40,6 @@ void input_days() {
     break;
   }
   current_day = day;
-  //return day;
 }
 
 void value() {
@@ -68,7 +64,6 @@ void value() {
     }
 
     //logic for handling doubles
-    //if(static_cast<double>(val) == static_cast<double>(val))
     if(val == static_cast<int>(val))
       whole_number = static_cast<int>(val);
     else{
