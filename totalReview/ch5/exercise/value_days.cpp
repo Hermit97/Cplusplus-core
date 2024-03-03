@@ -73,12 +73,12 @@ void input_days() {
         if (day == inner_days) {
           std::cout << "Match found: " << day << "\n";
           days.push_back(day);
+	  //put a bool to say it worked then put a if on the oputter for loop to break and go back to the while loop since it workd?
         } else{
           std::cout << "Non existent input entered. Try again.\n";
-          std::cin.clear();
+          //std::cin.clear();
           std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
-	++i;
 	if(i == inner_week_days())
 	  break;
       }
