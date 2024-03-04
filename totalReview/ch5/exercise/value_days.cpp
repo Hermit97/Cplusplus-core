@@ -17,7 +17,7 @@ std::vector<std::vector<std::string>> match_days = {
     {"Monday", "monday", "mon"},
     {"Tuesday", "tuesday", "tues", "Tues"},
     {"Wendsday", "wendsday", "weds", "Weds"},
-    {"Thursday", "thursday", "turs", "Thurs"},
+    {"Thursday", "thursday", "thurs", "Thurs"},
     {"Friday", "friday", "fri", "Fri"},
     {"Saturday", "saturday", "sat", "Sat"},
     {"Sunday", "sunday", "sun", "Sun"}};
@@ -89,6 +89,7 @@ void input_days() {
 	break;
       }
     }
+
     if(match_found == true){
        std::cout << "Match found: " << day << "\n";
         days.push_back(day);
@@ -110,14 +111,12 @@ void input_days() {
     int whole_number;
     double check_int;
     int i = 0;
-    while (true) {
-      if (i == 1)
-        break;
+    int iterator = 0;
+    while (iterator < 7) {
+      //if (i == 1)
+      //break;
       std::cout << "Enter a value:\n";
       std::cin >> val;
-
-      if (val == 0)
-        exit(0);
 
       if (!std::cin) {
         std::cout << "invalid input\n";
@@ -128,9 +127,11 @@ void input_days() {
 
       // logic for handling doubles
       // if(static_cast<double>(val) == static_cast<double>(val))
-      if (val == static_cast<int>(val))
+      if (val == static_cast<int>(val)){
         whole_number = static_cast<int>(val);
-      else {
+	num.push_back(whole_number);
+	++iterator;
+      }else {
         std::cout << "invalid input\n";
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -140,7 +141,18 @@ void input_days() {
     // num = whole_number;
   }
 
-  void print_day_value() { input_days(); }
+  void print_day_value()
+  {
+    input_days();
+    value();
+
+    for(int i = 0; i < days.size() && i < num.size(); ++i){
+      std::cout << days[i] << " " << num[i];
+      std::cout << " ";
+
+    }
+    std::cout << "\n";
+  }
 
   int main() {
     print_day_value();
