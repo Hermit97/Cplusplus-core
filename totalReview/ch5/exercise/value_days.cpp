@@ -28,8 +28,6 @@ int inner_vector_size() {
   for (const auto &weeks : match_days) {
     ++i;
   }
-  // std::cout << "The total inner vectors are " << i << "\n";
-
   return i;
 }
 
@@ -41,7 +39,6 @@ int inner_week_days() {
       ++i;
     }
   }
-  // std::cout << "The total inner vectors are " << i << "\n";
   return i;
 }
 
@@ -52,10 +49,7 @@ void input_days() {
   int reset = 0;
   bool match_found = true;
 
-  //while (true) {
   while (iterates < 7) {
-    // i = 0;
-    // reset = 0;
     std::cout << "Enter days, type done or d to finish.\n";
     std::cin >> day;
     if (day == "q")
@@ -77,8 +71,6 @@ void input_days() {
           match_found = true;
           break;
         } else {
-          // std::cin.clear();
-          // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
           match_found = false;
           ++i;
           if (i == inner_week_days())
@@ -97,7 +89,6 @@ void input_days() {
       std::cout << "Invalid input:" << day << "\n";
       --iterates;
     }
-
     ++iterates;
   }
 
@@ -113,8 +104,6 @@ void input_days() {
     int i = 0;
     int iterator = 0;
     while (iterator < 7) {
-      //if (i == 1)
-      //break;
       std::cout << "Enter a value:\n";
       std::cin >> val;
 
@@ -126,7 +115,6 @@ void input_days() {
       }
 
       // logic for handling doubles
-      // if(static_cast<double>(val) == static_cast<double>(val))
       if (val == static_cast<int>(val)){
         whole_number = static_cast<int>(val);
 	num.push_back(whole_number);
@@ -138,18 +126,15 @@ void input_days() {
       }
       ++i;
     }
-    // num = whole_number;
   }
 
   void print_day_value()
   {
     input_days();
     value();
-
     for(int i = 0; i < days.size() && i < num.size(); ++i){
       std::cout << days[i] << " " << num[i];
       std::cout << " ";
-
     }
     std::cout << "\n";
   }
