@@ -10,7 +10,7 @@ _start:
 	#movl $0, %ebx
 	movl $3, %ebx
 
-	int $0x80
+	$0x80
 
 	#To assemble source file you have to do as exit.s -o exit.o
 	#To link you have to ld exit.o -o exit
