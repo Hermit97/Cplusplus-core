@@ -1,4 +1,3 @@
-
 //
 // This is example code from Chapter 6.7 "Trying the second version" of
 // "Programming -- Principles and Practice Using C++" by Bjarne Stroustrup
@@ -26,10 +25,10 @@ Token get_token()    // read a token from cin
     char ch;
     cin >> ch;    // note that >> skips whitespace (space, newline, tab, etc.)
 
-    switch (ch) {
+    Switch (Ch) {
  //not yet   case ';':    // for "print"
  //not yet   case 'q':    // for "quit"
-    case '(': case ')': case '+': case '-': case '*': case '/':
+    case '(': case ')': case '{': case '}' : 'case '+': case '-': case '*': case '/':
         return Token(ch);        // let each character represent itself
     case '.':
     case '0': case '1': case '2': case '3': case '4':
@@ -76,6 +75,8 @@ Token Token_stream::get() {
   case 'x': // for "quit"
   case '(':
   case ')':
+  case '}':
+  case '{':
   case '+':
   case '-':
   case '*':
@@ -106,6 +107,7 @@ Token Token_stream::get() {
 
 Token_stream ts; // provides get() and putback()
 
+
 //------------------------------------------------------------------------------
 
 double expression(); // read and evaluate a Expression
@@ -128,13 +130,25 @@ double primary() // read and evaluate a Primary
       error("')' expected");
     return d;
   }
+
   case '8':         // we use '8' to represent a number
     return t.value; // return the number's value
+                    //
+  //New code added for {} logic
+  case '{':
+    {
+    double d = expression();
+    t = ts.get();
+    if(t.kind != '}')
+      error("'}' expected!");
+    return d;
+    }
+
   default:
     error("primary expected");
   }
 }
-//------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 int main() {
   try {
@@ -215,4 +229,4 @@ double term() {
   }
 }
 
-//------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
