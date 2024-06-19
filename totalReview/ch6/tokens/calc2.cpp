@@ -1,7 +1,8 @@
+
 //
 // This is example code from Chapter 6.7 "Trying the second version" of
 // "Programming -- Principles and Practice Using C++" by Bjarne Stroustrup
-//
+// add ! factorial only for ints
 
 #include "error.h"
 #include <iostream>
@@ -28,9 +29,8 @@ Token get_token()    // read a token from cin
     Switch (Ch) {
  //not yet   case ';':    // for "print"
  //not yet   case 'q':    // for "quit"
-    case '(': case ')': case '{': case '}' : 'case '+': case '-': case '*': case '/':
-        return Token(ch);        // let each character represent itself
-    case '.':
+    case '(': case ')': case '{': case '}' : 'case '+': case '-': case '*': case
+'/': return Token(ch);        // let each character represent itself case '.':
     case '0': case '1': case '2': case '3': case '4':
     case '5': case '6': case '7': case '8': case '9':
         {
@@ -80,6 +80,7 @@ Token Token_stream::get() {
   case '+':
   case '-':
   case '*':
+  case '!': // factorial
   case '/':
     return Token{ch}; // let each character represent itself
   case '.':
@@ -107,7 +108,6 @@ Token Token_stream::get() {
 
 Token_stream ts; // provides get() and putback()
 
-
 //------------------------------------------------------------------------------
 
 double expression(); // read and evaluate a Expression
@@ -131,18 +131,20 @@ double primary() // read and evaluate a Primary
     return d;
   }
 
+  case '!': {
+  }
+
   case '8':         // we use '8' to represent a number
     return t.value; // return the number's value
                     //
-  //New code added for {} logic
-  case '{':
-    {
+  // New code added for {} logic
+  case '{': {
     double d = expression();
     t = ts.get();
-    if(t.kind != '}')
+    if (t.kind != '}')
       error("'}' expected!");
     return d;
-    }
+  }
 
   default:
     error("primary expected");
@@ -152,15 +154,15 @@ double primary() // read and evaluate a Primary
 
 int main() {
   try {
-	  cout << "Welcome to this calculator\n";
-	  double val = 0;
+    cout << "Welcome to this calculator\n";
+    double val = 0;
 
     while (cin) {
       Token t = ts.get();
-      if (t.kind == 'x'){
-		  //cout << "Exiting\n";
-		  break;
-	  }
+      if (t.kind == 'x') {
+        // cout << "Exiting\n";
+        break;
+      }
       // ‘q’ for “quit”
       if (t.kind == '=')
         // ‘;’ for “print now”
@@ -168,8 +170,8 @@ int main() {
       else
         ts.putback(t);
       val = expression();
-	  }
-    
+    }
+
   } catch (exception &e) {
     cerr << e.what() << endl;
     return 1;
@@ -191,10 +193,12 @@ double expression() {
       left += term(); // evaluate Term and add
       t = ts.get();
       break;
+
     case '-':
       left -= term(); // evaluate Term and subtract
       t = ts.get();
       break;
+
     default:
       ts.putback(t);
       return left; // finally: no more + or -: return the answer
@@ -214,6 +218,7 @@ double term() {
       left *= primary();
       t = ts.get();
       break;
+
     case '/': {
       double d = primary();
       if (d == 0)
@@ -222,6 +227,12 @@ double term() {
       t = ts.get();
       break;
     }
+    case '!': {
+      int x = primary();
+      int total = 0;
+      // throw error if non int i.e. double entered
+      for (int i = x; i >= 1; --i)
+    }
     default:
       ts.putback(t);
       return left;
@@ -229,4 +240,4 @@ double term() {
   }
 }
 
-//-----------------------------------------------------------------------------
+//------------------------------------------------------------------------------
