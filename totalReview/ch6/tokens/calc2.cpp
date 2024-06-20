@@ -131,11 +131,9 @@ double primary() // read and evaluate a Primary
     return d;
   }
 
-  case '!': {
-  }
-
-  case '8':         // we use '8' to represent a number
+  case '8':         // we use '8' to represent a number;
     return t.value; // return the number's value
+	//if prior token is '!' then need logic here to handle the math because its not being read in the case for '!'some way to make the cpu look for the code below in case '!' from here once the number t.value is returned. 
                     //
   // New code added for {} logic
   case '{': {
@@ -144,6 +142,22 @@ double primary() // read and evaluate a Primary
     if (t.kind != '}')
       error("'}' expected!");
     return d;
+  }
+
+  case '!': {
+	  int face;
+    if (t.value == '8')
+		face = t.value;
+    int left = expression();
+    // throw error if non int i.e. double entered
+    for (int i = t.value; i >= 1; --i)
+		face = face * i; //getting 0 for the result math is wrong here.
+	return face;
+    ts.get();
+	if(t.kind != '8')
+		error("Expected value type");
+    // no ts.get() i.e. not grabbing the next token
+    return left;
   }
 
   default:
@@ -199,6 +213,9 @@ double expression() {
       t = ts.get();
       break;
 
+    case '8':         // we use '8' to represent a number
+      return t.value; // return the number's value
+
     default:
       ts.putback(t);
       return left; // finally: no more + or -: return the answer
@@ -227,17 +244,11 @@ double term() {
       t = ts.get();
       break;
     }
-    case '!': {
-      int x = primary();
-      int total = 0;
-      // throw error if non int i.e. double entered
-      for (int i = x; i >= 1; --i)
-    }
+
     default:
       ts.putback(t);
       return left;
     }
   }
 }
-
 //------------------------------------------------------------------------------
