@@ -14,6 +14,7 @@ public:
   char kind;    // what kind of token
   double value; // for numbers: a value
   bool factorial = false;
+  int oldvalue;
   Token(char ch) // make a Token from a char
       : kind(ch), value(0) {}
   Token(char ch, double val) // make a Token from a char and a double
@@ -51,10 +52,14 @@ class Token_stream {
 public:
   Token get();           // get a Token
   void putback(Token t); // put a Token back
+  void preserveOldTokenFact(
+      Token_stream t); // putt he old token here to be used later
 private:
   bool full{false};     // is there a Token in the buffer?
   Token buffer = {'0'}; // where we store a 'putback' Token
 };
+
+void Token_stream::preserveOldTokenFact(Token_stream old_token) {}
 
 void Token_stream::putback(Token t) {
   if (full)
@@ -95,6 +100,8 @@ Token Token_stream::get() {
   case '7':
   case '8':
   case '9': {
+    if (t.kind == '8')
+      Token::oldvalue = ch;
     cin.putback(ch);
     double val;
     cin >> val;
@@ -132,20 +139,7 @@ double primary() // read and evaluate a Primary
     return d;
   }
 
-  case '8': // we use '8' to represent a number;
-	  //if (t.factorial == true) {
-	  if(ts.kind == '!'){
-      int face;
-      face = t.value;
-      // throw error if non int i.e. double entered
-      for (int i = t.value; i >= 1; --i)
-        face = face * i; // getting 0 for the result math is wrong here.
-      ts.get();
-      return face;
-      // ts.get();
-      if (t.kind != '8')
-        error("Expected value type");
-    }
+  case '8':         // we use '8' to represent a number;
     return t.value; // return the number's value
                     // if prior token is '!' then need logic here to handle the
                     // math because its not being read in the case for '!'some
@@ -164,8 +158,8 @@ double primary() // read and evaluate a Primary
   case '!': {
     t.factorial = true;
     double d = expression();
-    //t = ts.get();
-    return d;
+    // t = ts.get();
+    // return d;
   }
 
   default:
@@ -221,22 +215,20 @@ double expression() {
       t = ts.get();
       break;
 
-    case '8': // we use '8' to represent a number
-              // do the factorial math logic here since afrer primary ! it
-              // executes these instructions
-      if (t.factorial == true) {
-        int face;
-        if (t.value == '8')
-          face = t.value;
-        // throw error if non int i.e. double entered
-        for (int i = t.value; i >= 1; --i)
-          face = face * i; // getting 0 for the result math is wrong here.
-        return face;
-        ts.get();
-        if (t.kind != '8')
-          error("Expected value type");
-      }
+    case '!': {
+      int face;
+      // if (t.value == '8')
+      // face = t.value;
+      // throw error if non int i.e. double entered
+      for (int i = t.value; i >= 1; --i)
+        face = face * i; // getting 0 for the result math is wrong here.
+      return face;
+      ts.get();
+      if (t.kind != '8')
+        error("Expected value type");
+    }
 
+    case '8':         // we use '8' to represent a number
       return t.value; // return the number's value
 
     default:
