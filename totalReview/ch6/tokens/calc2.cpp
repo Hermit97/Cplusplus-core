@@ -141,14 +141,9 @@ double primary() // read and evaluate a Primary
     return d;
   }
 
-  case '8':         // we use '8' to represent a number;
-    return t.value; // return the number's value
-                    // if prior token is '!' then need logic here to handle the
-                    // math because its not being read in the case for '!'some
-                    // way to make the cpu look for the code below in case '!'
-                    // from here once the number t.value is returned.
-                    //
-  // New code added for {} logic
+  case '8':         
+    return t.value; 
+
   case '{': {
     double d = expression();
     t = ts.get();
@@ -160,8 +155,6 @@ double primary() // read and evaluate a Primary
   case '!': {
     t.factorial = true;
     double d = expression();
-    // t = ts.get();
-    // return d;
   }
 
   default:
@@ -172,7 +165,6 @@ double primary() // read and evaluate a Primary
 
 int main() {
   try {
-    cout << "Welcome to this calculator\n";
     double val = 0;
 
     while (cin) {
@@ -207,6 +199,9 @@ double expression() {
   Token t = ts.get();   // get the next token
   while (true) {
     switch (t.kind) {
+	case 'x':
+		break;
+		
     case '+':
       left += term(); // evaluate Term and add
       t = ts.get();
@@ -261,6 +256,8 @@ double term() {
       t = ts.get();
       break;
     }
+	case 'x':
+		break;
 
     default:
       ts.putback(t);
