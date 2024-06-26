@@ -100,8 +100,6 @@ Token Token_stream::get() {
   case '7':
   case '8':
   case '9': {
-    if (t.kind == '8')
-      Token::oldvalue = ch;
     cin.putback(ch);
     double val;
     cin >> val;
@@ -218,7 +216,7 @@ double expression() {
     case '!': {
       int face;
       // if (t.value == '8')
-      // face = t.value;
+      face = t.value;
       // throw error if non int i.e. double entered
       for (int i = t.value; i >= 1; --i)
         face = face * i; // getting 0 for the result math is wrong here.
