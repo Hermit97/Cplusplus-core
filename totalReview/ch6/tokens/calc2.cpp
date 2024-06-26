@@ -9,6 +9,7 @@
 using namespace std;
 
 //------------------------------------------------------------------------------
+int od;
 class Token {
 public:
   char kind;    // what kind of token
@@ -127,11 +128,14 @@ double term(); // read and evaluate a Term
 double primary() // read and evaluate a Primary
 {
   Token t = ts.get();
+  if (t.kind == '8')
+    od = t.value;
   switch (t.kind) {
   case '(': // handle '(' expression ')'
   {
     double d = expression();
     t = ts.get();
+
     if (t.kind != ')')
       error("')' expected");
     return d;
@@ -215,12 +219,12 @@ double expression() {
 
     case '!': {
       int face;
-      // if (t.value == '8')
-      face = t.value;
+      int fact = 1;
+      face = od;
       // throw error if non int i.e. double entered
-      for (int i = t.value; i >= 1; --i)
-        face = face * i; // getting 0 for the result math is wrong here.
-      return face;
+      for (int i = face; i >= 1; --i)
+        fact = fact * i; // getting 0 for the result math is wrong here.
+      return fact;
       ts.get();
       if (t.kind != '8')
         error("Expected value type");
