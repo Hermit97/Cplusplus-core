@@ -218,7 +218,7 @@ double expression() {
       face = od;
       // throw error if non int i.e. double entered
       for (int i = face; i >= 1; --i)
-        fact = fact * i; // getting 0 for the result math is wrong here.
+	  fact = (fact * i); // getting 0 for the result math is wrong here.
       return fact;
       ts.get();
       if (t.kind != '8')
@@ -244,7 +244,7 @@ double term() {
   while (true) {
     switch (t.kind) {
     case '*':
-      left *= primary();
+	left *= (primary()); //have primry check if the next token is ! so that it does rhat math before coming back here to multply against left.
       t = ts.get();
       break;
 
