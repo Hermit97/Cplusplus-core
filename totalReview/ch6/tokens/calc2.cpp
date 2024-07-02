@@ -124,6 +124,7 @@ double expression(); // read and evaluate a Expression
 double term(); // read and evaluate a Term
 
 //------------------------------------------------------------------------------
+int factorial();
 
 double primary() // read and evaluate a Primary
 {
@@ -141,8 +142,8 @@ double primary() // read and evaluate a Primary
     return d;
   }
 
-  case '8':         
-    return t.value; 
+  case '8':
+    return t.value;
 
   case '{': {
     double d = expression();
@@ -153,8 +154,9 @@ double primary() // read and evaluate a Primary
   }
 
   case '!': {
-    t.factorial = true;
-    double d = expression();
+    // t.factorial = true;
+    // double d = expression();
+    factorial();
   }
 
   default:
@@ -199,9 +201,9 @@ double expression() {
   Token t = ts.get();   // get the next token
   while (true) {
     switch (t.kind) {
-	case 'x':
-		break;
-		
+    case 'x':
+      break;
+
     case '+':
       left += term(); // evaluate Term and add
       t = ts.get();
@@ -212,18 +214,18 @@ double expression() {
       t = ts.get();
       break;
 
-    case '!': {
-      int face;
-      int fact = 1;
-      face = od;
-      // throw error if non int i.e. double entered
-      for (int i = face; i >= 1; --i)
-	  fact = (fact * i); // getting 0 for the result math is wrong here.
-      return fact;
-      ts.get();
-      if (t.kind != '8')
-        error("Expected value type");
-    }
+      /*case '!': {
+  int face;
+  int fact = 1;
+  face = od;
+  // throw error if non int i.e. double entered
+  for (int i = face; i >= 1; --i)
+    fact = (fact * i); // getting 0 for the result math is wrong here.
+  return fact;
+  ts.get();
+  if (t.kind != '8')
+    error("Expected value type");
+            }*/
 
     case '8':         // we use '8' to represent a number
       return t.value; // return the number's value
@@ -234,17 +236,42 @@ double expression() {
     }
   }
 }
+int factorial() {
+  Token t = ts.get();
+  if (t.kind == '8')
+    od = t.value;
+
+  int face;
+  int fact = 1;
+  if (t.kind == '!') {
+    face = od;
+    // throw error if non int i.e. double entered
+    for (int i = face; i >= 1; --i)
+      fact = (fact * i); // getting 0 for the result math is wrong here.
+    return fact;
+    ts.get();
+    if (t.kind != '8')
+      error("Expected value type");
+  }
+
+  //return primary();
+  ts.putback(t);
+
+  //return fact;
+}
 
 //------------------------------------------------------------------------------
 
 double term() {
-  double left = primary();
-  Token t = ts.get(); // get the next token
+  double left = factorial(); // instead of primary()
+  Token t = ts.get();        // get the next token
 
   while (true) {
     switch (t.kind) {
     case '*':
-	left *= (primary()); //have primry check if the next token is ! so that it does rhat math before coming back here to multply against left.
+      // left *= (primary()); //have primry check if the next token is ! so that
+      // it does rhat math before coming back here to multpy against left.
+      left *= factorial();
       t = ts.get();
       break;
 
@@ -256,8 +283,8 @@ double term() {
       t = ts.get();
       break;
     }
-	case 'x':
-		break;
+    case 'x':
+      break;
 
     default:
       ts.putback(t);
