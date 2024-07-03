@@ -153,11 +153,11 @@ double primary() // read and evaluate a Primary
     return d;
   }
 
-  case '!': {
-    // t.factorial = true;
-    // double d = expression();
-    factorial();
-  }
+    /*case '!': {
+// t.factorial = true;
+// double d = expression();
+factorial();
+  }*/
 
   default:
     error("primary expected");
@@ -236,42 +236,43 @@ double expression() {
     }
   }
 }
-int factorial() {
-  Token t = ts.get();
-  if (t.kind == '8')
-    od = t.value;
 
-  int face;
+int factorial() {
+  int face = primary();
+  Token t = ts.get();
+
   int fact = 1;
-  if (t.kind == '!') {
-    face = od;
+  switch (t.kind) {
+  case '!': {
+    // face = od;
     // throw error if non int i.e. double entered
     for (int i = face; i >= 1; --i)
       fact = (fact * i); // getting 0 for the result math is wrong here.
     return fact;
-    ts.get();
+    // ts.get();
     if (t.kind != '8')
       error("Expected value type");
   }
-
-  //return primary();
-  ts.putback(t);
-
-  //return fact;
+  default:
+    ts.putback(t); // point of this?
+    return face;
+  }
 }
 
 //------------------------------------------------------------------------------
 
 double term() {
-  double left = factorial(); // instead of primary()
-  Token t = ts.get();        // get the next token
+  // double left = primary(); // instead of primary()
+  double left = factorial();
+  Token t = ts.get(); // get the next token
 
   while (true) {
     switch (t.kind) {
     case '*':
-      // left *= (primary()); //have primry check if the next token is ! so that
-      // it does rhat math before coming back here to multpy against left.
+      // left *= factorial(); //have primry check if the next token is ! so
+      // that
       left *= factorial();
+      // it does rhat math before coming back here to multpy against left.
       t = ts.get();
       break;
 
