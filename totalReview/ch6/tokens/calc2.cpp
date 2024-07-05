@@ -1,5 +1,4 @@
 
-//
 // This is example code from Chapter 6.7 "Trying the second version" of
 // "Programming -- Principles and Practice Using C++" by Bjarne Stroustrup
 // add ! factorial only for ints
@@ -132,6 +131,9 @@ double primary() // read and evaluate a Primary
   if (t.kind == '8')
     od = t.value;
   switch (t.kind) {
+  case 'x':
+    exit(0);
+
   case '(': // handle '(' expression ')'
   {
     double d = expression();
@@ -153,12 +155,6 @@ double primary() // read and evaluate a Primary
     return d;
   }
 
-    /*case '!': {
-// t.factorial = true;
-// double d = expression();
-factorial();
-  }*/
-
   default:
     error("primary expected");
   }
@@ -172,8 +168,9 @@ int main() {
     while (cin) {
       Token t = ts.get();
       if (t.kind == 'x') {
-        // cout << "Exiting\n";
-        break;
+        cout << "Exiting\n";
+        exit(0);
+        // break;
       }
       // ‘q’ for “quit”
       if (t.kind == '=')
@@ -189,7 +186,6 @@ int main() {
     return 1;
   } catch (...) {
     cerr << "exception \n";
-    // keep_window_open ("~1");
     return 2;
   }
 }
@@ -202,30 +198,17 @@ double expression() {
   while (true) {
     switch (t.kind) {
     case 'x':
-      break;
+      exit(0);
 
     case '+':
-      left += term(); // evaluate Term and add
+      left += factorial(); // evaluate Term and add
       t = ts.get();
       break;
 
     case '-':
-      left -= term(); // evaluate Term and subtract
+      left -= factorial(); // evaluate Term and subtract
       t = ts.get();
       break;
-
-      /*case '!': {
-  int face;
-  int fact = 1;
-  face = od;
-  // throw error if non int i.e. double entered
-  for (int i = face; i >= 1; --i)
-    fact = (fact * i); // getting 0 for the result math is wrong here.
-  return fact;
-  ts.get();
-  if (t.kind != '8')
-    error("Expected value type");
-            }*/
 
     case '8':         // we use '8' to represent a number
       return t.value; // return the number's value
@@ -243,13 +226,16 @@ int factorial() {
 
   int fact = 1;
   switch (t.kind) {
+  case 'x':
+    exit(0);
   case '!': {
-    // face = od;
-    // throw error if non int i.e. double entered
+    if (face == 0) {
+      face = 1;
+      return face;
+    }
     for (int i = face; i >= 1; --i)
       fact = (fact * i); // getting 0 for the result math is wrong here.
     return fact;
-    // ts.get();
     if (t.kind != '8')
       error("Expected value type");
   }
@@ -262,22 +248,18 @@ int factorial() {
 //------------------------------------------------------------------------------
 
 double term() {
-  // double left = primary(); // instead of primary()
   double left = factorial();
   Token t = ts.get(); // get the next token
 
   while (true) {
     switch (t.kind) {
     case '*':
-      // left *= factorial(); //have primry check if the next token is ! so
-      // that
       left *= factorial();
-      // it does rhat math before coming back here to multpy against left.
       t = ts.get();
       break;
 
     case '/': {
-      double d = primary();
+      double d = factorial();
       if (d == 0)
         error("divide by zero");
       left /= d;
@@ -285,7 +267,7 @@ double term() {
       break;
     }
     case 'x':
-      break;
+      exit(0);
 
     default:
       ts.putback(t);
