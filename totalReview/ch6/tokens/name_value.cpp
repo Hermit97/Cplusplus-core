@@ -14,14 +14,14 @@ int main() {
   bool still_running = true;
 
   while (still_running) {
-    std::cin >> person.Name_value::name;
-    std::cin >> person.Name_value::score;
-    if (name == "Noname" && score == 0)
+    std::cin >> Name_value::name;
+    std::cin >> Name_value::score;
+    if (Name_value:: name == "Noname" && Name_value::score == 0)
       break;
 
     if (names.size() == 0 && scores.size() == 0) {
-      names.push_back(name);
-      scores.push_back(score);
+      names.push_back(Name_value::name);
+      scores.push_back(Name_value::score);
       continue;
     }
 
