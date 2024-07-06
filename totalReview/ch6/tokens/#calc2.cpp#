@@ -1,18 +1,20 @@
 
-//
 // This is example code from Chapter 6.7 "Trying the second version" of
 // "Programming -- Principles and Practice Using C++" by Bjarne Stroustrup
-//
+// add ! factorial only for ints
 
 #include "error.h"
 #include <iostream>
 using namespace std;
 
 //------------------------------------------------------------------------------
+int od;
 class Token {
 public:
-  char kind;     // what kind of token
-  double value;  // for numbers: a value
+  char kind;    // what kind of token
+  double value; // for numbers: a value
+  bool factorial = false;
+  int oldvalue;
   Token(char ch) // make a Token from a char
       : kind(ch), value(0) {}
   Token(char ch, double val) // make a Token from a char and a double
@@ -26,12 +28,11 @@ Token get_token()    // read a token from cin
     char ch;
     cin >> ch;    // note that >> skips whitespace (space, newline, tab, etc.)
 
-    switch (ch) {
+    Switch (Ch) {
  //not yet   case ';':    // for "print"
  //not yet   case 'q':    // for "quit"
-    case '(': case ')': case '+': case '-': case '*': case '/':
-        return Token(ch);        // let each character represent itself
-    case '.':
+    case '(': case ')': case '{': case '}' : 'case '+': case '-': case '*': case
+'/': return Token(ch);        // let each character represent itself case '.':
     case '0': case '1': case '2': case '3': case '4':
     case '5': case '6': case '7': case '8': case '9':
         {
@@ -51,10 +52,14 @@ class Token_stream {
 public:
   Token get();           // get a Token
   void putback(Token t); // put a Token back
+  void preserveOldTokenFact(
+      Token_stream t); // putt he old token here to be used later
 private:
   bool full{false};     // is there a Token in the buffer?
   Token buffer = {'0'}; // where we store a 'putback' Token
 };
+
+void Token_stream::preserveOldTokenFact(Token_stream old_token) {}
 
 void Token_stream::putback(Token t) {
   if (full)
@@ -72,13 +77,16 @@ Token Token_stream::get() {
   cin >> ch;
 
   switch (ch) {
-  case ';': // for "print"
+  case '=': // for "print"
   case 'x': // for "quit"
   case '(':
   case ')':
+  case '}':
+  case '{':
   case '+':
   case '-':
   case '*':
+  case '!': // factorial
   case '/':
     return Token{ch}; // let each character represent itself
   case '.':
@@ -115,100 +123,156 @@ double expression(); // read and evaluate a Expression
 double term(); // read and evaluate a Term
 
 //------------------------------------------------------------------------------
+int factorial();
 
 double primary() // read and evaluate a Primary
 {
   Token t = ts.get();
+  if (t.kind == '8')
+    od = t.value;
   switch (t.kind) {
+  case 'x':
+    exit(0);
+
   case '(': // handle '(' expression ')'
   {
     double d = expression();
     t = ts.get();
+
     if (t.kind != ')')
       error("')' expected");
     return d;
   }
-  case '8':         // we use '8' to represent a number
-    return t.value; // return the number's value
+
+  case '8':
+    return t.value;
+
+  case '{': {
+    double d = expression();
+    t = ts.get();
+    if (t.kind != '}')
+      error("'}' expected!");
+    return d;
+  }
+
   default:
     error("primary expected");
   }
 }
-//------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 int main() {
-  double val = 0;
+  try {
+    double val = 0;
 
-  while (cin) {
-    Token t = ts.get();
-    if (t.kind == 'x')
-      break;
-    // ‘q’ for “quit”
-    if (t.kind == ';')
-      // ‘;’ for “print now”
-      cout << "=" << val << '\n';
-    else
-      ts.putback(t);
-    val = expression();
-  }
-  catch (exception &e) {
+    while (cin) {
+      Token t = ts.get();
+      if (t.kind == 'x') {
+        cout << "Exiting\n";
+        exit(0);
+        // break;
+      }
+      // ‘q’ for “quit”
+      if (t.kind == '=')
+        // ‘;’ for “print now”
+        cout << "=" << val << '\n';
+      else
+        ts.putback(t);
+      val = expression();
+    }
+
+  } catch (exception &e) {
     cerr << e.what() << endl;
     return 1;
-  }
-  catch (...) {
+  } catch (...) {
     cerr << "exception \n";
-    // keep_window_open ("~1");
     return 2;
   }
 }
 
-  //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
-  double expression() {
-    double left = term(); // read and evaluate a Term
-    Token t = ts.get();   // get the next token
-    while (true) {
-      switch (t.kind) {
-      case '+':
-        left += term(); // evaluate Term and add
-        t = ts.get();
-        break;
-      case '-':
-        left -= term(); // evaluate Term and subtract
-        t = ts.get();
-        break;
-      default:
-        ts.putback(t);
-        return left; // finally: no more + or -: return the answer
-      }
+double expression() {
+  double left = term(); // read and evaluate a Term
+  Token t = ts.get();   // get the next token
+  while (true) {
+    switch (t.kind) {
+    case 'x':
+      exit(0);
+
+    case '+':
+      left += factorial(); // evaluate Term and add
+      t = ts.get();
+      break;
+
+    case '-':
+      left -= factorial(); // evaluate Term and subtract
+      t = ts.get();
+      break;
+
+    case '8':         // we use '8' to represent a number
+      return t.value; // return the number's value
+
+    default:
+      ts.putback(t);
+      return left; // finally: no more + or -: return the answer
     }
   }
+}
 
-  //------------------------------------------------------------------------------
+int factorial() {
+  int face = primary();
+  Token t = ts.get();
 
-  double term() {
-    double left = primary();
-    Token t = ts.get(); // get the next token
+  int fact = 1;
+  switch (t.kind) {
+  case 'x':
+    exit(0);
+  case '!': {
+    if (face == 0) {
+      face = 1;
+      return face;
+    }
+    for (int i = face; i >= 1; --i)
+      fact = (fact * i); // getting 0 for the result math is wrong here.
+    return fact;
+    if (t.kind != '8')
+      error("Expected value type");
+  }
+  default:
+    ts.putback(t); // point of this?
+    return face;
+  }
+}
 
-    while (true) {
-      switch (t.kind) {
-      case '*':
-        left *= primary();
-        t = ts.get();
-        break;
-      case '/': {
-        double d = primary();
-        if (d == 0)
-          error("divide by zero");
-        left /= d;
-        t = ts.get();
-        break;
-      }
-      default:
-        ts.putback(t);
-        return left;
-      }
+//------------------------------------------------------------------------------
+
+double term() {
+  double left = factorial();
+  Token t = ts.get(); // get the next token
+
+  while (true) {
+    switch (t.kind) {
+    case '*':
+      left *= factorial();
+      t = ts.get();
+      break;
+
+    case '/': {
+      double d = factorial();
+      if (d == 0)
+        error("divide by zero");
+      left /= d;
+      t = ts.get();
+      break;
+    }
+    case 'x':
+      exit(0);
+
+    default:
+      ts.putback(t);
+      return left;
     }
   }
-
-  //------------------------------------------------------------------------------
+}
+//------------------------------------------------------------------------------
