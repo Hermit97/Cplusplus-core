@@ -3,35 +3,47 @@
 
 class Name_value {
 public:
-  static std::string name;
-  static int score;
+	std::string name;
+	int score;
+
+	//constructor dec
+	Name_value(const std::string name, int score);
 };
+//constructor init
+	Name_value::Name_value(std::string name, int score) : name(name), score(score){}
   
 int main() {
- //Name_value person;
+	int score;
+	std::string name;
+	Name_value person(name,score);
+
   std::vector<Name_value> names;
   std::vector<Name_value> scores;
+  std::vector<Name_value> names_scores;
+
   bool still_running = true;
 
   while (still_running) {
-    std::cin >> Name_value::name;
-    std::cin >> Name_value::score;
-    if (Name_value:: name == "Noname" && Name_value::score == 0)
+    std::cin >> name;
+    std::cin >> score;
+
+    if (person.name == "Noname" && person.score == 0)
       break;
 
     if (names.size() == 0 && scores.size() == 0) {
-      names.push_back(Name_value::name);
-      scores.push_back(Name_value::score);
-      continue;
+		//names.push_back(person);
+		//scores.push_back(person);
+		names_scores.push_back(person);
+		continue;
     }
 
-    for (int i = 0; i < names.size(); ++i) {
-      if (Name_value::name == names[i]) {
+    for (Name_value nv : names) {
+      if (person.name == nv.name) {
         std::cout << "ERROR\n";
         exit(0);
       }
-      if (Name_value::name != names[i]) {
-        names.push_back(Name_value::name);
+      if (person.Name_value::name != names[i]) {
+        names.push_back(person.name);
         scores.push_back(Name_value::score);
         break;
       }
