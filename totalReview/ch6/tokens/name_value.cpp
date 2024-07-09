@@ -30,6 +30,7 @@ int main() {
     if (person.name == "Noname" && person.score == 0)
       break;
 
+    //vector are empty proceed to push person object into names_scores
     if (names.size() == 0 && scores.size() == 0) {
 		//names.push_back(person);
 		//scores.push_back(person);
@@ -42,9 +43,10 @@ int main() {
         std::cout << "ERROR\n";
         exit(0);
       }
-      if (person.Name_value::name != names[i]) {
-        names.push_back(person.name);
-        scores.push_back(Name_value::score);
+      if (person.Name_value::name != nv) {
+        //names.push_back(nv);
+        //scores.push_back(Name_value::score);
+		names_scores.push_back(person);
         break;
       }
     }
@@ -56,7 +58,7 @@ int main() {
   while (std::cin >> user) {
     if (user == 0)
       break;
-    for (int i = 0; i < scores.size(); ++i) {
+    for (Name_value nv : names_scores) {
       if (user == scores[i]) {
         std::cout << "Found match! You entered " << user << " name is "
                   << names[i] << "\n";
