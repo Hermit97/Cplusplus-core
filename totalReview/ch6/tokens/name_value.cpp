@@ -53,10 +53,10 @@ private:
     for (const auto &i : n) {
       // how to compare the two without using the classic for loop
       if (name == i.name) {
-        std::cout << "duplicate found...removing duplicate.\n";
+        std::cout << "Name duplicate found...removing duplicate.\n";
 		n.pop_back();
       }else if(score == i.score){
-        std::cout << "duplicate found...removing duplicate.\n";
+        std::cout << "Score duplicate found...removing duplicate.\n";
 		n.pop_back();
 	  }
     }
