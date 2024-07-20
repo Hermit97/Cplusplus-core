@@ -33,15 +33,20 @@ private:
     int score;
 
     while (still_running) {
+		score = 0;
       std::cout << "Enter name\n";
       std::cin >> name;
-	  duplicates(name, n);
+	  if(duplicates(name, score, n) == true){
+		  continue;
+	  }
       if (name == "No name")
         break;
 
       std::cout << "Enter score\n";
       std::cin >> score;
-	  duplicates(name, n);
+	  if(duplicates(name, score, n) == true){
+		  continue;
+	   }
       if (score == 0)
         break;
 
@@ -49,17 +54,19 @@ private:
     }
   }
 
-	void duplicates(std::string name, std::vector<Name_value> &n) {
+	bool duplicates(std::string name, int score, std::vector<Name_value> &n) {
+		bool found_duplicate = false;
     for (const auto &i : n) {
-      // how to compare the two without using the classic for loop
       if (name == i.name) {
         std::cout << "Name duplicate found...removing duplicate.\n";
-		n.pop_back();
-      }else if(score == i.score){
-        std::cout << "Score duplicate found...removing duplicate.\n";
-		n.pop_back();
+		return found_duplicate = true;
+      }
+	  if(score == i.score){
+		  std::cout << "Score duplicate found...removing duplicate.\n";
+		  return found_duplicate = true;
 	  }
     }
+	return found_duplicate = false;
   }
 	//user search name.
 };
