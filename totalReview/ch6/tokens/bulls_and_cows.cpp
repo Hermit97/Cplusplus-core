@@ -113,9 +113,6 @@ void guess() {
   int cow = 0;
 
   while (bull < 4) {
-    // std::cin >> g1 >> g2 >> g3n >> g4;
-    // check_input(g1, g2, g3, g4);
-    //  std::cin >> g1 >> g2 >> g3 >> g4;
     std::cin >> g1;
     if (!std::cin)
       error("Non int entered\n");
