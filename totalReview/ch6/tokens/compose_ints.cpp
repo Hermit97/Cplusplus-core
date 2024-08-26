@@ -39,8 +39,7 @@ int main(){
   }
 
   //Check if non char is entered
-  //BUG! position value is - 1 for i instead of the cuurent value
-  for(int i = 1; i <= 4; ++i)
+  for(int i = 1; i <= 4 - 1; ++i)
     if(!std::isdigit(num1[i])){
       std::cerr << "Non char entered in the " << i << " position\n";
       exit(0);
@@ -54,6 +53,10 @@ int main(){
     std::cout << x << "\n";
 
   //seperate digits and assign ones, hundreeds thousands etc to them and print them
-  
+  for(int i = 0; i < 4; ++i){
+	  if(i == 3)
+		  std::cout << digits[i] << "ones";
+  }
+   
   return 0;
 }
