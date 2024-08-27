@@ -17,7 +17,9 @@ that is, '5'– '0'==5.*/
   return converted_num;
 }*/
 int main(){
-  char num1[4];
+  int base;
+  //char num1[4];
+  char num1[base];
   char num2;
   char num3;
   char num4;
@@ -29,6 +31,8 @@ int main(){
 
   int digits[4];
   
+
+  std::cin >> base;
   //std::cin >> num1 >> num2 >> num3 >> num4;
   std::cin >> num1;
 

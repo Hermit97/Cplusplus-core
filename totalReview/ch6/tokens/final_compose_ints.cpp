@@ -1,36 +1,42 @@
 #include <iostream>
-#include <vector>
 #include <cctype>
+#include <cstring>
+#include <string>
+#include <vector>
+#include <algorithm>
 
-int main(){
-  std::vector<char> char_numbers;
-  std::vector<char> nums = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
-  bool not_char = false;
-  char numbers;
+int main() {
+  int length;
+  char numbers[4];
+  int final_number;
+  std::string temp;
+  std::vector<std::string> place = {"Ten Thousands", "Thousands", "Hundreds", "Ones"};
+  std::vector<int> nums;
+
   std::cin >> numbers;
 
-  for(char x : nums){
-    if(x != numbers)
-      not_char = true;
-    else {
-      not_char = false;
-      break;
-    }
-  } 
-
-  if(not_char == true){
-    std::cout << "Non char number entered.\n";
-    exit(0);
+  //no more than 4 digits
+  if(std::strlen(numbers) > 4){
+	  std::cout << "Out of range\n";
+	  return 1;
   }
 
+  // numbers are valid i.e. non single digits are invalid
+  for (int i = 0; i < std::strlen(numbers); ++i) {
+    if(!std::isdigit(numbers[i])){
+      std::cout << "Error\n";
+      exit(0);
 
- /* 
-  
-  char_numbers.push_back(numbers);
+      }     
+    }
 
-  for(char x : char_numbers)
-    std::cout << x << "\n";
+  std::reverse(place.begin(), place.end());
+  //convert char to int
+  for(int i = 0; i < std::strlen(numbers); ++i){
+	  final_number = numbers[i] - '0';
+	  //std::cout << "It was " << numbers[i] << " Now its " << final_number << " as an int\n";
+	  std::cout << final_number << " " << place[i] << "\n";
+  }
 
-    */
-  //convrt char to int then push it from char_numbers to a int vector
 }
+
