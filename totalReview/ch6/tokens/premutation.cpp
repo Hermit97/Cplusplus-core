@@ -12,7 +12,6 @@ int factorial(int num){
 		sum = sum * i;
 	}
 
-	//if i = 4 then sum will be 24
 	return sum;
 }
 
@@ -25,7 +24,16 @@ int to_premutations(){
 	sum = numerator / denomenator;
 
 	return sum;
-	
+}
+
+int to_combinations(){
+	int numerator, denomenator, sum;
+
+	numerator = to_premutations();
+	denomenator = factorial(num2);
+	sum = numerator / denomenator;
+
+	return sum;
 }
 
 void input(){
@@ -46,38 +54,35 @@ void input(){
 	}
 }
 
-bool ask(){
+std::string ask(){
 	std::string answer;	
-	bool pre_option = true;
-	bool com_option = false;
-	std::string pre = "Premutation";
-	std::string com = "Combination";
-	std::cout << "Do you want to solve premutation or combinations?\n";
+	std::string pre = "premutation";
+	std::string com = "combination";
+	std::cout << "Do you want to solve premutation or combination?\n";
+
 	try{
 		std::cin >> answer;
 		if(answer == pre)
-			return pre_option;
+			return answer;
 		else if(answer == com)
-			return com_option;
+			return answer;
 		else if(!std::cin)
-			error("Invalid input\n");
+			error("Invalid input");
+		else 
+			error("invalid input");
 	}catch(std::runtime_error& e){
 		std::cerr << e.what() << "\n";	
 		std::exit(0);
 	}
 
-	return true;
+	return answer;
 }
 
 int main(){
 	input();
-
 	std::cout << num1 << " and " << num2 << "\n";
-
-	if(ask() == true)
+	if(ask() == "premutations")
 		std::cout << to_premutations() << "\n";
-	//else 
-		//to_combinations();
-	
-	
+	else 
+		std::cout << to_combinations() << "\n";
 }
