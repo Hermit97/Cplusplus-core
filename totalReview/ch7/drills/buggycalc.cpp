@@ -8,8 +8,12 @@ struct Token {
   char kind;
   double value;
   std::string name;
-  Token(char ch) : kind(ch), value(0) {}
-  Token(char ch, double val) : kind(ch), value(val) {}
+  
+  //Token constructors
+ // Token(char ch) : kind(ch), value(0) {} //(kind, value)
+  Token(char ch) : kind(ch) {} //(kind, value)
+  Token(char ch, double val) : kind(ch), value(val) {}  //(kind, value)
+  Token(char ch, std::string n) : kind(ch), name(n) {} //kind, name);
   
 };
 
@@ -35,7 +39,7 @@ const char print = ';';
 const char number = '8';
 const char name = 'a';
 
-Token Token_stream::get() {
+Token Token_stream::get() { //Get token from stream
   if (full) {
     full = false;
     return buffer;
@@ -111,7 +115,8 @@ double get_value(std::string s) {
   for (int i = 0; i < names.size(); ++i)
     if (names[i].name == s)
       return names[i].value;
-  error("get: undefined name ", s);
+  error("get: undefined name");
+  //error("get: undefined name ", s); add second argument to error later
 }
 
 void set_value(std::string s, double d) {
@@ -120,7 +125,8 @@ void set_value(std::string s, double d) {
       names[i].value = d;
       return;
     }
-  error("set: undefined name ", s);
+  error("get: undefined name");
+  //error("set: undefined name ", s);
 }
 
 bool is_declared(std::string s) {
@@ -200,10 +206,12 @@ double declaration() {
     error("name expected in declaration");
   std::string name = t.name;
   if (is_declared(name))
-    error(name, " declared twice");
+    error("Declared twice");
+    //error(name, " declared twice");
   Token t2 = ts.get();
   if (t2.kind != '=')
-    error("= missing in declaration of ", name);
+    error("= missing in declaration of ...");
+    //error("= missing in declaration of ", name);
   double d = expression();
   names.push_back(Variable(name, d));
   return d;
@@ -236,27 +244,26 @@ void calculate() {
         return;
       ts.unget(t);
       std::cout << result << statement() << std::endl;
-    } catch (std; : runtime_error & e) {
-      cerr << e.what() << endl;
+    } catch (std::runtime_error & e) {
+      std::cerr << e.what() << std::endl;
       clean_up_mess();
     }
 }
 
-int main()
-
-    try {
-  calculate();
-  return 0;
-} catch (std::exception &e) {
-  std::err << "exception: " << e.what() << std::endl;
-  char c;
-  while (std::cin >> c && c != ';')
-    ;
-  return 1;
-} catch (...) {
-  std::cerr << "exception\n";
-  char c;
-  while (std::cin >> c && c != ';')
-    ;
-  return 2;
+int main(){
+  try {
+    calculate();
+    return 0;
+  } catch (std::exception &e) {
+    std::cerr << "exception: " << e.what() << std::endl;
+    char c;
+    while (std::cin >> c && c != ';');
+    return 1;
+  } catch (...) {
+    std::cerr << "exception\n";
+    char c;
+    while (std::cin >> c && c != ';')
+      ;
+    return 2;
+  }
 }
