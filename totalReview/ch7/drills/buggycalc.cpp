@@ -10,7 +10,7 @@ struct Token {
   std::string name;
   
   //Token constructors
- // Token(char ch) : kind(ch), value(0) {} //(kind, value)
+ // Token(char ch) : kind(ch), value(0) {} //(name, kind)
   Token(char ch) : kind(ch) {} //(kind, value)
   Token(char ch, double val) : kind(ch), value(val) {}  //(kind, value)
   Token(char ch, std::string n) : kind(ch), name(n) {} //kind, name);
@@ -38,6 +38,7 @@ const char quit = 'Q';
 const char print = ';';
 const char number = '8';
 const char name = 'a';
+const std::string declkey = "let";
 
 Token Token_stream::get() { //Get token from stream
   if (full) {
@@ -68,22 +69,19 @@ Token Token_stream::get() { //Get token from stream
   case '7':
   case '8':
   case '9': {
-    std::cin.unget();
+    std::cin.unget(); //Put back character in stream
     double val;
     std::cin >> val;
     return Token(number, val);
   }
   default:
     if (isalpha(ch)) {
+      std::cin.putback(ch);
       std::string s;
-      s += ch;
-      while (std::cin.get(ch) && (isalpha(ch) || isdigit(ch)))
-        s = ch;
-      std::cin.unget();
-      if (s == "let")
-        return Token(let);
+      std::cin >> s;
+      if(s == declkey) return Token(let);
       if (s == "quit")
-        return Token(name);
+        return Token(quit);
       return Token(name, s);
     }
     error("Bad token");
@@ -91,14 +89,14 @@ Token Token_stream::get() { //Get token from stream
 }
 
 void Token_stream::ignore(char c) {
-  if (full && c == buffer.kind) {
+  if (full && c == buffer.kind) { //if buffer is full and char is equal to the buffer token kind then buffer is not full and return
     full = false;
     return;
   }
   full = false;
 
   char ch;
-  while (std::cin >> ch)
+  while (std::cin >> ch) 
     if (ch == c)
       return;
 }
@@ -121,7 +119,7 @@ double get_value(std::string s) {
 
 void set_value(std::string s, double d) {
   for (int i = 0; i <= names.size(); ++i)
-    if (names[i].name == s) {
+    if (names[i].name == s) { //s exists in names then assign d as a value to it
       names[i].value = d;
       return;
     }
@@ -129,7 +127,7 @@ void set_value(std::string s, double d) {
   //error("set: undefined name ", s);
 }
 
-bool is_declared(std::string s) {
+bool is_declared(std::string s) { //object is declared
   for (int i = 0; i < names.size(); ++i)
     if (names[i].name == s)
       return true;
@@ -200,7 +198,7 @@ double expression() {
   }
 }
 
-double declaration() {
+double declration() {
   Token t = ts.get();
   if (t.kind != 'a')
     error("name expected in declaration");
@@ -221,7 +219,7 @@ double statement() {
   Token t = ts.get();
   switch (t.kind) {
   case let:
-    return declaration();
+    return declration();
   default:
     ts.unget(t);
     return expression();
