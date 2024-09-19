@@ -1,0 +1,2 @@
+Prompt char dissapers after incorrect input.
+    Fix: have ">" appear even after wrong input error always.

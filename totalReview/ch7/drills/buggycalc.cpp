@@ -76,20 +76,20 @@ Token Token_stream::get() { //Get token from stream
   }
   default:
     if (isalpha(ch)) {
-      std::cin.putback(ch);
+      std::cin.putback(ch); //Put ch back if its not a character
       std::string s;
-      std::cin >> s;
-      if(s == declkey) return Token(let);
+      std::cin >> s; //Reads the ch input again since its int he buffer because of cin.putback(ch)
+      if(s == declkey) return Token(let); //returns the token let 
       if (s == "quit")
         return Token(quit);
-      return Token(name, s);
+      return Token(name, s); //If its not let or name then it takes the name only
     }
     error("Bad token");
   }
 }
 
 void Token_stream::ignore(char c) {
-  if (full && c == buffer.kind) { //if buffer is full and char is equal to the buffer token kind then buffer is not full and return
+  if (full && c == buffer.kind) { //if buffer is full and c is equal to the buffer token kind then buffer is not full and return
     full = false;
     return;
   }
@@ -216,13 +216,13 @@ double declration() {
 }
 
 double statement() {
-  Token t = ts.get();
+  Token t = ts.get(); //get token
   switch (t.kind) {
-  case let:
+  case let: //if its let then return dec
     return declration();
   default:
-    ts.unget(t);
-    return expression();
+    ts.unget(t); //otherwise put the token back into the buffer
+    return expression(); //return to expression
   }
 }
 
