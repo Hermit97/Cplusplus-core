@@ -88,6 +88,7 @@ Token Token_stream::get() { //Get token from stream
   }
 }
 
+const std::string prompt = "> ";
 void Token_stream::ignore(char c) {
   if (full && c == buffer.kind) { //if buffer is full and c is equal to the buffer token kind then buffer is not full and return
     full = false;
@@ -95,10 +96,14 @@ void Token_stream::ignore(char c) {
   }
   full = false;
 
-  char ch;
-  while (std::cin >> ch) 
-    if (ch == c)
-      return;
+  char ch = 0;
+  std::cout << prompt;
+
+
+  //while (std::cin >> ch)  //problem is here why it wont print error second time
+  //if (ch == c)
+  //return;
+
 }
 
 struct Variable {
@@ -113,18 +118,18 @@ double get_value(std::string s) {
   for (int i = 0; i < names.size(); ++i)
     if (names[i].name == s)
       return names[i].value;
-  error("get: undefined name");
-  //error("get: undefined name ", s); add second argument to error later
+ // error("get: undefined name");
+  error("get: undefined name ", s); //add second argument to error later
 }
 
 void set_value(std::string s, double d) {
   for (int i = 0; i <= names.size(); ++i)
-    if (names[i].name == s) { //s exists in names then assign d as a value to it
+    if (names[i].name == s) {
       names[i].value = d;
       return;
     }
-  error("get: undefined name");
-  //error("set: undefined name ", s);
+  //error("get: undefined name");
+  error("set: undefined name ", s);
 }
 
 bool is_declared(std::string s) { //object is declared
@@ -204,12 +209,12 @@ double declration() {
     error("name expected in declaration");
   std::string name = t.name;
   if (is_declared(name))
-    error("Declared twice");
-    //error(name, " declared twice");
+    //error("Declared twice");
+    error(name, " declared twice");
   Token t2 = ts.get();
   if (t2.kind != '=')
-    error("= missing in declaration of ...");
-    //error("= missing in declaration of ", name);
+    //error("= missing in declaration of ...");
+    error("= missing in declaration of ", name);
   double d = expression();
   names.push_back(Variable(name, d));
   return d;
@@ -218,7 +223,7 @@ double declration() {
 double statement() {
   Token t = ts.get(); //get token
   switch (t.kind) {
-  case let: //if its let then return dec
+   case let: //if its let then return dec
     return declration();
   default:
     ts.unget(t); //otherwise put the token back into the buffer
@@ -228,23 +233,24 @@ double statement() {
 
 void clean_up_mess() { ts.ignore(print); }
 
-const std::string prompt = "> ";
+//const std::string prompt = "> ";
 const std::string result = "= ";
 
 void calculate() {
   while (true)
     try {
-      std::cout << prompt;
+      //std::cout << prompt;
       Token t = ts.get();
       while (t.kind == print)
         t = ts.get();
       if (t.kind == quit)
         return;
       ts.unget(t);
-      std::cout << result << statement() << std::endl;
+      std::cout << result << statement() << std::endl; //no prompt after this if error
     } catch (std::runtime_error & e) {
       std::cerr << e.what() << std::endl;
       clean_up_mess();
+      //continue;
     }
 }
 
