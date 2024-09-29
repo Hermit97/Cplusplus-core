@@ -42,6 +42,8 @@ const std::string declkey = "let";
 const int k = 1000;
 const std::string squared = "sq";
 const char sq = 's';
+const std::string dec_power = "pow";
+const char pw = 'p';
 
 Token Token_stream::get() { // Get token from stream
   if (full) {
@@ -89,6 +91,8 @@ Token Token_stream::get() { // Get token from stream
         return Token(sq);
       if (s == "quit")
         return Token(quit);
+      if (s == dec_power)
+        return Token(pw);
       return Token(name, s);
       // If its not let or name then it takes the name only
     }
@@ -149,6 +153,14 @@ bool is_declared(std::string s) { // object is declared
 Token_stream ts;
 
 double expression();
+double power(); // needs arguments
+
+double power(double value, int pow) {
+  int sum = 1;
+  for (int i = 0; i < pow; ++i)
+    sum = sum * value;
+  return sum;
+}
 
 double primary() {
   Token t = ts.get();
@@ -166,13 +178,16 @@ double primary() {
   case name:
     return get_value(t.name);
   case sq: {
-    double d = expression();
-    if(d < 0)
-	  error("invalid negative input");
+	double d = expression();
+    if (d < 0)
+      error("invalid negative input");
     return std::sqrt(d);
   }
-  case pow:{
-		  
+  case pw: {
+	  int power;
+	  std::cin >> power;
+	  double d = expression();
+	  return pow(d, power);
   }
   default:
     error("primary expected");
