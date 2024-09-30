@@ -38,7 +38,7 @@ const char quit = 'Q';
 const char print = ';';
 const char number = '8';
 const char name = 'a';
-const std::string declkey = "let";
+const std::string declkey = "#";
 const int k = 1000;
 const std::string squared = "sq";
 const char sq = 's';
@@ -80,7 +80,7 @@ Token Token_stream::get() { // Get token from stream
     return Token(number, val);
   }
   default:
-    if (isalpha(ch)) {
+    if (isalpha(ch) || ch == '#') {
       std::cin.putback(ch); // Put ch back if its not a character
       std::string s;
       std::cin >> s; // Reads the ch input again since its int he buffer because
@@ -89,7 +89,7 @@ Token Token_stream::get() { // Get token from stream
         return Token(let); // returns the token let
       if (s == squared)
         return Token(sq);
-      if (s == "quit")
+      if (s == "exit")
         return Token(quit);
       if (s == dec_power)
         return Token(pw);
