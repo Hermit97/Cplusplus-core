@@ -187,7 +187,7 @@ double primary() {
 	  int power;
 	  std::cin >> power;
 	  double d = expression();
-	  return pow(d, power);
+	  return pow(power, d);
   }
   default:
     error("primary expected");
