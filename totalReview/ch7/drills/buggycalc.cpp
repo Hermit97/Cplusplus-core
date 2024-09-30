@@ -111,7 +111,7 @@ void Token_stream::ignore(char c) {
   full = false;
 
   char ch = 0;
-  std::cout << prompt;
+  //std::cout << prompt;
 
   // while (std::cin >> ch)  //problem is here why it wont print error second
   // time if (ch == c) return;
@@ -274,7 +274,7 @@ const std::string result = "= ";
 void calculate() {
   while (true)
     try {
-      // std::cout << prompt;
+      std::cout << prompt;		
       Token t = ts.get();
 
       while (t.kind == print)
