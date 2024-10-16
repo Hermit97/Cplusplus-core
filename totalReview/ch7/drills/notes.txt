@@ -1,0 +1,1 @@
+Looking statement for the case name. tracked it to is_declared which is fine but for someone reawsonin reassign_obj its xomignf out as false instead of true throwing the error("invalid error"). Nakes no sense because it is declared already. 

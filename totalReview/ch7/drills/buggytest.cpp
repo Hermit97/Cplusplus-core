@@ -152,7 +152,13 @@ void set_value(std::string s, double d) {
 bool is_declared(std::string s) { // object is declared
   for (int i = 0; i < names.size(); ++i)
     if (names[i].name == s)
-      return true;
+      return true; // Check if the variable is declared with '#' (let)
+
+  Token t = ts.get();
+  if (t.kind == let && t.name == s) {
+    ts.unget(t);
+    return true;
+  }
   return false;
 }
 
@@ -245,25 +251,21 @@ double expression() {
 }
 
 // function for name push back for when type is '='
-double statement();
 double reassign_obj() {
   Token t = ts.get();
   if (t.kind != name)
     error("Name expected for reassignment");
-  
-  // std::string var_name = t.name;
-  // if (!is_declared(var_name))
-  // error("Vaiable " + var_name + " ' has not been declared.");
 
-  return statement();
+  std::string var_name = t.name;
+  if (!is_declared(var_name))
+    error("Variable " + var_name + " ' has not been declared.");
 
   Token t2 = ts.get();
-  //ts.unget(t2); 
   if (t2.kind != '=')
     error("= expected for reassignment");
 
   double d = expression();
-  // set_value(var_name, d);
+  set_value(var_name, d);
   return d;
 }
 
@@ -284,21 +286,21 @@ double declration() {
 
 double statement() {
   Token t = ts.get(); // get token
+
   switch (t.kind) {
   case let: // if its let then return dec
     return declration();
   case name: {
     Token t2 = ts.get();
     if (t2.kind == '=') {
+      double d = expression();
+      set_value(t.name, d);
+      return d;
+    } else {
+      ts.unget(t2);
       ts.unget(t);
-      return reassign_obj();
-
-      ts.unget(t2); //put '=' back into buffer stream
-      return reassign_obj();
+      return expression();
     }
-    // ts.unget(t2);
-    //ts.unget(t);
-    return expression();
   }
   default:
     ts.unget(t);         // otherwise put the token back into the buffer
