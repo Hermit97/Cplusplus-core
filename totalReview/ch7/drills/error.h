@@ -6,6 +6,7 @@
 /*void error(std::string er){
     throw std::runtime_error(er);
 }*/
+//have it exit the program after each error
 
 struct Exit : std::runtime_error {
 	Exit() : std::runtime_error("Exit") {}

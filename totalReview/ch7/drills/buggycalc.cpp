@@ -251,9 +251,10 @@ double reassign_obj() {
   if (t.kind != name)
     error("Name expected for reassignment");
   
-  // std::string var_name = t.name;
-  // if (!is_declared(var_name))
-  // error("Vaiable " + var_name + " ' has not been declared.");
+  //whats the point of this?
+   std::string var_name = t.name;
+   if (!is_declared(var_name))
+      error("Vaiable " + var_name + " ' has not been declared.");
 
   return statement();
 
