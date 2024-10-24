@@ -9,6 +9,8 @@ struct Token {
   char kind;
   double value;
   std::string name;
+	bool constant_decl;
+  
 
   // Token constructors
   // Token(char ch) : kind(ch), value(0) {} //(name, kind)
@@ -30,6 +32,19 @@ public:
     full = true;
   }
 
+  /*bool empty(Token t){
+    buffer = t;
+    full = false;
+
+    return true;
+  }*/
+
+  bool empty() {
+    bool isEmpty = true;
+    return isEmpty;
+  }
+  // no declare key #
+
   void ignore(char);
   /*void putback(Token t){
           buffer.p
@@ -43,6 +58,9 @@ const char print = ';';
 const char number = '8';
 const char name = 'a';
 const std::string declkey = "#";
+const char deckl = '#';
+const std::string constant_id = "constant";
+const char constant_key = 'c';
 const int k = 1000;
 const std::string squared = "sq";
 const char sq = 's';
@@ -100,6 +118,8 @@ Token Token_stream::get() { // Get token from stream
       if (s == dec_power)
         return Token(pw);
       return Token(name, s);
+      if (s == constant_id)
+        return Token(constant_key);
       // If its not let or name then it takes the name only
     }
     error("Bad token");
@@ -126,7 +146,10 @@ void Token_stream::ignore(char c) {
 struct Variable {
   std::string name;
   double value;
-  Variable(std::string n, double v) : name(n), value(v) {}
+  bool constant_val;
+  // Variable(std::string n, double v) : name(n), value(v) {}
+  Variable(bool c, std::string n, double v)
+      : constant_val(c), name(n), value(v) {}
 };
 
 std::vector<Variable> names;
@@ -142,10 +165,10 @@ double get_value(std::string s) {
 void set_value(std::string s, double d) {
   for (int i = 0; i <= names.size(); ++i)
     if (names[i].name == s) {
-      names[i].value = d;
+      if (s == constant_id)
+        names[i].value = d;
       return;
     }
-  // error("get: undefined name");
   error("set: undefined name ", s);
 }
 
@@ -250,21 +273,28 @@ double reassign_obj() {
   Token t = ts.get();
   if (t.kind != name)
     error("Name expected for reassignment");
-  
-  //whats the point of this?
-   std::string var_name = t.name;
-   if (!is_declared(var_name))
-      error("Vaiable " + var_name + " ' has not been declared.");
+
+  // whats the point of this?
+  std::string var_name = t.name;
+  std::string errorstuff = "Vaiable " + var_name + " ' has not been declared.";
+  try {
+    if (!is_declared(var_name)) {
+      // error("Vaiable " + var_name + " ' has not been declared.");
+      throw std::runtime_error(errorstuff);
+    }
+  } catch (std::runtime_error &e) {
+    std::cerr << "Vaiable " << var_name << " ' has not been declared.";
+    Token t2 = ts.get();
+  }
 
   return statement();
 
   Token t2 = ts.get();
-  //ts.unget(t2); 
   if (t2.kind != '=')
     error("= expected for reassignment");
 
   double d = expression();
-  // set_value(var_name, d);
+  set_value(var_name, d);
   return d;
 }
 
@@ -273,13 +303,14 @@ double declration() {
   if (t.kind != 'a')
     error("name expected in declaration");
   std::string name = t.name;
+  bool c = t.constant_decl; //might be wrong along with the pushback to numbers
   if (is_declared(name) == true)
     error(name, " declared twice");
   Token t2 = ts.get();
   if (t2.kind != '=')
     error("= missing in declaration of ", name);
   double d = expression();
-  names.push_back(Variable(name, d));
+  names.push_back(Variable(c, name, d));
   return d;
 }
 
@@ -294,12 +325,16 @@ double statement() {
       ts.unget(t);
       return reassign_obj();
 
-      ts.unget(t2); //put '=' back into buffer stream
+      ts.unget(t2); // put '=' back into buffer stream
       return reassign_obj();
     }
     // ts.unget(t2);
-    //ts.unget(t);
+    // ts.unget(t);
     return expression();
+  }
+  case constant_key:{
+	  if(t.kind == constant_key)
+		  t.constant_decl = true; //this is true then go to declaration.
   }
   default:
     ts.unget(t);         // otherwise put the token back into the buffer
@@ -315,9 +350,8 @@ const std::string result = "= ";
 void calculate() {
   while (true)
     try {
-      std::cout << prompt;
       Token t = ts.get();
-
+      std::cout << prompt;
       while (t.kind == print)
         t = ts.get();
       if (t.kind == quit)
