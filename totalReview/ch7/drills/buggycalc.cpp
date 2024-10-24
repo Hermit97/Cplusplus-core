@@ -117,9 +117,9 @@ Token Token_stream::get() { // Get token from stream
         return Token(quit);
       if (s == dec_power)
         return Token(pw);
-      return Token(name, s);
       if (s == constant_id)
         return Token(constant_key);
+      return Token(name, s);
       // If its not let or name then it takes the name only
     }
     error("Bad token");
@@ -333,8 +333,11 @@ double statement() {
     return expression();
   }
   case constant_key:{
-	  if(t.kind == constant_key)
+	  if(t.kind == constant_key){
 		  t.constant_decl = true; //this is true then go to declaration.
+		  return declration();
+	  }else
+		  t.constant_decl = false;
   }
   default:
     ts.unget(t);         // otherwise put the token back into the buffer
