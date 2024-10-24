@@ -59,7 +59,7 @@ const char number = '8';
 const char name = 'a';
 const std::string declkey = "#";
 const char deckl = '#';
-const std::string constant_id = "constant";
+const std::string constant_id = "const";
 const char constant_key = 'c';
 const int k = 1000;
 const std::string squared = "sq";
@@ -282,6 +282,9 @@ double reassign_obj() {
       // error("Vaiable " + var_name + " ' has not been declared.");
       throw std::runtime_error(errorstuff);
     }
+
+	if(t.constant_decl == true)
+		throw std::runtime_error("Cannot reassign const value");
   } catch (std::runtime_error &e) {
     std::cerr << "Vaiable " << var_name << " ' has not been declared.";
     Token t2 = ts.get();
