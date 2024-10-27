@@ -180,6 +180,17 @@ double get_value(std::string s) {
   }*/
 
 void set_value(std::string s, double d) {
+  Symbol_table st;
+  for (int i = 0; i <= st.var_table.size(); ++i)
+    if (st.var_table[i].name == s) {
+      if (s == constant_id)
+        st.var_table[i].value = d;
+      return;
+    }
+  error("set: undefined name ", s);
+}
+
+/*/void set_value(std::string s, double d) {
     Symbol_table st;
   for (int i = 0; i <= names.size(); ++i)
     if (names[i].name == s) {
@@ -188,14 +199,15 @@ void set_value(std::string s, double d) {
       return;
     }
   error("set: undefined name ", s);
-}
+  }*/
 
 bool is_declared(std::string s) { // object is declared
-  for (int i = 0; i < names.size(); ++i)
-    if (names[i].name == s)
+    Symbol_table st;
+  for (int i = 0; i < st.var_table.size(); ++i)
+    if (st.var_table[i].name == s)
       return true;
   return false;
-}
+  }
 
 Token_stream ts;
 
@@ -333,7 +345,8 @@ double declration() {
   if (t2.kind != '=')
     error("= missing in declaration of ", name);
   double d = expression();
-  names.push_back(Variable(t.constant_decl, name, d));
+  Symbol_table st;
+  st.var_table.push_back(Variable(t.constant_decl, name, d));
   return d;
 }
 
