@@ -9,8 +9,7 @@ struct Token {
   char kind;
   double value;
   std::string name;
-	bool constant_decl;
-  
+  bool constant_decl = true;
 
   // Token constructors
   // Token(char ch) : kind(ch), value(0) {} //(name, kind)
@@ -152,17 +151,36 @@ struct Variable {
       : constant_val(c), name(n), value(v) {}
 };
 
-std::vector<Variable> names;
+class Symbol_table {
+public:
+  std::vector<Variable> var_table;
+  double get();
+  void set();
+  double is_declared();
+};
+
+// std::vector<Variable> names;
+// rewrite get_value as get
 
 double get_value(std::string s) {
+    Symbol_table st;
+  for (int i = 0; i < st.var_table.size(); ++i)
+    if (st.var_table[i].name == s)
+      return st.var_table[i].value;
+  // error("get: undefined name");
+  error("get: undefined name ", s); // add second argument to error later
+}
+
+/*double get_value(std::string s) {
   for (int i = 0; i < names.size(); ++i)
     if (names[i].name == s)
       return names[i].value;
   // error("get: undefined name");
   error("get: undefined name ", s); // add second argument to error later
-}
+  }*/
 
 void set_value(std::string s, double d) {
+    Symbol_table st;
   for (int i = 0; i <= names.size(); ++i)
     if (names[i].name == s) {
       if (s == constant_id)
@@ -278,13 +296,13 @@ double reassign_obj() {
   std::string var_name = t.name;
   std::string errorstuff = "Vaiable " + var_name + " ' has not been declared.";
   try {
+    // if (t.constant_decl == true)
+    // throw std::runtime_error("Cannot reassign const value");
     if (!is_declared(var_name)) {
       // error("Vaiable " + var_name + " ' has not been declared.");
       throw std::runtime_error(errorstuff);
     }
 
-	if(t.constant_decl == true)
-		throw std::runtime_error("Cannot reassign const value");
   } catch (std::runtime_error &e) {
     std::cerr << "Vaiable " << var_name << " ' has not been declared.";
     Token t2 = ts.get();
@@ -306,14 +324,16 @@ double declration() {
   if (t.kind != 'a')
     error("name expected in declaration");
   std::string name = t.name;
-  bool c = t.constant_decl; //might be wrong along with the pushback to numbers
+  bool c = t.constant_decl; // might be wrong along with the pushback to numbers
+  if (is_declared(name) == true && t.constant_decl == true)
+    error("Cannot reassign a constant object");
   if (is_declared(name) == true)
     error(name, " declared twice");
   Token t2 = ts.get();
   if (t2.kind != '=')
     error("= missing in declaration of ", name);
   double d = expression();
-  names.push_back(Variable(c, name, d));
+  names.push_back(Variable(t.constant_decl, name, d));
   return d;
 }
 
@@ -322,11 +342,21 @@ double statement() {
   switch (t.kind) {
   case let: // if its let then return dec
     return declration();
+  case constant_key: {
+    // if (t.kind == constant_key) {
+    t.constant_decl = true; // this is true then go to declaration.
+    return declration();
+    //}
+  }
   case name: {
     Token t2 = ts.get();
     if (t2.kind == '=') {
-      ts.unget(t);
-      return reassign_obj();
+      if (t.constant_decl == true) {
+        error("cannot reassign const value");
+      } else {
+        ts.unget(t);
+        return reassign_obj();
+      }
 
       ts.unget(t2); // put '=' back into buffer stream
       return reassign_obj();
@@ -334,13 +364,6 @@ double statement() {
     // ts.unget(t2);
     // ts.unget(t);
     return expression();
-  }
-  case constant_key:{
-	  if(t.kind == constant_key){
-		  t.constant_decl = true; //this is true then go to declaration.
-		  return declration();
-	  }else
-		  t.constant_decl = false;
   }
   default:
     ts.unget(t);         // otherwise put the token back into the buffer
