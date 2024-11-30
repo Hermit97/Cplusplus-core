@@ -300,8 +300,8 @@ double expression() {
 
 // function for name push back for when type is '='
 double statement();
-double reassign_obj() {
-  Token t = ts.get();
+double reassign_obj(Token& t) {
+    //Token t = ts.get();
   if (t.kind != name)
     error("Name expected for reassignment");
 
@@ -339,10 +339,16 @@ double declration(Token& t) {
   }
   //if (t.kind != 'a')
   //error("name expected in declaration");
-  std::string name = t.name;
+
+  //First input: # x = 23; Second input x = 44;
+  if(t.kind == 'a' && t.constant_decl == false)
+      if(is_declared(t.name))
+	  return reassign_obj(t);
+      
+  Token t_name = ts.get();
+  std::string name = t_name.name;
   if (is_declared(name) == true)
     error(name, " declared twice");
-  Token t_name = ts.get();
 
   //problem is here it wont check if its declatred for someone reason prob because of token t is looking at the next token instead of the name.
   /*if (is_declared(name) == true && t.constant_decl == true)
@@ -386,11 +392,11 @@ double statement() {
       } else {*/
       ts.unget(t);
       // t.constant_decl = false;
-      return reassign_obj();
+      return reassign_obj(t);
       //}
 
       ts.unget(t2); // put '=' back into buffer stream
-      return reassign_obj();
+      return reassign_obj(t); //???  is it 2 or t2?
     }
     return expression();
   }
