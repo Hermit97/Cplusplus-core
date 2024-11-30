@@ -9,7 +9,7 @@ struct Token {
   char kind;
   double value;
   std::string name;
-  bool constant_decl = true;
+  bool constant_decl;
 
   // Token constructors
   // Token(char ch) : kind(ch), value(0) {} //(name, kind)
@@ -158,12 +158,13 @@ public:
   void set();
   double is_declared();
 };
+Symbol_table st;
 
 // std::vector<Variable> names;
 // rewrite get_value as get
 
 double get_value(std::string s) {
-    Symbol_table st;
+  // Symbol_table st;
   for (int i = 0; i < st.var_table.size(); ++i)
     if (st.var_table[i].name == s)
       return st.var_table[i].value;
@@ -180,7 +181,7 @@ double get_value(std::string s) {
   }*/
 
 void set_value(std::string s, double d) {
-  Symbol_table st;
+  // Symbol_table st;
   for (int i = 0; i <= st.var_table.size(); ++i)
     if (st.var_table[i].name == s) {
       if (s == constant_id)
@@ -202,12 +203,12 @@ void set_value(std::string s, double d) {
   }*/
 
 bool is_declared(std::string s) { // object is declared
-    Symbol_table st;
+  // Symbol_table st;
   for (int i = 0; i < st.var_table.size(); ++i)
     if (st.var_table[i].name == s)
       return true;
   return false;
-  }
+}
 
 Token_stream ts;
 
@@ -304,7 +305,6 @@ double reassign_obj() {
   if (t.kind != name)
     error("Name expected for reassignment");
 
-  // whats the point of this?
   std::string var_name = t.name;
   std::string errorstuff = "Vaiable " + var_name + " ' has not been declared.";
   try {
@@ -331,51 +331,67 @@ double reassign_obj() {
   return d;
 }
 
-double declration() {
-  Token t = ts.get();
-  if (t.kind != 'a')
-    error("name expected in declaration");
+double declration(Token& t) {
+    //Token t = ts.get();
+    //t = ts.get();
+  if(t.constant_decl == true){
+      std::cout << "ENTERED CONST";
+  }
+  //if (t.kind != 'a')
+  //error("name expected in declaration");
   std::string name = t.name;
-  bool c = t.constant_decl; // might be wrong along with the pushback to numbers
-  if (is_declared(name) == true && t.constant_decl == true)
-    error("Cannot reassign a constant object");
   if (is_declared(name) == true)
     error(name, " declared twice");
+  Token t_name = ts.get();
+
+  //problem is here it wont check if its declatred for someone reason prob because of token t is looking at the next token instead of the name.
+  /*if (is_declared(name) == true && t.constant_decl == true)
+    error("Cannot reassign a constant object");*/
+  if (is_declared(name) == true)
+    error(name, " declared twice");
+  if (is_declared(name) == true && t.constant_decl == true)
+    error("Cannot reassign a constant object");
   Token t2 = ts.get();
   if (t2.kind != '=')
     error("= missing in declaration of ", name);
   double d = expression();
-  Symbol_table st;
-  st.var_table.push_back(Variable(t.constant_decl, name, d));
+  if(t.constant_decl == true){
+      Variable var(var.constant_val = true, name, d);
+      st.var_table.push_back(var);
+  }
+  Variable var(var.constant_val = false, name, d);
+  st.var_table.push_back(var);
   return d;
 }
 
 double statement() {
   Token t = ts.get(); // get token
+  bool constant_decl;
   switch (t.kind) {
   case let: // if its let then return dec
-    return declration();
+    return declration(t);
   case constant_key: {
-    // if (t.kind == constant_key) {
     t.constant_decl = true; // this is true then go to declaration.
-    return declration();
-    //}
+    return declration(t);
   }
   case name: {
+      if (t.constant_decl == true){
+	  std::cout << "Goign into declaration/n";
+      }
+      return declration(t);
     Token t2 = ts.get();
     if (t2.kind == '=') {
-      if (t.constant_decl == true) {
-        error("cannot reassign const value");
-      } else {
-        ts.unget(t);
-        return reassign_obj();
-      }
+      /*if (t.constant_decl == true) {
+      error("cannot reassign const value");
+      } else {*/
+      ts.unget(t);
+      // t.constant_decl = false;
+      return reassign_obj();
+      //}
 
       ts.unget(t2); // put '=' back into buffer stream
       return reassign_obj();
     }
-    // ts.unget(t2);
-    // ts.unget(t);
     return expression();
   }
   default:
@@ -386,9 +402,7 @@ double statement() {
 
 void clean_up_mess() { ts.ignore(print); }
 
-// const std::string prompt = "> ";
 const std::string result = "= ";
-
 void calculate() {
   while (true)
     try {
@@ -404,7 +418,6 @@ void calculate() {
     } catch (std::runtime_error &e) {
       std::cerr << e.what() << std::endl;
       clean_up_mess();
-      // continue;
     }
 }
 
