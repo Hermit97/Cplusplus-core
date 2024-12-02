@@ -300,8 +300,8 @@ double expression() {
 
 // function for name push back for when type is '='
 double statement();
-double reassign_obj(Token& t) {
-    //Token t = ts.get();
+double reassign_obj(Token &t) {
+  // Token t = ts.get();
   if (t.kind != name)
     error("Name expected for reassignment");
 
@@ -320,7 +320,7 @@ double reassign_obj(Token& t) {
     Token t2 = ts.get();
   }
 
-  return statement();
+  //return statement();
 
   Token t2 = ts.get();
   if (t2.kind != '=')
@@ -331,26 +331,27 @@ double reassign_obj(Token& t) {
   return d;
 }
 
-double declration(Token& t) {
-    //Token t = ts.get();
-    //t = ts.get();
-  if(t.constant_decl == true){
-      std::cout << "ENTERED CONST";
+double declration(Token &t) {
+  // Token t = ts.get();
+  // t = ts.get();
+  if (t.constant_decl == true) {
+    std::cout << "ENTERED CONST";
   }
-  //if (t.kind != 'a')
-  //error("name expected in declaration");
+  // if (t.kind != 'a')
+  // error("name expected in declaration");
 
-  //First input: # x = 23; Second input x = 44;
-  if(t.kind == 'a' && t.constant_decl == false)
-      if(is_declared(t.name))
-	  return reassign_obj(t);
-      
+  // First input: # x = 23; Second input x = 44;
+  if (t.kind == 'a' && t.constant_decl == false)
+    if (is_declared(t.name))
+      return reassign_obj(t);
+
   Token t_name = ts.get();
   std::string name = t_name.name;
   if (is_declared(name) == true)
     error(name, " declared twice");
 
-  //problem is here it wont check if its declatred for someone reason prob because of token t is looking at the next token instead of the name.
+  // problem is here it wont check if its declatred for someone reason prob
+  // because of token t is looking at the next token instead of the name.
   /*if (is_declared(name) == true && t.constant_decl == true)
     error("Cannot reassign a constant object");*/
   if (is_declared(name) == true)
@@ -361,9 +362,9 @@ double declration(Token& t) {
   if (t2.kind != '=')
     error("= missing in declaration of ", name);
   double d = expression();
-  if(t.constant_decl == true){
-      Variable var(var.constant_val = true, name, d);
-      st.var_table.push_back(var);
+  if (t.constant_decl == true) {
+    Variable var(var.constant_val = true, name, d);
+    st.var_table.push_back(var);
   }
   Variable var(var.constant_val = false, name, d);
   st.var_table.push_back(var);
@@ -381,10 +382,10 @@ double statement() {
     return declration(t);
   }
   case name: {
-      if (t.constant_decl == true){
-	  std::cout << "Goign into declaration/n";
-      }
-      return declration(t);
+    if (t.constant_decl == true) {
+      std::cout << "Goign into declaration/n";
+    }
+    return declration(t);
     Token t2 = ts.get();
     if (t2.kind == '=') {
       /*if (t.constant_decl == true) {
@@ -395,7 +396,7 @@ double statement() {
       return reassign_obj(t);
       //}
 
-      ts.unget(t2); // put '=' back into buffer stream
+      ts.unget(t2);           // put '=' back into buffer stream
       return reassign_obj(t); //???  is it 2 or t2?
     }
     return expression();
