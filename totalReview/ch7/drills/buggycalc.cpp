@@ -67,6 +67,7 @@ const std::string dec_power = "pow";
 const char pw = 'p';
 const char reassign = 'e';
 const std::string reassign_operator = "=";
+bool end_flow = false;
 
 Token Token_stream::get() { // Get token from stream
   if (full) {
@@ -231,7 +232,7 @@ double primary() {
     if (t.kind != ')')
       error("'(' expected");
   }
-  case '-':
+  case '-': //Check if its subtractinga  object and a num or a num and num (x - 1 or x - x on lldb first)
     return -primary();
   case number:
     return t.value;
@@ -307,24 +308,15 @@ double reassign_obj(Token &t) {
 
   std::string var_name = t.name;
   std::string errorstuff = "Vaiable " + var_name + " ' has not been declared.";
-  try {
-    // if (t.constant_decl == true)
-    // throw std::runtime_error("Cannot reassign const value");
-    if (!is_declared(var_name)) {
-      // error("Vaiable " + var_name + " ' has not been declared.");
-      throw std::runtime_error(errorstuff);
-    }
 
-  } catch (std::runtime_error &e) {
-    std::cerr << "Vaiable " << var_name << " ' has not been declared.";
-    Token t2 = ts.get();
+  for(auto &var : st.var_table){
+      if(var.name == var_name && var.constant_val)
+	  error("Cannot reassign a constant value");
   }
 
-  //return statement();
-
   Token t2 = ts.get();
-  if (t2.kind != '=')
-    error("= expected for reassignment");
+  //if (t2.kind != '=')
+  //error("= expected for reassignment");
 
   double d = expression();
   set_value(var_name, d);
@@ -334,12 +326,10 @@ double reassign_obj(Token &t) {
 double declration(Token &t) {
   // Token t = ts.get();
   // t = ts.get();
+    bool is_constant = (t.kind == constant_key);
   if (t.constant_decl == true) {
     std::cout << "ENTERED CONST";
   }
-  // if (t.kind != 'a')
-  // error("name expected in declaration");
-
   // First input: # x = 23; Second input x = 44;
   if (t.kind == 'a' && t.constant_decl == false)
     if (is_declared(t.name))
@@ -347,17 +337,14 @@ double declration(Token &t) {
 
   Token t_name = ts.get();
   std::string name = t_name.name;
+  if(is_declared(name) && is_constant)
+      error("Cannot reassign a constant object");
   if (is_declared(name) == true)
     error(name, " declared twice");
 
-  // problem is here it wont check if its declatred for someone reason prob
-  // because of token t is looking at the next token instead of the name.
-  /*if (is_declared(name) == true && t.constant_decl == true)
-    error("Cannot reassign a constant object");*/
-  if (is_declared(name) == true)
-    error(name, " declared twice");
   if (is_declared(name) == true && t.constant_decl == true)
     error("Cannot reassign a constant object");
+
   Token t2 = ts.get();
   if (t2.kind != '=')
     error("= missing in declaration of ", name);
@@ -381,25 +368,23 @@ double statement() {
     t.constant_decl = true; // this is true then go to declaration.
     return declration(t);
   }
-  case name: {
+  case name: { //if x = something and its not using # to declare then check if vector is empty then print error message.
     if (t.constant_decl == true) {
-      std::cout << "Goign into declaration/n";
+      std::cout << "Going into declaration/n";
     }
-    return declration(t);
+    //return declration(t);
     Token t2 = ts.get();
-    if (t2.kind == '=') {
-      /*if (t.constant_decl == true) {
-      error("cannot reassign const value");
-      } else {*/
-      ts.unget(t);
-      // t.constant_decl = false;
-      return reassign_obj(t);
-      //}
-
-      ts.unget(t2);           // put '=' back into buffer stream
-      return reassign_obj(t); //???  is it 2 or t2?
+    if(st.var_table.size() == 0){
+	end_flow = true;
+	error("Invalid declaration");
     }
-    return expression();
+    if (t2.kind == '=') {
+      ts.unget(t);
+      return reassign_obj(t);
+      }else{
+	ts.unget(t2);           // put '=' back into buffer stream
+	return expression(); //???  is it 2 or t2?
+    }
   }
   default:
     ts.unget(t);         // otherwise put the token back into the buffer
@@ -420,6 +405,8 @@ void calculate() {
       if (t.kind == quit)
         return;
       ts.unget(t);
+      if(end_flow == true)
+	  continue; //this gives infinite >?????
       std::cout << result << statement()
                 << std::endl; // no prompt after this if error
     } catch (std::runtime_error &e) {

@@ -1,0 +1,14 @@
+Fix:
+
+(Working on)
+# x = 23; x + 2; primary expected = 2.
+Primary expected error outputs and =2 instead of = 25.
+
+Should primary check token() for # the object pushed tp st.var_table??? x  = 2 + 4;
+
+-------------------------------------------------------------------------------------------------------------------
+
+
+Constant values re entered show error but show =value as well.
+
+Adding objects dont work get primary expected error for normal assigns and constant.
