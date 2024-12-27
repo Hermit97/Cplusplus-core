@@ -1,4 +1,5 @@
 #include "error.h"
+#include <cctype>
 #include <cmath>
 #include <iostream>
 #include <limits>
@@ -31,17 +32,17 @@ public:
     full = true;
   }
 
-  /*bool empty(Token t){
+  bool empty(Token t){
     buffer = t;
     full = false;
 
     return true;
-  }*/
+  }
 
-  bool empty() {
+  /*bool empty() {
     bool isEmpty = true;
     return isEmpty;
-  }
+  }*/
   // no declare key #
 
   void ignore(char);
@@ -49,8 +50,40 @@ public:
           buffer.p
           }
   */
+    
 };
 
+// test token stream
+void test_token_stream() {
+    Token_stream ts;
+    std::string input = "12 + 3\n4 + 5\n";  // Test input containing newlines
+    std::istringstream input_stream(input);  // Use stringstream to simulate user input
+    std::cin.rdbuf(input_stream.rdbuf());  // Redirect std::cin to input_stream
+    
+    Token t = ts.get();  // First token: 12
+    std::cout << "Received token: " << t.kind << " with value: " << t.value << std::endl;
+    
+    t = ts.get();  // Second token: +
+    std::cout << "Received token: " << t.kind << std::endl;
+    
+    t = ts.get();  // Third token: 3
+    std::cout << "Received token: " << t.kind << " with value: " << t.value << std::endl;
+    
+    t = ts.get();  // Fourth token: Newline -> should print the newline message and return Token(print)
+    std::cout << "Received token: " << t.kind << std::endl;  // Should show ';' as kind
+    
+    t = ts.get();  // Fifth token: 4
+    std::cout << "Received token: " << t.kind << " with value: " << t.value << std::endl;
+    
+    t = ts.get();  // Sixth token: +
+    std::cout << "Received token: " << t.kind << std::endl;
+    
+    t = ts.get();  // Seventh token: 5
+    std::cout << "Received token: " << t.kind << " with value: " << t.value << std::endl;
+}
+
+const char help = 'H';
+std::string help_command = "h";
 const char let = 'L';
 const char quit = 'Q';
 const char print = ';';
@@ -76,7 +109,15 @@ Token Token_stream::get() { // Get token from stream
   }
   char ch;
   std::cin >> ch;
+
+  while(std::isspace(ch) && ch != '\n'){
+      return Token(print);
+      std::cin >> ch;
+  }
+
   switch (ch) {
+  case '\n':
+      return Token(print);
   case '(':
   case ')':
   case '+':
@@ -113,14 +154,15 @@ Token Token_stream::get() { // Get token from stream
         return Token(let); // returns the token let
       if (s == squared)
         return Token(sq);
-      if (s == "exit")
+      if (s == "quit")
         return Token(quit);
+      if (s == help_command)
+        return Token(help);
       if (s == dec_power)
         return Token(pw);
       if (s == constant_id)
         return Token(constant_key);
       return Token(name, s);
-      // If its not let or name then it takes the name only
     }
     error("Bad token");
   }
@@ -328,7 +370,6 @@ double declration(Token &t) {
   // t = ts.get();
     bool is_constant = (t.kind == constant_key);
   if (t.constant_decl == true) {
-    std::cout << "ENTERED CONST";
   }
   // First input: # x = 23; Second input x = 44;
   if (t.kind == 'a' && t.constant_decl == false)
@@ -394,12 +435,24 @@ double statement() {
 
 void clean_up_mess() { ts.ignore(print); }
 
+void help_info(){
+  std::cout << "Welcome to this trash interpertor compiler fake trash.\n";
+  std::cout << "# is the declaration key and ; is to end it and itll print.\n";
+  std::cout << "Use quit to end the program and see a small test case run\n";
+  
+}
+
 const std::string result = "= ";
 void calculate() {
   while (true)
     try {
       Token t = ts.get();
       std::cout << prompt;
+      if(t.kind == help){
+        help_info();
+        ts.empty(t);
+        continue;
+      }
       while (t.kind == print)
         t = ts.get();
       if (t.kind == quit)
@@ -417,7 +470,8 @@ void calculate() {
 
 int main() {
   try {
-    calculate();
+      calculate();
+      //test_token_stream();
     return 0;
   } catch (std::exception &e) {
     std::cerr << "exception: " << e.what() << std::endl;
@@ -428,8 +482,7 @@ int main() {
   } catch (...) {
     std::cerr << "exception\n";
     char c;
-    while (std::cin >> c && c != ';')
-      ;
+    while (std::cin >> c && c != ';');
     return 2;
   }
 }

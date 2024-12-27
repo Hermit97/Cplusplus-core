@@ -1,6 +1,6 @@
 Fix:
 
-(Working on)
+(Working on) (DONE)
 # x = 23; x + 2; primary expected = 2.
 Primary expected error outputs and =2 instead of = 25.
 
